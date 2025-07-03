@@ -1,0 +1,23 @@
+# Environment
+/.env
+
+# PHP dependencies (if you ever use Composer)
+/vendor/
+
+# Logs
+*.log
+
+# Archive files
+*.zip
+*.7z
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDE/editor folders
+/.vscode/
+/.idea/
+
+# Optional: lock files you don’t need in VCS
+composer.lock
