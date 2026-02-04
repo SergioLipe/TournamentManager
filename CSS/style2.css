@@ -1,416 +1,191 @@
-   body,
-   html {
-     background-color: #EFEFEF;
-     height: 100%;
-     margin: 0;
-     padding: 0;
-    
-   }
-
-   .bracket {
-     display: flex;
-     justify-content: center;
-     align-items: flex-start;
-     max-height: 100%;
-     
-
-   }
-
-   .coluna-esquerda-12,
-   .coluna-direita-12 {
-     display: flex;
-     flex-direction: column;
-     gap: 250px;
-   }
-
-   .segunda-coluna {
-
-     display: flex;
-     flex-direction: column;
-     gap: 200px;
-     margin-top: 5%;
-
-   }
-
-   .segunda-coluna-12 {
-     display: flex;
-     flex-direction: column;
-     gap: 250px;
-   }
-
-   .terceira-coluna {
-    
-     margin-top: 15%;
-   }
-
-   .coluna-final {
-     display: flex;
-     flex-direction: column;
-     margin-top: 15%;
-
-   }
-   #carregar, #addNames{
-    padding:10px;
-    background-color: lightgreen;
-    border: 5px solid #26161F;
-    font-size: larger;
-    font-weight: bold;
-    margin-bottom: 10px;
-   }
-
-   .coluna-final-14 {
-     display: flex;
-     flex-direction: column;
-     margin-top: 5%;
-   }
-
-   .ronda {
-     display: flex;
-     justify-content: center;
-     
-     margin-bottom: 60px;
-
-     width: 100%;
-   }
-   
-
-
-   .vs {
-     margin: 2px;
-     font-size: 24px;
-     font-weight: bold;
-     margin-top: auto;
-     margin-bottom: 32px;
-   }
-
-   .img{
-
-     width: 100%;
-     max-width: 100%;
-     height: auto;
-     max-height: 120px;
-    max-width: 120px;
-    min-width: 70px;
-    min-height: 70px;
-     border: 5px solid #26161F;
-     
-
-   }
-   .lista_imagens{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    grid-gap: 10px;
-   }
-   .img_delete{
-    text-align: center;
-   }
-   .img_delete img {
-    max-width: 100%;
-    height: auto;
-}
-
-   .img-4 {
-     width: 100%;
-     min-width: 130px;
-     max-width: 180px;
-     height: auto;
-     border: 5px solid #26161F;
-     max-height: 200px;
-   }
-   .img-6 {
-    width: 100%;
-    min-width: 120px;
-    max-width: 180px;
-    height: auto;
-    border: 5px solid #26161F;
-    max-height: 200px;
-    min-height: 100px;
-  }
-  .img-8 {
-    width: 100%;
-    min-width: 96px;
-    max-width: 180px;
-    height: auto;
-    border: 5px solid #26161F;
-    max-height: 200px;
-    min-height: 100px;
-  }
-
-   .img-2 {
-     width: 100%;
-     min-width: 200px;
-     max-width: 250px;
-     height: auto;
-     border: 5px solid #26161F;
-     max-height: 250px;
-   }
-
-   .img-12 {
-    width: 100%;
-    min-width: 80px;
-    min-height: 85px;
-    max-width: 140px;
-    height: auto;
-    border: 5px solid #26161F;
-    max-height: 110px;
-   }
-.img-14{
-  width: 100%;
-  min-width: 80px;
-  min-height: 85px;
-  max-width: 140px;
-  height: auto;
-  border: 5px solid #26161F;
-  max-height: 110px;
-}
-.img-10{
-  width: 100%;
-  min-width: 88px;
-  min-height: 85px;
-  max-width: 140px;
-  height: auto;
-  border: 5px solid #26161F;
-  max-height: 110px;
-}
-.img-escolhe{
-  width: auto;
-max-width: 100%;
- max-height: 600px;
-height: auto;
-min-width: 400px;
-min-height: 350px;
-
-  border: 5px solid lightgreen;
-  
-}
-
-   .descricao {
-     font-size: 14px;
-     font-family: arial, sans-serif;
-     color: #3c4043;
-     font-weight: bold;
-     margin-top: 5px;
-   }
-
-   
-
-   .imagem-texto {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-
-
-
-   }
-
-   .meioImagens {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-     height: 140px;
-   }
-
-   .botaoVS {
-     background-color: #f8f9fa;
-     border: 1px solid #26161F;
-     border-radius: 4px;
-     color: #3c4043;
-     cursor: pointer;
-     font-family: arial, sans-serif;
-     font-size: 14px;
-     font-weight: bold;
-     height: 36px;
-     line-height: 27px;
-     min-width: 54px;
-     padding: 0 10px;
-     text-align: center;
-     user-select: none;
-     -webkit-user-select: none;
-     touch-action: manipulation;
-     white-space: pre;
-     margin: 0 10px;
-
-   }
-
-   .botaoVS:hover {
-     border-color: #dadce0;
-     box-shadow: rgba(0, 0, 0, .1) 0 1px 1px;
-     color: #202124;
-   }
-
-
-   /*  Escolhe */
-
-   .imagem_decisao {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000; 
-    visibility: hidden;
-}
-
-
-.imagem_decisao .vs {
-    font-size: 30px;
-    font-weight: bold;
-    color: #FFF; 
-    margin: 0 10px;
-}
-.imagem_decisao .botaoVS{
-  margin-top: 10px ;
-  font-size: 20px;
-  min-width: 220px;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+/* ============================================================
+   ESTRUTURA ORIGINAL (BASE QUE FUNCIONA)
+   ============================================================ */
+body, html {
+    background-color: #EFEFEF;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.93); 
-    z-index: 999; 
-    visibility: hidden; 
+    margin: 0;
+    padding: 0;
+    font-family: arial, sans-serif;
+    /* Adicionei scroll-behavior e garanti overflow */
+    overflow-x: hidden; 
+    overflow-y: auto;
 }
 
-
-
-/* vencedor final */
-
-.vencedor_final {
-  text-align: center; 
-
-  color: #fff; 
-  padding: 20px; 
+.bracket {
+    display: flex;
+    justify-content: center; /* Padrão: Centrado */
+    align-items: flex-start;
+    max-height: 100%;
+    /* Ponto de origem padrão para zooms */
+    transform-origin: top center; 
+    transition: transform 0.3s ease;
+    width: 100%;
+    overflow: auto; /* Garante scroll */
+    padding-bottom: 50px; /* Espaço extra no fundo */
 }
 
-.vencedor_titulo {
-  font-size: 2em; 
-  margin-bottom: 20px; 
-  color: gold; 
+/* --- Colunas e Gaps (O teu layout original) --- */
+.coluna-esquerda-12, .coluna-direita-12 {
+    display: flex; flex-direction: column; gap: 250px;
+}
+.segunda-coluna {
+    display: flex; flex-direction: column; gap: 200px; margin-top: 5%;
+}
+.segunda-coluna-12 {
+    display: flex; flex-direction: column; gap: 250px;
+}
+.terceira-coluna { margin-top: 15%; }
+.coluna-final {
+    display: flex; flex-direction: column; margin-top: 15%;
+}
+.coluna-final-14 {
+    display: flex; flex-direction: column; margin-top: 5%;
 }
 
-.vencedor_final .imagem_vencedor{
- max-width: 100%;
- max-height: 800px;
-  height: auto; 
-  border: 5px solid gold; 
+.ronda {
+    display: flex; justify-content: center; margin-bottom: 60px; width: 100%;
 }
 
-.descricao_final {
-  display: block; 
-  margin-top: 10px; 
-  font-size: 1.2em; 
+/* --- Estilos Visuais --- */
+.vs {
+    margin: 2px; font-size: 24px; font-weight: bold; margin-top: auto; margin-bottom: 32px;
+}
+.img {
+    width: 100%; max-width: 120px; height: auto; 
+    max-height: 120px; min-width: 70px; min-height: 70px; 
+    border: 5px solid #26161F;
+}
+.lista_imagens {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); grid-gap: 10px;
+}
+.img_delete { text-align: center; }
+.img_delete img { max-width: 100%; height: auto; }
+
+/* Tamanhos de Imagens Específicos */
+.img-4 { width: 100%; min-width: 130px; max-width: 180px; height: auto; border: 5px solid #26161F; max-height: 200px; }
+.img-6 { width: 100%; min-width: 120px; max-width: 180px; height: auto; border: 5px solid #26161F; max-height: 200px; min-height: 100px; }
+.img-8 { width: 100%; min-width: 96px; max-width: 180px; height: auto; border: 5px solid #26161F; max-height: 200px; min-height: 100px; }
+.img-2 { width: 100%; min-width: 200px; max-width: 250px; height: auto; border: 5px solid #26161F; max-height: 250px; }
+.img-12 { width: 100%; min-width: 80px; min-height: 85px; max-width: 140px; height: auto; border: 5px solid #26161F; max-height: 110px; }
+.img-14 { width: 100%; min-width: 80px; min-height: 85px; max-width: 140px; height: auto; border: 5px solid #26161F; max-height: 110px; }
+.img-10 { width: 100%; min-width: 88px; min-height: 85px; max-width: 140px; height: auto; border: 5px solid #26161F; max-height: 110px; }
+.img-escolhe { width: auto; max-width: 100%; max-height: 600px; height: auto; min-width: 400px; min-height: 350px; border: 5px solid lightgreen; }
+
+.descricao {
+    font-size: 14px; font-family: arial, sans-serif; color: #3c4043; font-weight: bold; margin-top: 5px;
+}
+.imagem-texto {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.meioImagens {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; height: 140px;
+}
+.botaoVS {
+    background-color: #f8f9fa; border: 1px solid #26161F; border-radius: 4px; color: #3c4043; cursor: pointer;
+    font-family: arial, sans-serif; font-size: 14px; font-weight: bold; height: 36px; line-height: 27px;
+    min-width: 54px; padding: 0 10px; text-align: center; margin: 0 10px;
+}
+.botaoVS:hover { border-color: #dadce0; box-shadow: rgba(0, 0, 0, .1) 0 1px 1px; color: #202124; }
+#carregar, #addNames {
+    padding: 10px; background-color: lightgreen; border: 5px solid #26161F; font-size: larger; font-weight: bold; margin-bottom: 10px;
 }
 
-/*  fireworks */
-/* Basic styling for the fireworks container */
-.fireworks-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 9999;
+/* Modais e Extras */
+.imagem_decisao {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    display: flex; align-items: center; justify-content: center; z-index: 1000; visibility: hidden;
 }
-
-/* Individual firework */
-.firework {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 5px;
-  height: 5px;
-  background: rgba(255, 255, 255, 1);
-  border-radius: 50%;
-  animation: firework-burst 0.8s ease-out forwards;
+.imagem_decisao .vs { font-size: 30px; font-weight: bold; color: #FFF; margin: 0 10px; }
+.imagem_decisao .botaoVS { margin-top: 10px; font-size: 20px; min-width: 220px; }
+.overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.93); z-index: 999; visibility: hidden;
 }
-
-@keyframes firework-burst {
-  0% {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-  }
-  100% {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(10);
-  }
-}
-
+.vencedor_final { text-align: center; color: #fff; padding: 20px; }
+.vencedor_titulo { font-size: 2em; margin-bottom: 20px; color: gold; }
+.vencedor_final .imagem_vencedor { max-width: 100%; max-height: 800px; height: auto; border: 5px solid gold; }
+.descricao_final { display: block; margin-top: 10px; font-size: 1.2em; }
+.fireworks-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; z-index: 9999; }
+.firework { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 5px; height: 5px; background: rgba(255, 255, 255, 1); border-radius: 50%; animation: firework-burst 0.8s ease-out forwards; }
+@keyframes firework-burst { 0% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(10); } }
 
 
 /* ============================================================
-   CONTROLO DE ZOOM FORÇADO (Adiciona isto ao fim do CSS)
+   AQUI ESTÁ A LÓGICA DE ZOOMS ATUALIZADA
    ============================================================ */
 
-/* Configuração Base para permitir o Zoom */
-.bracket {
-    /* Define que o zoom acontece a partir do topo e centro */
-    transform-origin: top center; 
-    transition: transform 0.3s ease; /* Transição suave se mudares o tamanho */
-    width: 100%;
-    /* Importante: garante que o conteúdo encolhido não corta */
-    overflow: visible; 
+/* 1. DESKTOP (Ecrãs grandes > 1440px)
+   Aqui aumentamos tudo para ocupar o espaço vazio */
+
+.zoom-8 { 
+    transform: scale(1.1); /* Aumentei para 110% */
+    margin-top: 20px; 
 }
 
-/* --- CLASSES DE ZOOM POR NÚMERO DE JOGADORES --- */
-/* Estas percentagens ajustam o tamanho para caber no ecrã */
-
-/* Para 8 Jogadores (Zoom 85%) */
-.zoom-8 {
-    transform: scale(0.85); 
-    margin-top: -50px; /* Puxa um pouco para cima se necessário */
+.zoom-10 { 
+    transform: scale(1.0); /* Tamanho real 100% */
+    margin-top: 0; 
 }
 
-/* Para 10 Jogadores (Zoom 75%) */
-.zoom-10 {
-    transform: scale(0.75); 
-    margin-top: -80px; 
+.zoom-12 { 
+    transform: scale(0.95); /* Quase 100%, muito maior que antes */
+    margin-top: -20px; 
 }
 
-/* Para 12, 14 ou 16 Jogadores (Zoom 60% - Muito Zoom Out) */
-.zoom-12, .zoom-14, .zoom-16 {
-    transform: scale(0.60); 
-    margin-top: -100px; 
+.zoom-14, .zoom-16 { 
+    transform: scale(0.85); /* 85% - Grande o suficiente, mas cabe */
+    margin-top: -40px; 
 }
 
 
-/* --- ZOOM AUTOMÁTICO PARA PORTÁTEIS E TELEMÓVEIS --- */
-
-/* Portáteis (Ecrãs abaixo de 1400px de largura) */
-@media screen and (max-width: 1400px) {
-    .bracket {
-        /* Força zoom out geral em portáteis */
-        transform: scale(0.65) !important; 
-    }
+/* 2. PORTÁTEIS (Ecrãs médios - Max 1440px) */
+@media screen and (max-width: 1440px) {
     
-    /* Se for o de 10 ou mais, encolhe ainda mais no portátil */
-    .zoom-10, .zoom-12, .zoom-14 {
-        transform: scale(0.55) !important;
+    /* 8 e 10 Jogadores: Aumentados */
+    .zoom-8 { transform: scale(0.90) !important; margin-top: 0; }
+    
+    /* 10 Jogadores: Alinhado à esquerda para não cortar */
+    .zoom-10 { 
+        transform: scale(0.80) !important; 
+        transform-origin: top left !important; /* Truque anti-corte */
+        margin-left: 5%; /* Centraliza um pouco visualmente */
+        margin-top: -20px;
+    }
+
+    /* 12 Jogadores: Mantido "Perfeito" (0.65) */
+    .zoom-12 { transform: scale(0.65) !important; margin-top: -50px; transform-origin: top center; }
+
+    /* 14 e 16 Jogadores: Estavam cortados -> Passam para alinhamento Esquerda */
+    .zoom-14, .zoom-16 {
+        transform: scale(0.60) !important;
+        transform-origin: top left !important; /* Começa a desenhar da esquerda */
+        margin-left: 20px !important; /* Margem de segurança */
+        margin-top: 0 !important;
+        /* Largura extra para garantir que a barra de scroll aparece */
+        width: 150% !important; 
     }
 }
 
-/* Telemóveis (Ecrãs abaixo de 768px) */
+
+/* 3. TELEMÓVEIS (Ecrãs pequenos - Max 768px) */
 @media screen and (max-width: 768px) {
     .bracket {
-        /* No telemóvel, reduzimos para menos de metade */
-        transform: scale(0.4) !important; 
-        
-        /* Mudamos a origem para a esquerda para não cortar o início */
-        transform-origin: top left; 
-        
-        /* Truque: Como encolhemos o conteúdo, temos de dizer ao browser
-           que o contentor é "maior" para permitir scroll lateral */
-        width: 250%; 
-        height: 100vh;
+        justify-content: flex-start !important; /* Força tudo para a esquerda */
+        padding-left: 10px;
+        align-items: flex-start;
+    }
+
+    /* Todas as classes forçadas à esquerda no mobile */
+    [class*="zoom-"] {
+        transform-origin: top left !important;
+        margin-left: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    .zoom-8 { transform: scale(0.60) !important; width: 150% !important; }
+    
+    .zoom-10, .zoom-12, .zoom-14, .zoom-16 { 
+        transform: scale(0.45) !important; 
+        width: 250% !important; /* Scroll longo garantido */
     }
 }
