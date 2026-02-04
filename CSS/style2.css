@@ -345,3 +345,72 @@ min-height: 350px;
       transform: translate(-50%, -50%) scale(10);
   }
 }
+
+
+
+/* ============================================================
+   CONTROLO DE ZOOM FORÇADO (Adiciona isto ao fim do CSS)
+   ============================================================ */
+
+/* Configuração Base para permitir o Zoom */
+.bracket {
+    /* Define que o zoom acontece a partir do topo e centro */
+    transform-origin: top center; 
+    transition: transform 0.3s ease; /* Transição suave se mudares o tamanho */
+    width: 100%;
+    /* Importante: garante que o conteúdo encolhido não corta */
+    overflow: visible; 
+}
+
+/* --- CLASSES DE ZOOM POR NÚMERO DE JOGADORES --- */
+/* Estas percentagens ajustam o tamanho para caber no ecrã */
+
+/* Para 8 Jogadores (Zoom 85%) */
+.zoom-8 {
+    transform: scale(0.85); 
+    margin-top: -50px; /* Puxa um pouco para cima se necessário */
+}
+
+/* Para 10 Jogadores (Zoom 75%) */
+.zoom-10 {
+    transform: scale(0.75); 
+    margin-top: -80px; 
+}
+
+/* Para 12, 14 ou 16 Jogadores (Zoom 60% - Muito Zoom Out) */
+.zoom-12, .zoom-14, .zoom-16 {
+    transform: scale(0.60); 
+    margin-top: -100px; 
+}
+
+
+/* --- ZOOM AUTOMÁTICO PARA PORTÁTEIS E TELEMÓVEIS --- */
+
+/* Portáteis (Ecrãs abaixo de 1400px de largura) */
+@media screen and (max-width: 1400px) {
+    .bracket {
+        /* Força zoom out geral em portáteis */
+        transform: scale(0.65) !important; 
+    }
+    
+    /* Se for o de 10 ou mais, encolhe ainda mais no portátil */
+    .zoom-10, .zoom-12, .zoom-14 {
+        transform: scale(0.55) !important;
+    }
+}
+
+/* Telemóveis (Ecrãs abaixo de 768px) */
+@media screen and (max-width: 768px) {
+    .bracket {
+        /* No telemóvel, reduzimos para menos de metade */
+        transform: scale(0.4) !important; 
+        
+        /* Mudamos a origem para a esquerda para não cortar o início */
+        transform-origin: top left; 
+        
+        /* Truque: Como encolhemos o conteúdo, temos de dizer ao browser
+           que o contentor é "maior" para permitir scroll lateral */
+        width: 250%; 
+        height: 100vh;
+    }
+}
