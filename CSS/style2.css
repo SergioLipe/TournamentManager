@@ -1,123 +1,139 @@
-   body,
-   html {
-     background-color: #EFEFEF;
-     height: 100%;
-     margin: 0;
-     padding: 0;
+body,
+html {
+    background-color: #EFEFEF;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+
+/* --- Contentor Principal --- */
+.bracket {
+    display: flex;
+    /* Mudamos de center para flex-start para não cortar o lado esquerdo */
+    justify-content: flex-start; 
+    align-items: flex-start;
     
-   }
-
-   .bracket {
-     display: flex;
-     justify-content: center;
-     align-items: flex-start;
-     max-height: 100%;
-     
-
-   }
-
-   .coluna-esquerda-12,
-   .coluna-direita-12 {
-     display: flex;
-     flex-direction: column;
-     gap: 250px;
-   }
-
-   .segunda-coluna {
-
-     display: flex;
-     flex-direction: column;
-     gap: 200px;
-     margin-top: 5%;
-
-   }
-
-   .segunda-coluna-12 {
-     display: flex;
-     flex-direction: column;
-     gap: 250px;
-   }
-
-   .terceira-coluna {
+    /* Truque para centrar apenas se houver espaço livre */
+    margin: 0 auto; 
     
-     margin-top: 15%;
-   }
+    /* O container adapta-se ao tamanho do conteúdo */
+    width: fit-content; 
+    min-width: 100%; /* Garante que ocupa pelo menos o ecrã todo */
+    
+    /* Configuração do scroll */
+    overflow-x: auto; 
+    padding-bottom: 20px;
+    padding-left: 20px; /* Um pouco de margem para não colar à esquerda */
+}
 
-   .coluna-final {
-     display: flex;
-     flex-direction: column;
-     margin-top: 15%;
+/* --- Colunas e Estrutura (Desktop Padrão) --- */
+.coluna-esquerda-12,
+.coluna-direita-12 {
+    display: flex;
+    flex-direction: column;
+    gap: 250px;
+}
 
-   }
-   #carregar, #addNames{
-    padding:10px;
+.segunda-coluna {
+    display: flex;
+    flex-direction: column;
+    gap: 200px;
+    margin-top: 5%;
+}
+
+.segunda-coluna-12 {
+    display: flex;
+    flex-direction: column;
+    gap: 250px;
+}
+
+.terceira-coluna {
+    display: flex;
+    flex-direction: column; /* Adicionado para garantir alinhamento */
+    margin-top: 15%;
+}
+
+.coluna-final {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15%;
+}
+
+.coluna-final-14 {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+}
+
+/* --- Botões de Carregar --- */
+#carregar,
+#addNames {
+    padding: 10px;
     background-color: lightgreen;
     border: 5px solid #26161F;
     font-size: larger;
     font-weight: bold;
     margin-bottom: 10px;
-   }
+    cursor: pointer;
+}
 
-   .coluna-final-14 {
-     display: flex;
-     flex-direction: column;
-     margin-top: 5%;
-   }
+/* --- Rondas e Imagens --- */
+.ronda {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+    width: 100%;
+}
 
-   .ronda {
-     display: flex;
-     justify-content: center;
-     
-     margin-bottom: 60px;
+.vs {
+    margin: 2px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: auto;
+    margin-bottom: 32px;
+}
 
-     width: 100%;
-   }
-   
-
-
-   .vs {
-     margin: 2px;
-     font-size: 24px;
-     font-weight: bold;
-     margin-top: auto;
-     margin-bottom: 32px;
-   }
-
-   .img{
-
-     width: 100%;
-     max-width: 100%;
-     height: auto;
-     max-height: 120px;
+/* Classe base para imagens */
+.img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 120px;
     max-width: 120px;
     min-width: 70px;
     min-height: 70px;
-     border: 5px solid #26161F;
-     
+    border: 5px solid #26161F;
+    object-fit: cover; /* Garante que a imagem não fica esticada */
+}
 
-   }
-   .lista_imagens{
+.lista_imagens {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     grid-gap: 10px;
-   }
-   .img_delete{
+}
+
+.img_delete {
     text-align: center;
-   }
-   .img_delete img {
+}
+
+.img_delete img {
     max-width: 100%;
     height: auto;
 }
 
-   .img-4 {
-     width: 100%;
-     min-width: 130px;
-     max-width: 180px;
-     height: auto;
-     border: 5px solid #26161F;
-     max-height: 200px;
-   }
-   .img-6 {
+/* Tamanhos específicos de imagens (Desktop) */
+.img-4 {
+    width: 100%;
+    min-width: 130px;
+    max-width: 180px;
+    height: auto;
+    border: 5px solid #26161F;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.img-6 {
     width: 100%;
     min-width: 120px;
     max-width: 180px;
@@ -125,8 +141,10 @@
     border: 5px solid #26161F;
     max-height: 200px;
     min-height: 100px;
-  }
-  .img-8 {
+    object-fit: cover;
+}
+
+.img-8 {
     width: 100%;
     min-width: 96px;
     max-width: 180px;
@@ -134,18 +152,20 @@
     border: 5px solid #26161F;
     max-height: 200px;
     min-height: 100px;
-  }
+    object-fit: cover;
+}
 
-   .img-2 {
-     width: 100%;
-     min-width: 200px;
-     max-width: 250px;
-     height: auto;
-     border: 5px solid #26161F;
-     max-height: 250px;
-   }
+.img-2 {
+    width: 100%;
+    min-width: 200px;
+    max-width: 250px;
+    height: auto;
+    border: 5px solid #26161F;
+    max-height: 250px;
+    object-fit: cover;
+}
 
-   .img-12 {
+.img-12 {
     width: 100%;
     min-width: 80px;
     min-height: 85px;
@@ -153,97 +173,100 @@
     height: auto;
     border: 5px solid #26161F;
     max-height: 110px;
-   }
-.img-14{
-  width: 100%;
-  min-width: 80px;
-  min-height: 85px;
-  max-width: 140px;
-  height: auto;
-  border: 5px solid #26161F;
-  max-height: 110px;
-}
-.img-10{
-  width: 100%;
-  min-width: 88px;
-  min-height: 85px;
-  max-width: 140px;
-  height: auto;
-  border: 5px solid #26161F;
-  max-height: 110px;
-}
-.img-escolhe{
-  width: auto;
-max-width: 100%;
- max-height: 600px;
-height: auto;
-min-width: 400px;
-min-height: 350px;
-
-  border: 5px solid lightgreen;
-  
+    object-fit: cover;
 }
 
-   .descricao {
-     font-size: 14px;
-     font-family: arial, sans-serif;
-     color: #3c4043;
-     font-weight: bold;
-     margin-top: 5px;
-   }
+.img-14 {
+    width: 100%;
+    min-width: 80px;
+    min-height: 85px;
+    max-width: 140px;
+    height: auto;
+    border: 5px solid #26161F;
+    max-height: 110px;
+    object-fit: cover;
+}
 
-   
+.img-10 {
+    width: 100%;
+    min-width: 88px;
+    min-height: 85px;
+    max-width: 140px;
+    height: auto;
+    border: 5px solid #26161F;
+    max-height: 110px;
+    object-fit: cover;
+}
 
-   .imagem-texto {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
+/* Imagem Grande do Pop-up (Desktop) */
+.img-escolhe {
+    width: auto;
+    max-width: 100%;
+    max-height: 600px;
+    height: auto;
+    min-width: 400px;
+    min-height: 350px;
+    border: 5px solid lightgreen;
+    object-fit: contain;
+}
 
+.descricao {
+    font-size: 14px;
+    font-family: arial, sans-serif;
+    color: #3c4043;
+    font-weight: bold;
+    margin-top: 5px;
+    text-align: center;
+    background-color: rgba(255,255,255,0.8); /* Melhor leitura */
+    padding: 2px;
+    border-radius: 4px;
+}
 
+.imagem-texto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
-   }
+.meioImagens {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 140px;
+}
 
-   .meioImagens {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-     height: 140px;
-   }
+.botaoVS {
+    background-color: #f8f9fa;
+    border: 1px solid #26161F;
+    border-radius: 4px;
+    color: #3c4043;
+    cursor: pointer;
+    font-family: arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    height: 36px;
+    line-height: 27px;
+    min-width: 54px;
+    padding: 0 10px;
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: pre;
+    margin: 0 10px;
+}
 
-   .botaoVS {
-     background-color: #f8f9fa;
-     border: 1px solid #26161F;
-     border-radius: 4px;
-     color: #3c4043;
-     cursor: pointer;
-     font-family: arial, sans-serif;
-     font-size: 14px;
-     font-weight: bold;
-     height: 36px;
-     line-height: 27px;
-     min-width: 54px;
-     padding: 0 10px;
-     text-align: center;
-     user-select: none;
-     -webkit-user-select: none;
-     touch-action: manipulation;
-     white-space: pre;
-     margin: 0 10px;
+.botaoVS:hover {
+    border-color: #dadce0;
+    box-shadow: rgba(0, 0, 0, .1) 0 1px 1px;
+    color: #202124;
+}
 
-   }
+/* --- OVERLAY / POP-UP de Decisão --- */
 
-   .botaoVS:hover {
-     border-color: #dadce0;
-     box-shadow: rgba(0, 0, 0, .1) 0 1px 1px;
-     color: #202124;
-   }
-
-
-   /*  Escolhe */
-
-   .imagem_decisao {
+.imagem_decisao {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -251,21 +274,24 @@ min-height: 350px;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000; 
+    z-index: 1000;
     visibility: hidden;
+    /* Adicionado para garantir que não sai do ecrã */
+    max-width: 95vw;
+    max-height: 95vh;
 }
-
 
 .imagem_decisao .vs {
     font-size: 30px;
     font-weight: bold;
-    color: #FFF; 
+    color: #FFF;
     margin: 0 10px;
 }
-.imagem_decisao .botaoVS{
-  margin-top: 10px ;
-  font-size: 20px;
-  min-width: 220px;
+
+.imagem_decisao .botaoVS {
+    margin-top: 10px;
+    font-size: 20px;
+    min-width: 220px;
 }
 
 .overlay {
@@ -274,74 +300,193 @@ min-height: 350px;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.93); 
-    z-index: 999; 
-    visibility: hidden; 
+    background-color: rgba(0, 0, 0, 0.93);
+    z-index: 999;
+    visibility: hidden;
 }
 
-
-
-/* vencedor final */
+/* --- Vencedor Final --- */
 
 .vencedor_final {
-  text-align: center; 
-
-  color: #fff; 
-  padding: 20px; 
+    text-align: center;
+    color: #fff;
+    padding: 20px;
 }
 
 .vencedor_titulo {
-  font-size: 2em; 
-  margin-bottom: 20px; 
-  color: gold; 
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: gold;
 }
 
-.vencedor_final .imagem_vencedor{
- max-width: 100%;
- max-height: 800px;
-  height: auto; 
-  border: 5px solid gold; 
+.vencedor_final .imagem_vencedor {
+    max-width: 100%;
+    max-height: 800px;
+    height: auto;
+    border: 5px solid gold;
 }
 
 .descricao_final {
-  display: block; 
-  margin-top: 10px; 
-  font-size: 1.2em; 
+    display: block;
+    margin-top: 10px;
+    font-size: 1.2em;
 }
 
-/*  fireworks */
-/* Basic styling for the fireworks container */
+/* --- Fireworks --- */
 .fireworks-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 9999;
 }
 
-/* Individual firework */
 .firework {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 5px;
-  height: 5px;
-  background: rgba(255, 255, 255, 1);
-  border-radius: 50%;
-  animation: firework-burst 0.8s ease-out forwards;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 50%;
+    animation: firework-burst 0.8s ease-out forwards;
 }
 
 @keyframes firework-burst {
-  0% {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-  }
-  100% {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(10);
-  }
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(10);
+    }
+}
+
+
+/* ==========================================================================
+   RESPONSIVIDADE (MOBILE)
+   ========================================================================== */
+
+@media screen and (max-width: 768px) {
+
+    /* Ajustar contentor principal */
+    .bracket {
+        justify-content: flex-start; /* Alinha à esquerda para permitir scroll */
+        padding: 10px;
+    }
+
+    /* Reduzir drasticamente os espaçamentos das colunas e anular estilos inline do HTML */
+    .coluna-esquerda-12,
+    .coluna-direita-12,
+    .segunda-coluna,
+    .segunda-coluna-12,
+    .terceira-coluna,
+    .coluna-final,
+    .coluna-final-14 {
+        gap: 20px !important; /* De 200px para 20px */
+        margin-top: 20px !important; /* Ignora o 'margin-top: 60%' do HTML */
+        margin-left: 5px !important;
+        margin-right: 5px !important;
+    }
+
+    /* Ajustar botões principais */
+    #carregar, #addNames {
+        font-size: 14px;
+        padding: 5px;
+    }
+
+    /* Reduzir tamanho de todas as imagens da bracket */
+    .img, .img-2, .img-4, .img-6, .img-8, .img-10, .img-12, .img-14 {
+        width: auto;
+        max-width: 80px;
+        max-height: 80px;
+        min-width: 50px;
+        min-height: 50px;
+        border-width: 2px; /* Borda mais fina */
+    }
+
+    /* Ajustar Rondas */
+    .ronda {
+        margin-bottom: 20px;
+    }
+    
+    .meioImagens {
+        height: auto;
+        min-height: 60px;
+    }
+
+    .vs {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .botaoVS {
+        padding: 2px 5px;
+        font-size: 12px;
+        min-width: 40px;
+        height: 30px;
+        line-height: 25px;
+        margin: 0 2px;
+    }
+
+    /* --- FIX POP-UP DE DECISÃO NO MOBILE --- */
+    
+    /* Passar de horizontal (lado a lado) para vertical (um em cima do outro) */
+    .imagem_decisao {
+        flex-direction: column; 
+        width: 90%;
+        height: auto;
+        max-height: 90vh;
+        overflow-y: auto; /* Scroll vertical se necessário no popup */
+    }
+
+    /* Ajustar container de cada opção no popup */
+    .coluna-final {
+        flex-direction: column;
+        margin-top: 0 !important;
+        gap: 10px !important;
+    }
+    
+    /* Ajustar a estrutura interna do popup para vertical */
+    .imagem_decisao .ronda {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 0;
+    }
+    
+    /* Resetar tamanho forçado da imagem de escolha */
+    .img-escolhe {
+        min-width: 0; /* Anula o 400px fixo */
+        min-height: 0; /* Anula o 350px fixo */
+        max-width: 80vw;
+        max-height: 25vh; /* Ocupa no máximo 25% da altura do ecrã */
+        width: auto;
+        height: auto;
+        border-width: 3px;
+    }
+
+    /* Botão de escolha no popup */
+    .imagem_decisao .botaoVS {
+        min-width: 100px;
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+
+    .imagem_decisao .meioImagens {
+        flex-direction: row; /* Mantém o VS na horizontal se sobrar */
+        height: 40px;
+    }
+
+    /* Vencedor Final Mobile */
+    .vencedor_titulo {
+        font-size: 1.5em;
+    }
+    .vencedor_final .imagem_vencedor {
+        max-height: 50vh;
+    }
 }
