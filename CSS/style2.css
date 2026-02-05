@@ -279,34 +279,62 @@ body, html {
 
 
 /* --- C. TELEMÓVEIS (Ecrãs Pequenos < 768px) --- */
+/* --- MODO MOBILE: FORÇA BRUTA --- */
 @media screen and (max-width: 768px) {
-    .bracket {
-        justify-content: flex-start !important;
-        padding-left: 10px;
-        /* Block ajuda o browser a gerir melhor a área de scroll */
-        display: block; 
+
+    /* 1. O Contentor de Decisão */
+    .imagem_decisao {
+        flex-direction: column !important; /* Imagens uma em cima da outra */
+        width: 95% !important;
+        max-width: 320px !important;
+        height: auto !important;
+        max-height: 90vh !important;
+        overflow-y: auto !important;
+        background: rgba(0, 0, 0, 0.98) !important;
+        padding: 10px !important;
     }
 
-    [class*="zoom-"] {
-        transform-origin: top left !important;
-        margin: 0 !important;
-        width: max-content !important; 
+    /* 2. Reset à Estrutura Interna */
+    .imagem_decisao .coluna-final {
+        margin-top: 0 !important; /* Remove os 15% do desktop */
     }
 
-    /* ZOOM OUT EXTREMO (AQUI ESTÁ A MUDANÇA) */
-    /* Valores muito baixos para garantir que vês tudo */
-    
-    .zoom-8 { 
-        transform: scale(0.40) !important; 
-        min-width: 150% !important;
+    .imagem_decisao .ronda {
+        flex-direction: column !important;
+        margin-bottom: 0 !important;
+        gap: 5px !important;
     }
-    
-    /* 22% do tamanho original. Quase vista de mapa. */
-    .zoom-10, .zoom-12, .zoom-14, .zoom-16 { 
-        transform: scale(0.22) !important; 
+
+    /* 3. AS IMAGENS (Onde estava o maior erro) */
+    .img-escolhe {
+        /* Mata os 400px e 350px fixos do style2.css original */
+        min-width: 0 !important; 
+        min-height: 0 !important;
         
-        /* Largura 450%: Cria uma pista de scroll gigante para a direita
-           para teres a certeza que chegas às batalhas finais */
-        min-width: 450% !important; 
+        width: 140px !important; /* Tamanho pequeno e seguro */
+        height: 140px !important;
+        object-fit: cover !important;
+        border: 3px solid lightgreen !important;
+        margin-bottom: 5px !important;
+    }
+
+    /* 4. O Espaço do VS (Reset aos 140px) */
+    .imagem_decisao .meioImagens {
+        height: 40px !important; /* Reduz de 140px para 40px */
+        margin: 0 !important;
+    }
+
+    .imagem_decisao .vs {
+        margin: 0 !important;
+        font-size: 18px !important;
+    }
+
+    /* 5. Os Botões */
+    .imagem_decisao .botaoVS {
+        width: 100% !important;
+        min-width: 150px !important;
+        height: 40px !important;
+        margin: 0 0 15px 0 !important;
+        font-size: 14px !important;
     }
 }

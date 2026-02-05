@@ -75,6 +75,17 @@ function EscolheVencedor() {
               </div>
               `;
 
+      // --- NOVO: TORNAR AS IMAGENS CLICÁVEIS ---
+      var imagensParaClicar = imagensDiv.querySelectorAll('.img-escolhe');
+      imagensParaClicar.forEach(img => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', function () {
+          // Clica automaticamente no botão que está logo abaixo da imagem
+          this.nextElementSibling.click();
+        });
+      });
+      // -----------------------------------------
+
       // mete visivel as imagens
       overlay.style.visibility = 'visible';
       imagensDiv.style.visibility = 'visible';
