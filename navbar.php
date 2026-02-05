@@ -10,7 +10,7 @@
     <link href="CSS/style2.css" rel="stylesheet">
     
     <style>
-        /* CSS DA NAVBAR */
+        /* --- CSS DA NAVBAR --- */
         .navbar {
             padding-top: 5px !important;
             padding-bottom: 5px !important;
@@ -18,78 +18,97 @@
             transition: margin-top 0.4s ease-in-out;
             z-index: 1000;
             position: relative;
-            /* Sombra na barra para separar do conteúdo */
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); 
         }
 
         .navbar-hidden {
-            margin-top: -100px !important; /* Esconde a barra puxando para cima */
+            margin-top: -120px !important;
         }
 
-        /* --- BOTÃO PREMIUM --- */
+        /* --- BOTÃO FLUTUANTE (MENU) --- */
         #toggleNavBtn {
             position: fixed;
             top: 15px;
             left: 15px;
-            z-index: 2000; /* Fica SEMPRE acima de tudo */
-            
-            /* Tamanho e Forma */
+            z-index: 2000; 
             width: 45px;
             height: 45px;
-            border-radius: 50%; /* Redondo */
+            border-radius: 50%;
             border: none;
-            
-            /* Estilo Visual (Gradiente Escuro Moderno) */
             background: linear-gradient(145deg, #212529, #495057);
             color: white;
-            
-            /* Sombra para dar efeito 3D */
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            
-            /* Alinhamento da Seta */
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 20px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animação "elástica" */
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Efeito ao passar o rato */
         #toggleNavBtn:hover {
-            transform: scale(1.1) rotate(0deg);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            transform: scale(1.1);
             background: linear-gradient(145deg, #000000, #343a40);
         }
 
-        /* Efeito ao clicar */
-        #toggleNavBtn:active {
-            transform: scale(0.95);
+        /* --- CONTROLO DE IMAGENS (+ INPUT -) --- */
+        .input-group-custom {
+            display: flex;
+            align-items: center;
+            width: 140px; /* Aumentei para caber bem */
         }
 
-        /* Ajustes internos */
-        .nav-gap { gap: 10px; }
-        #numImagens { height: 38px; width: 70px; }
-        .img-label { font-weight: bold; font-size: 14px; white-space: nowrap; }
+        .btn-qty {
+            border: 1px solid #ced4da;
+            background-color: #fff;
+            color: #333;
+            font-weight: bold;
+            width: 35px; /* Botões um pouco mais largos */
+            height: 38px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .btn-qty:hover {
+            background-color: #e9ecef;
+        }
 
-        /* --- AJUSTES MOBILE --- */
+        /* O input no meio (Agora editável) */
+        #numImagens {
+            text-align: center;
+            width: 50px;
+            height: 38px;
+            padding: 0;
+            margin: 0;
+            border: 1px solid #ced4da;
+            border-left: none;
+            border-right: none;
+            -moz-appearance: textfield; /* Esconde setas nativas Firefox */
+        }
+        /* Esconde setas nativas Chrome/Safari */
+        #numImagens::-webkit-outer-spin-button,
+        #numImagens::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Ajustes de Texto e Mobile */
+        .nav-gap { gap: 10px; }
+        
+        /* Garante que o texto não parte nem desaparece */
+        .img-label { 
+            font-weight: bold; 
+            font-size: 14px; 
+            white-space: nowrap; 
+            margin-right: 8px;
+        }
+
         @media (max-width: 992px) {
-            .navbar-container { justify-content: center !important; gap: 15px; }
+            .navbar-container { justify-content: center !important; gap: 15px; padding-top: 10px; }
             .section-block { justify-content: center !important; margin-bottom: 5px; }
-            
-            /* No telemóvel, o botão fica um pouco mais pequeno */
-            #toggleNavBtn { 
-                width: 40px; 
-                height: 40px; 
-                top: 10px; 
-                left: 10px; 
-                font-size: 18px;
-            }
-            
-            /* Garante que o conteúdo da navbar não fica debaixo do botão */
-            .navbar-container {
-                padding-top: 10px; 
-            }
+            #toggleNavBtn { width: 40px; height: 40px; top: 10px; left: 10px; font-size: 18px; }
         }
     </style>
 </head>
@@ -101,12 +120,14 @@
     ?>
     
     <button id="toggleNavBtn" onclick="toggleNavbar()" title="Mostrar/Esconder Menu">
-        &#8593; </button>
+        &#8593;
+    </button>
 
     <nav id="mainNav" class="navbar navbar-light bg-light" style="margin-bottom: 0;">
         <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap navbar-container" style="padding-left: 70px;">
             
             <div class="d-flex align-items-center flex-wrap nav-gap section-block">
+                
                 <div class="dropdown">
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                        Choose Theme
@@ -150,9 +171,14 @@
                 <a class="btn btn-outline-success" href="CriarTema.php">Create</a>
                 
                 <div class="d-flex align-items-center">
-                    <span class="img-label me-2">Images:</span>
-                    <input type="number" class="form-control" placeholder="8" id="numImagens" value="8" min="1" max="16">
+                    <span class="img-label">Nº of Images:</span>
+                    <div class="input-group-custom">
+                        <button class="btn btn-qty" type="button" onclick="alterarQtd(-2)">-</button>
+                        <input type="number" class="form-control" id="numImagens" value="8" min="2" max="16" onchange="validarInput(this)">
+                        <button class="btn btn-qty" type="button" onclick="alterarQtd(2)">+</button>
+                    </div>
                 </div>
+
             </div>
 
             <div class="d-flex justify-content-center align-items-center section-block">
@@ -175,19 +201,57 @@
     </nav>
 
     <script>
+        // 1. Esconder Navbar
         function toggleNavbar() {
             var nav = document.getElementById('mainNav');
             var btn = document.getElementById('toggleNavBtn');
-            
             nav.classList.toggle('navbar-hidden');
             
             if (nav.classList.contains('navbar-hidden')) {
-                btn.innerHTML = "&#8595;"; // Seta Baixo
-                // No mobile, adicionamos um pequeno estilo para o botão não tapar o torneio
+                btn.innerHTML = "&#8595;";
                 btn.style.opacity = "0.7"; 
             } else {
-                btn.innerHTML = "&#8593;"; // Seta Cima
+                btn.innerHTML = "&#8593;";
                 btn.style.opacity = "1";
             }
         }
+
+        // 2. Botões (+ e -)
+        function alterarQtd(valor) {
+            var input = document.getElementById('numImagens');
+            var atual = parseInt(input.value) || 0; // Se estiver vazio, assume 0
+            var novoValor = atual + valor;
+
+            if (novoValor >= 2 && novoValor <= 16) {
+                input.value = novoValor;
+                dispararEvento(input);
+            }
+        }
+
+        // 3. Validar Escrita Manual
+        function validarInput(input) {
+            var valor = parseInt(input.value);
+
+            // Se não for número ou for menor que 2, fixa em 2
+            if (isNaN(valor) || valor < 2) {
+                input.value = 2;
+            } 
+            // Se for maior que 16, fixa em 16
+            else if (valor > 16) {
+                input.value = 16;
+            }
+            
+            // Se for número ímpar (ex: 7), ajusta para par (8) - Opcional, depende da tua lógica
+            // if (input.value % 2 !== 0) input.value = parseInt(input.value) + 1;
+
+            dispararEvento(input);
+        }
+
+        // Helper para avisar o resto do site que mudou
+        function dispararEvento(elemento) {
+            elemento.dispatchEvent(new Event('change'));
+            elemento.dispatchEvent(new Event('input'));
+        }
     </script>
+</body>
+</html>
