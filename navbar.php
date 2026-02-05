@@ -168,10 +168,10 @@
                 </div>
                 <?php } ?>
 
-                <a class="btn btn-outline-success" href="CriarTema.php">Create</a>
+                <a class="btn btn-outline-success" href="CriarTema.php">Create Theme</a>
                 
                 <div class="d-flex align-items-center">
-                    <span class="img-label">Nº of Images:</span>
+                    <span class="img-label">Number -></span>
                     <div class="input-group-custom">
                         <button class="btn btn-qty" type="button" onclick="alterarQtd(-2)">-</button>
                         <input type="number" class="form-control" id="numImagens" value="8" min="2" max="16" onchange="validarInput(this)">
