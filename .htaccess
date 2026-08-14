@@ -9,6 +9,19 @@
 # rebentam com 500 quando o PHP corre como CGI/FastCGI.
 # ---------------------------------------------------------------------------
 
+# --- Forçar HTTPS ------------------------------------------------------------
+#
+# Sem isto o site respondia normalmente em http://, incluindo o login — a
+# sessão nascia sem a flag Secure na cookie e ficava visível a quem
+# partilhasse a rede. O InfinityFree está atrás de um proxy que nunca entrega
+# HTTPS directo ao Apache, por isso o %{HTTPS} do mod_rewrite não chega a ver
+# a ligação real; o cabeçalho X-Forwarded-Proto, esse, é fiável aqui.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP:X-Forwarded-Proto} =http
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
 # --- Ficheiros escondidos (.env, .git, .htpasswd, ...) ---------------------
 <FilesMatch "^\.">
     <IfModule mod_authz_core.c>
