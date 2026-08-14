@@ -1,5 +1,10 @@
 # Environment
 /.env
+/.env.production
+
+# Credenciais e estado de publicação (nunca vão para o repositório)
+/.deploy.env
+/.deploy-state
 
 # PHP dependencies (if you ever use Composer)
 /vendor/
@@ -21,3 +26,10 @@ Thumbs.db
 
 # Optional: lock files you don’t need in VCS
 composer.lock
+
+# Fixtures criadas pelos testes
+/.testfixtures/
+
+# Backups do site em producao e estado de publicacao — nunca publicar
+/backup-live-*/
+/.last-backup

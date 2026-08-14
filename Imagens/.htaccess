@@ -1,0 +1,32 @@
+# Esta pasta recebe ficheiros enviados por utilizadores. Mesmo com a
+# validação de MIME no upload, nada aqui dentro deve alguma vez ser
+# executado pelo servidor — só servido como ficheiro estático.
+#
+# NÃO usar php_flag/php_value aqui: só funcionam com mod_php. Em alojamentos
+# que correm PHP como CGI/FastCGI — o caso do InfinityFree — uma directiva
+# php_flag no .htaccess devolve 500 Internal Server Error em toda a pasta.
+# As directivas abaixo são todas do core do Apache e são seguras nos dois casos.
+
+# Se por acaso houver mod_php, desligar o motor é a defesa mais forte.
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+
+# Sem mod_php, o que impede a execução é não haver handler associado.
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .phps .cgi .pl .py
+RemoveType .php .phtml .php3 .php4 .php5 .php7 .php8 .phps
+
+# E, por fim, negar mesmo o acesso a qualquer coisa executável.
+<FilesMatch "\.(?i:php|phtml|php[0-9]|phps|cgi|pl|py|sh|htaccess)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>

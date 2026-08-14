@@ -1,0 +1,37 @@
+# Ficheiros que existiram em versões anteriores e têm de desaparecer do
+# servidor. O deploy.sh apaga exactamente estes caminhos — nunca padrões,
+# nunca recursivamente — para que uma entrada errada aqui não possa levar
+# nada à frente.
+#
+# Caminhos relativos a FTP_DIR. Uma linha terminada em / é uma pasta, e só
+# é removida depois de os ficheiros dela terem sido apagados.
+#
+# Isto não é arrumação: os três primeiros são os endpoints antigos, com
+# SQL injection e escritas sem autenticação. Enquanto continuarem no
+# servidor, publicar o código novo ao lado deles não corrige nada.
+
+Carregar_Imagens.php
+UpdateEstatistica.php
+funcoesBD.php
+navbar.php
+
+CSS/style2.css
+JavaScript/Brackets.js
+JavaScript/Carregar_Imagens.js
+
+Extras/2p_Brackets.html
+Extras/4p_Brackets.html
+Extras/6p_Brackets.html
+Extras/8p_Brackets.html
+Extras/10p_Brackets.html
+Extras/12p_Brackets.html
+Extras/14p_Brackets.html
+Extras/16p_Brackets.html
+Extras/
+
+# Substituído por Imagens/placeholder.jpg (nome só ASCII).
+Imagens/interrogaçao_food.jpg
+
+# Ficheiros que não são páginas e não pertencem a um servidor público.
+README.md
+.gitignore

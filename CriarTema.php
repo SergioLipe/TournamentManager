@@ -1,115 +1,170 @@
-<?php include "navbar.php"; ?>
+<?php
+declare(strict_types=1);
 
-<?php if (isset($_SESSION['autenticado']) && $_SESSION['autenticado'] === true) { ?>
-  <div class="container mt-4">
-    <div class="row">
-      <!-- form para criar um novo tema -->
-      <div class="col-md-6">
-        <h3>Create a new Theme</h3>
-        <form action="AdicionarCompetidor.php" method="post" enctype="multipart/form-data">
-          <div class="form-group">
-            <label>Theme's Name:</label>
-            <input type="text" name="nomePasta" class="form-control" required maxlength="25">
-          </div>
-          <div class="form-group">
-            <label>Select the Images:</label>
-            <input type="file" name="imagens[]" class="form-control-file" multiple>
-          </div>
-          <button type="submit" class="btn btn-primary" name="criar_tema">Upload Images</button>
-        </form>
-      </div>
+require_once __DIR__ . '/includes/temas.php';
 
-      <!-- form para adicionar imagens a um tema existente-->
-      <div class="col-md-6">
-        <h3>Select a Existing Theme</h3>
-        <form action="AdicionarCompetidor.php" method="post" enctype="multipart/form-data">
-          <div class="form-group">
-            <label>Your Themes:</label>
-            <select name="nomeTema" class="form-control">
-              <?php
-              $userId = $_SESSION['userId']; // vai buscar o id do utilizador logado
-              $sql_temas = "SELECT nome FROM tema WHERE utilizadorId = $userId";     // vai buscar os temas do utilizador
-              $resultado_temas = obterDadosBaseDados($sql_temas);
-              if (mysqli_num_rows($resultado_temas) > 0) {
-                while ($linhaTabelaTemas = mysqli_fetch_assoc($resultado_temas)) {
-                  echo '<option value="' . $linhaTabelaTemas['nome'] . '">' . $linhaTabelaTemas['nome'] . '</option>';
-                }
-              }
-              ?>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Select the Images:</label>
-            <input type="file" name="imagens[]" class="form-control-file" multiple>
-          </div>
-          <button type="submit" class="btn btn-primary" name="tema_existente">Upload Images</button>
-        </form>
-      </div>
+$tituloPagina = 'Create theme';
+
+if (!autenticado()) {
+    require __DIR__ . '/includes/header.php';
+    ?>
+    <div class="container form-estreito">
+        <h1 class="h2 mb-3">Create a theme</h1>
+        <p class="lead">You need an account to build your own themes.</p>
+        <a href="Login.php" class="btn btn-primary">Log in</a>
+        <a href="Registar.php" class="btn btn-outline-primary">Register</a>
     </div>
-    <br><br><br>
-
-   <!-- dropdown para selecionar um tema para ver as imagens e apagar -->
-    <form method ="post" class="d-flex align-items-center">
-      <div class="dropdown">
-        <button class="btn btn-lg btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-          data-bs-toggle="dropdown" aria-expanded="false">
-          Choose a Theme
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <?php
-       
-         
-          $sql_temas = "SELECT id,nome FROM tema where utilizadorId = $userId ";
-          $resultado = obterDadosBaseDados($sql_temas);
-          if (mysqli_num_rows($resultado) > 0) {
-            while ($linhaTabela = mysqli_fetch_assoc($resultado)) {
-             
-             echo '<li><button class="dropdown-item" type="submit" name="temaId"  value="' . $linhaTabela['id'] . '">' . $linhaTabela['nome'] . '</button></li>';
-         
-
-
-            }
-          }
-
-          ?>
-        </ul>
-      </div>
-    </form><br>
-<?php  
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['temaId'])) {
-  $temaId = $_POST['temaId'];  // id do tema que vem do formulário
-  $sql = "SELECT id, nome, imagem FROM competidor WHERE TemaId = $temaId";
-  $resultado = obterDadosBaseDados($sql);
-  
-  if (mysqli_num_rows($resultado) > 0) {
-    echo "<div class='row'>";
-    while ($linhaTabela = mysqli_fetch_assoc($resultado)) {
-      echo "<div class='col-md-3 mb-3'>";
-      echo "<div class='card h-100'>";
-      echo "<img src='" . $linhaTabela['imagem'] . "' class='card-img-top img-fluid' style='height: 150px; object-fit: cover;'>";
-      echo "<div class='card-body'>";
-      echo "<h5 class='card-title'>" . $linhaTabela['nome'] . "</h5>";
-      echo "<a href='apagar.php?id=" . $linhaTabela['id'] . "' class='btn btn-danger'>Eliminate</a>";
-      echo "</div></div></div>";
-    }
-    echo "</div>";
-  }
+    <?php
+    require __DIR__ . '/includes/footer.php';
+    return;
 }
 
+$utilizador    = (int) utilizadorId();
+$listaPessoais = temasDoUtilizador($utilizador);
+
+// Tema actualmente aberto para gestão.
+$temaId = inteiro($_GET, 'temaId');
+$tema   = $temaId > 0 ? obterTema($temaId) : null;
+if (!podeEditarTema($tema)) {
+    $tema = null;
+}
+
+$competidores = $tema !== null ? competidoresDoTema((int) $tema['id']) : [];
+
+require __DIR__ . '/includes/header.php';
 ?>
 
+<div class="container form-largo">
+    <h1 class="h2 mb-4">Your themes</h1>
 
-  </div>
-<?php } else { ?> <!-- se nao tiver login-->
+    <div class="row g-4">
+        <!-- Criar um tema novo -->
+        <div class="col-lg-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="h5 card-title">New theme</h2>
+                    <form action="AdicionarCompetidor.php" method="post" enctype="multipart/form-data">
+                        <?= campoCsrf() ?>
+                        <div class="mb-3">
+                            <label class="form-label" for="nomeTema">Theme name</label>
+                            <input type="text" id="nomeTema" name="nomeTema" class="form-control"
+                                   maxlength="25" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="imagensNovas">Images</label>
+                            <input type="file" id="imagensNovas" name="imagens[]" class="form-control"
+                                   accept="image/*" multiple required>
+                            <div class="form-text">
+                                JPEG, PNG, GIF, WEBP or AVIF &mdash; up to
+                                <?= (int) (MAX_UPLOAD_BYTES / 1024 / 1024) ?> MB each,
+                                <?= MAX_UPLOADS_PER_REQUEST ?> at a time.
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" name="criar_tema" value="1">
+                            Create theme
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-  <div class="container mt-4">
-    <p class="font-weight-bold mt-4 display-6 ">Para começar a criar um tema, é preciso fazer o login.</p>
-    <a href='Login.php' class='btn btn-primary'>Login</a>
-    <a href='Registar.php' class='btn btn-primary'>Registar</a>
-  </div>
+        <!-- Adicionar a um tema existente -->
+        <div class="col-lg-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="h5 card-title">Add to an existing theme</h2>
 
-<?php } ?>
+                    <?php if ($listaPessoais === []) { ?>
+                        <p class="text-muted mb-0">Create your first theme to start adding images to it.</p>
+                    <?php } else { ?>
+                        <form action="AdicionarCompetidor.php" method="post" enctype="multipart/form-data">
+                            <?= campoCsrf() ?>
+                            <div class="mb-3">
+                                <label class="form-label" for="temaExistente">Theme</label>
+                                <select id="temaExistente" name="temaId" class="form-select" required>
+                                    <?php foreach ($listaPessoais as $opcao) { ?>
+                                        <option value="<?= (int) $opcao['id'] ?>"
+                                            <?= $tema !== null && (int) $opcao['id'] === (int) $tema['id'] ? 'selected' : '' ?>>
+                                            <?= e($opcao['nome']) ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="imagensExtra">Images</label>
+                                <input type="file" id="imagensExtra" name="imagens[]" class="form-control"
+                                       accept="image/*" multiple required>
+                            </div>
+                            <button type="submit" class="btn btn-primary" name="tema_existente" value="1">
+                                Upload images
+                            </button>
+                        </form>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+    </div>
 
-</body>
+    <?php if ($listaPessoais !== []) { ?>
+        <hr class="my-5">
 
-</html>
+        <h2 class="h4 mb-3">Manage a theme</h2>
+
+        <div class="seletor-temas">
+            <?php foreach ($listaPessoais as $opcao) {
+                $activo = $tema !== null && (int) $opcao['id'] === (int) $tema['id'];
+                ?>
+                <a href="CriarTema.php?temaId=<?= (int) $opcao['id'] ?>"
+                   class="btn <?= $activo ? 'btn-secondary' : 'btn-outline-secondary' ?>">
+                    <?= e($opcao['nome']) ?>
+                </a>
+            <?php } ?>
+        </div>
+
+        <?php if ($tema !== null) { ?>
+            <div class="tema-cabecalho">
+                <h3 class="h5 mb-0">
+                    <?= e($tema['nome']) ?>
+                    <span class="text-muted">&middot; <?= count($competidores) ?> competitor<?= count($competidores) === 1 ? '' : 's' ?></span>
+                </h3>
+
+                <!-- A mensagem vai num data-attribute em vez de um onsubmit: o
+                     nome do tema pode conter plicas, que dentro de uma string
+                     JavaScript inline fechariam a string. -->
+                <form action="apagar.php" method="post"
+                      data-confirmar="Delete the theme &quot;<?= e($tema['nome']) ?>&quot; and all of its images? This cannot be undone.">
+                    <?= campoCsrf() ?>
+                    <input type="hidden" name="temaId" value="<?= (int) $tema['id'] ?>">
+                    <button type="submit" class="btn btn-outline-danger btn-sm">Delete theme</button>
+                </form>
+            </div>
+
+            <?php if ($competidores === []) { ?>
+                <p class="text-muted">No images in this theme yet.</p>
+            <?php } else { ?>
+                <div class="grelha-cartoes">
+                    <?php foreach ($competidores as $competidor) { ?>
+                        <article class="cartao">
+                            <img class="cartao__img" loading="lazy"
+                                 src="<?= urlImagem($competidor['imagem']) ?>"
+                                 alt="<?= e($competidor['nome']) ?>">
+                            <div class="cartao__corpo">
+                                <h4 class="cartao__titulo"><?= e($competidor['nome']) ?></h4>
+                                <form action="apagar.php" method="post"
+                                      data-confirmar="Delete this competitor?">
+                                    <?= campoCsrf() ?>
+                                    <input type="hidden" name="competidorId" value="<?= (int) $competidor['id'] ?>">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </article>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+        <?php } else { ?>
+            <p class="text-muted">Pick one of your themes to see and manage its images.</p>
+        <?php } ?>
+    <?php } ?>
+</div>
+
+<?php require __DIR__ . '/includes/footer.php'; ?>

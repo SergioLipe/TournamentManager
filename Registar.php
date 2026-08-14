@@ -1,42 +1,79 @@
 <?php
-include "navbar.php";
+declare(strict_types=1);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = isset($_POST['utilizador']) ? $_POST['utilizador'] : '';
-    $password = isset($_POST['password']) ? $_POST['password'] : '';
+require_once __DIR__ . '/includes/helpers.php';
 
-    $sql = "INSERT INTO utilizador (username, password) VALUES ('$username', '$password')";
-    try {
-        $resultadoGuardarBD = guardarDadosBaseDados($sql);
+if (autenticado()) {
+    redirecionar('index.php');
+}
 
-        if ($resultadoGuardarBD === true) {
-            echo "<div class='alert alert-success' role='alert'><br>Conta criada com sucesso</div>";
+$erros = [];
 
-        } else {
-            echo "<div class='alert alert-danger' role='alert'><br>Erro ao criar a conta</div>";
-        }
-    } catch (Exception $e) {
+if (ehPost()) {
+    exigirCsrf();
 
-        echo "<div class='alert alert-danger' role='alert'><br>Erro ao criar a conta</div>";
+    $username = trim((string) ($_POST['utilizador'] ?? ''));
+    $password = (string) ($_POST['password'] ?? '');
+    $confirma = (string) ($_POST['confirmacao'] ?? '');
 
+    if (!preg_match('/^[A-Za-z0-9_.-]{3,30}$/', $username)) {
+        $erros[] = 'The username must be 3 to 30 characters, using only letters, digits, dot, dash or underscore.';
+    }
+    if (strlen($password) < 8) {
+        $erros[] = 'The password must be at least 8 characters long.';
+    }
+    if ($password !== $confirma) {
+        $erros[] = 'The two passwords do not match.';
+    }
+    if ($erros === [] && obterValor('SELECT 1 FROM utilizador WHERE username = ?', [$username]) !== null) {
+        $erros[] = 'That username is already taken.';
+    }
+
+    if ($erros === []) {
+        query(
+            'INSERT INTO utilizador (username, password) VALUES (?, ?)',
+            [$username, password_hash($password, PASSWORD_DEFAULT)]
+        );
+
+        autenticar((int) db()->lastInsertId(), $username);
+        guardarMensagem('success', 'Account created. Welcome!');
+        redirecionar('index.php');
     }
 }
+
+$tituloPagina = 'Register';
+require __DIR__ . '/includes/header.php';
 ?>
 
-<div class="container mt-4">
-<div class="text-center mb-4">
-        <h2 class="display-4">Register</h2>
-    </div>
-    <form id="formulario" method="post" class="mb-3">
-        <div class="form-group">
-            <label for="utilizador">Username:</label>
-            <input type="text" class="form-control" name="utilizador" minlength="3" maxlength="10" required>
-        </div><br>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" class="form-control" name="password" minlength="3" required>
+<div class="container form-estreito">
+    <h1 class="h2 mb-4">Create an account</h1>
+
+    <?php foreach ($erros as $erro) { ?>
+        <div class="alert alert-danger"><?= e($erro) ?></div>
+    <?php } ?>
+
+    <form method="post" novalidate>
+        <?= campoCsrf() ?>
+        <div class="mb-3">
+            <label class="form-label" for="utilizador">Username</label>
+            <input type="text" id="utilizador" name="utilizador" class="form-control"
+                   autocomplete="username" minlength="3" maxlength="30" required
+                   value="<?= e((string) ($_POST['utilizador'] ?? '')) ?>">
         </div>
-        <br>
-        <input type="submit" value="Register" class="btn btn-primary">
+        <div class="mb-3">
+            <label class="form-label" for="password">Password</label>
+            <input type="password" id="password" name="password" class="form-control"
+                   autocomplete="new-password" minlength="8" required>
+            <div class="form-text">At least 8 characters.</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="confirmacao">Repeat password</label>
+            <input type="password" id="confirmacao" name="confirmacao" class="form-control"
+                   autocomplete="new-password" minlength="8" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+        <a href="Login.php" class="btn btn-link">I already have an account</a>
     </form>
 </div>
+
+<?php require __DIR__ . '/includes/footer.php'; ?>

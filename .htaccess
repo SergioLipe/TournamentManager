@@ -1,0 +1,52 @@
+# ---------------------------------------------------------------------------
+# Protecção dos ficheiros que não são páginas.
+#
+# Num alojamento partilhado como o InfinityFree o projecto inteiro fica dentro
+# de htdocs/, ou seja, tudo é acessível pela web por omissão — incluindo o
+# .env com a password da base de dados e os .sql da pasta database/.
+#
+# Só se usam directivas do core do Apache: nada de php_flag/php_value, que
+# rebentam com 500 quando o PHP corre como CGI/FastCGI.
+# ---------------------------------------------------------------------------
+
+# --- Ficheiros escondidos (.env, .git, .htpasswd, ...) ---------------------
+<FilesMatch "^\.">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# --- Extensões que nunca devem ser servidas --------------------------------
+<FilesMatch "\.(?i:env|sql|md|log|ini|json|lock|example|bak|old|dist)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# --- Pastas que só existem para serem incluídas ----------------------------
+# O includes/ e o database/ nunca são pedidos directamente pelo browser: as
+# páginas incluem-nos por caminho de ficheiro, não por URL.
+RedirectMatch 404 ^/(includes|database|vendor)(/|$)
+
+# --- Não listar o conteúdo das pastas --------------------------------------
+<IfModule mod_autoindex.c>
+    Options -Indexes
+</IfModule>
+
+# --- Cabeçalhos de segurança -----------------------------------------------
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# --- Página inicial ---------------------------------------------------------
+DirectoryIndex index.php
