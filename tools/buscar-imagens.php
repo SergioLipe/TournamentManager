@@ -13,6 +13,17 @@ require_once __DIR__ . '/comum.php';
  *   php tools/buscar-imagens.php --dry-run           mostrar sem descarregar
  *   php tools/buscar-imagens.php Animais --refazer   voltar a descarregar tudo
  *
+ * Normalmente a pasta em Imagens/ sai do nome do tema (o de #tema=, ou o nome
+ * do ficheiro da lista). Quando o tema já existe com uma pasta de nome
+ * diferente — caso de 'Movies', cuja pasta ficou 'Filmes' para não reenviar
+ * as imagens por FTP — usa-se --pasta= para acrescentar à pasta certa:
+ *
+ *   php tools/buscar-imagens.php "More Movies" --pasta=Filmes
+ *
+ * Só faz sentido com uma lista de cada vez. Essa lista tem de conter a sua
+ * própria linha #tema= com o nome a mostrar (aqui, 'Movies'), senão o nome do
+ * ficheiro da lista ('More Movies') passava a ser o nome do tema.
+ *
  * Cada lista é um ficheiro de texto em tools/temas/, um competidor por linha:
  *
  *     #tema=Raças de Cães             <- opcional: nome do tema com acentos
@@ -54,6 +65,7 @@ $lingua     = opcao($argv, 'lang', 'en');
 $seco       = temFlag($argv, 'dry-run');
 $refazer    = temFlag($argv, 'refazer');
 $agente     = opcao($argv, 'ua', 'TournamentManager/1.0 (ferramenta local de seeding; PHP ' . PHP_VERSION . ')');
+$pastaForcada = opcao($argv, 'pasta', '');
 
 if (!preg_match('/^[a-z]{2,3}(-[a-z]+)?$/i', $lingua)) {
     erro('Língua inválida: ' . $lingua);
@@ -225,6 +237,26 @@ function imagensDosArtigos(array $titulos, string $lingua, string $agente): arra
     return $encontradas;
 }
 
+/**
+ * Imagem principal de um artigo, pelo endpoint REST em vez da API clássica.
+ *
+ * A prop=pageimages da action=query filtra as imagens que não são de licença
+ * livre — o que chumba silenciosamente qualquer cartaz de filme ou capa de
+ * jogo, que na Wikipédia quase sempre são ficheiros "fair use" locais, não do
+ * Commons. O endpoint REST não aplica esse filtro. Sem batch — só serve como
+ * último recurso para o punhado de títulos que a via rápida não resolveu.
+ */
+function imagemViaResumo(string $titulo, string $lingua, string $agente): ?string
+{
+    $url = 'https://' . $lingua . '.wikipedia.org/api/rest_v1/page/summary/'
+        . rawurlencode(str_replace(' ', '_', $titulo)) . '?redirect=true';
+
+    $dados = obterJson($url, $agente);
+    $fonte = $dados['thumbnail']['source'] ?? ($dados['originalimage']['source'] ?? null);
+
+    return is_string($fonte) && $fonte !== '' ? $fonte : null;
+}
+
 /** Título do artigo que melhor corresponde a um nome, ou null. */
 function procurarArtigo(string $nome, string $lingua, string $agente): ?string
 {
@@ -339,7 +371,7 @@ foreach ($listas as $caminhoLista) {
 
     // A linha #tema= manda; sem ela, o nome do ficheiro serve de nome do tema.
     $tema  = $lista['tema'] ?? pathinfo($caminhoLista, PATHINFO_FILENAME);
-    $pasta = pastaDoTemaPublico($tema);
+    $pasta = $pastaForcada !== '' ? $pastaForcada : pastaDoTemaPublico($tema);
     $dir   = UPLOAD_DIR . '/' . $pasta;
 
     if ($entradas === []) {
@@ -398,9 +430,9 @@ foreach ($listas as $caminhoLista) {
         static fn(array $e): bool => !isset($urls[$e['artigo']])
     ));
 
-    if ($semTitulo !== []) {
-        $encontrados = [];
+    $encontrados = [];
 
+    if ($semTitulo !== []) {
         foreach ($semTitulo as $entrada) {
             $titulo = procurarArtigo($entrada['artigo'], $lingua, $agente);
 
@@ -417,6 +449,22 @@ foreach ($listas as $caminhoLista) {
                     $urls[$artigo] = $porTitulo[$titulo];
                 }
             }
+        }
+    }
+
+    // 3.5. O que ainda falta tenta-se pelo REST, título a título: é o caso dos
+    //      cartazes de filme e capas de jogo, que a via rápida (passo 2) nunca
+    //      devolve por não serem de licença livre.
+    foreach ($porBuscar as $entrada) {
+        if (isset($urls[$entrada['artigo']])) {
+            continue;
+        }
+
+        $titulo = $encontrados[$entrada['artigo']] ?? $entrada['artigo'];
+        $url    = imagemViaResumo($titulo, $lingua, $agente);
+
+        if ($url !== null) {
+            $urls[$entrada['artigo']] = $url;
         }
     }
 

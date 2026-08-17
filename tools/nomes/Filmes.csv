@@ -1,7 +1,9 @@
-# ficheiro,nome a mostrar
+# ficheiro,nome a mostrar — gerado por tools/buscar-imagens.php
 #tema=Movies
 300.jpeg,300
+American-History-X.png,"American History X"
 Avatar.jpeg,Avatar
+Back-to-the-Future.jpg,"Back to the Future"
 Book-of-Eli.jpeg,"The Book of Eli"
 Da-Vinci-Code.jpeg,"The Da Vinci Code"
 Django-Unchained.jpeg,"Django Unchained"
@@ -12,11 +14,24 @@ Good-Will-Hunting.jpeg,"Good Will Hunting"
 Hangover.jpeg,"The Hangover"
 Inception.jpeg,Inception
 Inglorious-Basterds.jpeg,"Inglourious Basterds"
+Interstellar.jpg,Interstellar
+Joker.jpg,Joker
+Jurassic-Park.jpg,"Jurassic Park"
 Matrix.jpeg,"The Matrix"
 Memento.jpeg,Memento
 No-Country-fol-Old-men.jpeg,"No Country for Old Men"
+Parasite.png,Parasite
 Prometheus.jpeg,Prometheus
 Pulp-Fiction.jpeg,"Pulp Fiction"
 Saving-Private-Ryan.jpeg,"Saving Private Ryan"
+Se7en.jpg,Se7en
 Shutter-Island.jpeg,"Shutter Island"
+Star-Wars.png,"Star Wars"
 The-Dark-Knight.jpeg,"The Dark Knight"
+The-Departed.jpg,"The Departed"
+The-Godfather.jpg,"The Godfather"
+The-Lord-of-the-Rings-The-Fellowship-of-the-Ring.jpg,"The Lord of the Rings: The Fellowship of the Ring"
+The-Shawshank-Redemption.jpg,"The Shawshank Redemption"
+The-Silence-of-the-Lambs.jpg,"The Silence of the Lambs"
+Titanic.png,Titanic
+Whiplash.jpg,Whiplash

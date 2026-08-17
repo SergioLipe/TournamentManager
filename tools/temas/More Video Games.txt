@@ -1,0 +1,19 @@
+#tema=Video Games
+#
+# Folder stays "VideoGames" (that's where the original 28 already live), so
+# this has to run with an explicit --pasta override:
+#
+#   php tools/buscar-imagens.php "More Video Games" --pasta=VideoGames
+
+Half-Life 2
+Elden Ring
+Overwatch | Overwatch (video game)
+Diablo II
+StarCraft II
+Terraria
+Stardew Valley
+Hollow Knight
+Celeste | Celeste (video game)
+Super Mario 64
+Doom (2016 video game) | Doom (2016 video game)
+World of Warcraft

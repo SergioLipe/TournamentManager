@@ -1,0 +1,22 @@
+#tema=Movies
+#
+# Folder stays "Filmes" (that's where the original 20 already live), so this
+# has to run with an explicit --pasta override:
+#
+#   php tools/buscar-imagens.php "More Movies" --pasta=Filmes
+
+The Godfather
+The Shawshank Redemption
+Interstellar
+The Lord of the Rings: The Fellowship of the Ring | The Fellowship of the Ring
+Jurassic Park
+Titanic | Titanic (1997 film)
+Star Wars | Star Wars (film)
+Back to the Future
+The Silence of the Lambs
+Whiplash | Whiplash (2014 film)
+Parasite | Parasite (2019 film)
+Joker | Joker (2019 film)
+The Departed
+Se7en | Se7en
+American History X

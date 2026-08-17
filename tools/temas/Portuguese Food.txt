@@ -1,0 +1,17 @@
+# Portuguese Food — more entries, added into Imagens/Portuguese-Food/
+#
+#   php tools/buscar-imagens.php "Portuguese Food" --lang=pt
+
+Bifana
+Prego no Pão | Prego (sanduíche)
+Caldo Verde
+Amêijoas à Bulhão Pato
+Bacalhau à Gomes de Sá
+Leitão à Bairrada
+Chanfana
+Arroz de Marisco
+Pastéis de Bacalhau
+Bola de Berlim
+Queijo da Serra | Queijo da Serra da Estrela
+Presunto
+Vinho do Porto | Vinho do Porto

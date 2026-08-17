@@ -1,15 +1,15 @@
-# ficheiro,nome a mostrar
-#
-# Os pratos portugueses ficam com o nome português — é assim que se chamam
-# também em inglês. Só os genéricos é que foram traduzidos.
+# ficheiro,nome a mostrar — gerado por tools/buscar-imagens.php
 alheira.jpg,Alheira
+Ameijoas-a-Bulhao-Pato.jpg,"Amêijoas à Bulhão Pato"
 Arroz-de-cabidelas.jfif,"Arroz de Cabidela"
+Arroz-de-Marisco.jpg,"Arroz de Marisco"
 arroz_pato.jpg,"Arroz de Pato"
+Bacalhau-a-Gomes-de-Sa.jpg,"Bacalhau à Gomes de Sá"
 Bacalhau-a-Lagareiro.jpg,"Bacalhau à Lagareiro"
 bacalhau_braz.jpg,"Bacalhau à Brás"
-bife.jpg,Steak
-Bolonhesa.webp,"Spaghetti Bolognese"
-Carbonara.jpg,Carbonara
+Bifana.jpg,Bifana
+Bola-de-Berlim.jpg,"Bola de Berlim"
+Caldo-Verde.jpg,"Caldo Verde"
 carne-de-porco-a-alentejana.jpg,"Carne de Porco à Alentejana"
 cheeseburger.jpg,Cheeseburger
 cozido.jpg,"Cozido à Portuguesa"
@@ -18,13 +18,14 @@ feijoada_transmontana.jpg,"Feijoada à Transmontana"
 francesinha.jpg,Francesinha
 Frango-Piri-Piri.jfif,"Piri-Piri Chicken"
 Kebab.jpg,Kebab
-lasanha.jpg,Lasagna
-Pad-Thai.webp,"Pad Thai"
-Paella-de-marisco.jpeg,"Seafood Paella"
+Leitao-a-Bairrada.jpg,"Leitão à Bairrada"
+Pasteis-de-Bacalhau.jpg,"Pastéis de Bacalhau"
 polvo_Lagareiro.jpg,"Polvo à Lagareiro"
-Ramen.jpg,Ramen
+Presunto.jpg,Presunto
+Queijo-da-Serra.jpg,"Queijo da Serra"
 rojoes.jfif,Rojões
 Sardinhas.jpg,"Grilled Sardines"
 sushi.jpg,Sushi
 Tacos.jpg,Tacos
 Tripas-a-modo-do-Porto.jfif,"Tripas à Moda do Porto"
+Vinho-do-Porto.jpg,"Vinho do Porto"

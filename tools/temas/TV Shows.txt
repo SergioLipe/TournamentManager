@@ -1,0 +1,33 @@
+# TV Shows
+#
+#   php tools/buscar-imagens.php "TV Shows"
+#
+# A handful of very famous shows (Friends, The Sopranos, House, The Office...)
+# have no fetchable lead image at all: their Wikipedia infobox uses a logo/
+# wordmark file, which the pageimages API deliberately skips in favour of
+# photographic images. Swapped those for shows whose infobox is a cast photo.
+
+Breaking Bad
+Game of Thrones
+The Wire
+Stranger Things
+The Simpsons
+Better Call Saul
+Chernobyl | Chernobyl (miniseries)
+Sherlock | Sherlock (TV series)
+The Big Bang Theory
+Peaky Blinders
+Lost | Lost (TV series)
+Dexter | Dexter (TV series)
+Narcos
+How I Met Your Mother
+Vikings | Vikings (TV series)
+True Detective
+Fargo | Fargo (TV series)
+Mad Men
+Downton Abbey
+The Crown | The Crown (TV series)
+Homeland | Homeland (TV series)
+Bridgerton
+Band of Brothers | Band of Brothers (miniseries)
+The Boys | The Boys (TV series)

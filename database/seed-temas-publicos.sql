@@ -129,12 +129,15 @@ INSERT INTO competidor (nome, imagem, TemaId) VALUES
     ('Dilophosaurus', 'Imagens/Dinosaurs/Dilophosaurus.jpg', @t),
     ('Diplodocus', 'Imagens/Dinosaurs/Diplodocus.jpg', @t),
     ('Giganotosaurus', 'Imagens/Dinosaurs/Giganotosaurus.jpg', @t),
+    ('Iguanodon', 'Imagens/Dinosaurs/Iguanodon.jpg', @t),
     ('Mosasaurus', 'Imagens/Dinosaurs/Mosasaurus.jpg', @t),
     ('Pachycephalosaurus', 'Imagens/Dinosaurs/Pachycephalosaurus.jpg', @t),
     ('Parasaurolophus', 'Imagens/Dinosaurs/Parasaurolophus.jpg', @t),
     ('Pteranodon', 'Imagens/Dinosaurs/Pteranodon.jpg', @t),
+    ('Quetzalcoatlus', 'Imagens/Dinosaurs/Quetzalcoatlus.jpg', @t),
     ('Spinosaurus', 'Imagens/Dinosaurs/Spinosaurus.jpg', @t),
     ('Stegosaurus', 'Imagens/Dinosaurs/Stegosaurus.jpg', @t),
+    ('Therizinosaurus', 'Imagens/Dinosaurs/Therizinosaurus.jpg', @t),
     ('Triceratops', 'Imagens/Dinosaurs/Triceratops.jpg', @t),
     ('Tyrannosaurus', 'Imagens/Dinosaurs/Tyrannosaurus.jpg', @t),
     ('Utahraptor', 'Imagens/Dinosaurs/Utahraptor.jpg', @t),
@@ -202,39 +205,6 @@ INSERT INTO competidor (nome, imagem, TemaId) VALUES
     ('Warsaw', 'Imagens/European-Capitals/Warsaw.jpg', @t),
     ('Zagreb', 'Imagens/European-Capitals/Zagreb.jpg', @t);
 
--- ---------- Food ----------
-INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Food', @dono, 1)
-    ON DUPLICATE KEY UPDATE publico = 1;
-SET @t = (SELECT id FROM tema WHERE nome = 'Food' AND utilizadorId = @dono);
-DELETE FROM competidor WHERE TemaId = @t;
-INSERT INTO competidor (nome, imagem, TemaId) VALUES
-    ('Alheira', 'Imagens/Food/alheira.jpg', @t),
-    ('Arroz de Cabidela', 'Imagens/Food/Arroz-de-cabidelas.jfif', @t),
-    ('Arroz de Pato', 'Imagens/Food/arroz_pato.jpg', @t),
-    ('Bacalhau à Lagareiro', 'Imagens/Food/Bacalhau-a-Lagareiro.jpg', @t),
-    ('Bacalhau à Brás', 'Imagens/Food/bacalhau_braz.jpg', @t),
-    ('Steak', 'Imagens/Food/bife.jpg', @t),
-    ('Spaghetti Bolognese', 'Imagens/Food/Bolonhesa.webp', @t),
-    ('Carbonara', 'Imagens/Food/Carbonara.jpg', @t),
-    ('Carne de Porco à Alentejana', 'Imagens/Food/carne-de-porco-a-alentejana.jpg', @t),
-    ('Cheeseburger', 'Imagens/Food/cheeseburger.jpg', @t),
-    ('Cozido à Portuguesa', 'Imagens/Food/cozido.jpg', @t),
-    ('Dobrada', 'Imagens/Food/Dobrada.jpg', @t),
-    ('Feijoada à Transmontana', 'Imagens/Food/feijoada_transmontana.jpg', @t),
-    ('Francesinha', 'Imagens/Food/francesinha.jpg', @t),
-    ('Piri-Piri Chicken', 'Imagens/Food/Frango-Piri-Piri.jfif', @t),
-    ('Kebab', 'Imagens/Food/Kebab.jpg', @t),
-    ('Lasagna', 'Imagens/Food/lasanha.jpg', @t),
-    ('Pad Thai', 'Imagens/Food/Pad-Thai.webp', @t),
-    ('Seafood Paella', 'Imagens/Food/Paella-de-marisco.jpeg', @t),
-    ('Polvo à Lagareiro', 'Imagens/Food/polvo_Lagareiro.jpg', @t),
-    ('Ramen', 'Imagens/Food/Ramen.jpg', @t),
-    ('Rojões', 'Imagens/Food/rojoes.jfif', @t),
-    ('Grilled Sardines', 'Imagens/Food/Sardinhas.jpg', @t),
-    ('Sushi', 'Imagens/Food/sushi.jpg', @t),
-    ('Tacos', 'Imagens/Food/Tacos.jpg', @t),
-    ('Tripas à Moda do Porto', 'Imagens/Food/Tripas-a-modo-do-Porto.jfif', @t);
-
 -- ---------- Footballers ----------
 INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Footballers', @dono, 1)
     ON DUPLICATE KEY UPDATE publico = 1;
@@ -266,6 +236,41 @@ INSERT INTO competidor (nome, imagem, TemaId) VALUES
     ('Xavi', 'Imagens/Footballers/Xavi.jpg', @t),
     ('Zinedine Zidane', 'Imagens/Footballers/Zinedine-Zidane.jpg', @t);
 
+-- ---------- International Food ----------
+INSERT INTO tema (nome, utilizadorId, publico) VALUES ('International Food', @dono, 1)
+    ON DUPLICATE KEY UPDATE publico = 1;
+SET @t = (SELECT id FROM tema WHERE nome = 'International Food' AND utilizadorId = @dono);
+DELETE FROM competidor WHERE TemaId = @t;
+INSERT INTO competidor (nome, imagem, TemaId) VALUES
+    ('Baklava', 'Imagens/International-Food/Baklava.png', @t),
+    ('Steak', 'Imagens/International-Food/bife.jpg', @t),
+    ('Spaghetti Bolognese', 'Imagens/International-Food/Bolonhesa.webp', @t),
+    ('Burrito', 'Imagens/International-Food/Burrito.jpg', @t),
+    ('Butter Chicken', 'Imagens/International-Food/Butter-Chicken.jpg', @t),
+    ('Carbonara', 'Imagens/International-Food/Carbonara.jpg', @t),
+    ('Ceviche', 'Imagens/International-Food/Ceviche.jpg', @t),
+    ('Cheeseburger', 'Imagens/International-Food/cheeseburger.jpg', @t),
+    ('Churro', 'Imagens/International-Food/Churro.jpg', @t),
+    ('Croissant', 'Imagens/International-Food/Croissant.jpg', @t),
+    ('Croque Monsieur', 'Imagens/International-Food/Croque-Monsieur.jpg', @t),
+    ('Curry', 'Imagens/International-Food/Curry.jpg', @t),
+    ('Dim Sum', 'Imagens/International-Food/Dim-Sum.jpg', @t),
+    ('Dumpling', 'Imagens/International-Food/Dumpling.jpg', @t),
+    ('Falafel', 'Imagens/International-Food/Falafel.jpg', @t),
+    ('Fish and Chips', 'Imagens/International-Food/Fish-and-Chips.jpg', @t),
+    ('Hummus', 'Imagens/International-Food/Hummus.jpg', @t),
+    ('Kebab', 'Imagens/International-Food/Kebab.jpg', @t),
+    ('Lasagna', 'Imagens/International-Food/lasanha.jpg', @t),
+    ('Pad Thai', 'Imagens/International-Food/Pad-Thai.webp', @t),
+    ('Seafood Paella', 'Imagens/International-Food/Paella-de-marisco.jpeg', @t),
+    ('Pho', 'Imagens/International-Food/Pho.jpg', @t),
+    ('Pizza', 'Imagens/International-Food/Pizza.jpg', @t),
+    ('Poutine', 'Imagens/International-Food/Poutine.jpg', @t),
+    ('Ramen', 'Imagens/International-Food/Ramen.jpg', @t),
+    ('Sushi', 'Imagens/International-Food/sushi.jpg', @t),
+    ('Tacos', 'Imagens/International-Food/Tacos.jpg', @t),
+    ('Tiramisu', 'Imagens/International-Food/Tiramisu.jpg', @t);
+
 -- ---------- Movies ----------
 INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Movies', @dono, 1)
     ON DUPLICATE KEY UPDATE publico = 1;
@@ -273,7 +278,9 @@ SET @t = (SELECT id FROM tema WHERE nome = 'Movies' AND utilizadorId = @dono);
 DELETE FROM competidor WHERE TemaId = @t;
 INSERT INTO competidor (nome, imagem, TemaId) VALUES
     ('300', 'Imagens/Filmes/300.jpeg', @t),
+    ('American History X', 'Imagens/Filmes/American-History-X.png', @t),
     ('Avatar', 'Imagens/Filmes/Avatar.jpeg', @t),
+    ('Back to the Future', 'Imagens/Filmes/Back-to-the-Future.jpg', @t),
     ('The Book of Eli', 'Imagens/Filmes/Book-of-Eli.jpeg', @t),
     ('The Da Vinci Code', 'Imagens/Filmes/Da-Vinci-Code.jpeg', @t),
     ('Django Unchained', 'Imagens/Filmes/Django-Unchained.jpeg', @t),
@@ -284,14 +291,27 @@ INSERT INTO competidor (nome, imagem, TemaId) VALUES
     ('The Hangover', 'Imagens/Filmes/Hangover.jpeg', @t),
     ('Inception', 'Imagens/Filmes/Inception.jpeg', @t),
     ('Inglourious Basterds', 'Imagens/Filmes/Inglorious-Basterds.jpeg', @t),
+    ('Interstellar', 'Imagens/Filmes/Interstellar.jpg', @t),
+    ('Joker', 'Imagens/Filmes/Joker.jpg', @t),
+    ('Jurassic Park', 'Imagens/Filmes/Jurassic-Park.jpg', @t),
     ('The Matrix', 'Imagens/Filmes/Matrix.jpeg', @t),
     ('Memento', 'Imagens/Filmes/Memento.jpeg', @t),
     ('No Country for Old Men', 'Imagens/Filmes/No-Country-fol-Old-men.jpeg', @t),
+    ('Parasite', 'Imagens/Filmes/Parasite.png', @t),
     ('Prometheus', 'Imagens/Filmes/Prometheus.jpeg', @t),
     ('Pulp Fiction', 'Imagens/Filmes/Pulp-Fiction.jpeg', @t),
     ('Saving Private Ryan', 'Imagens/Filmes/Saving-Private-Ryan.jpeg', @t),
+    ('Se7en', 'Imagens/Filmes/Se7en.jpg', @t),
     ('Shutter Island', 'Imagens/Filmes/Shutter-Island.jpeg', @t),
-    ('The Dark Knight', 'Imagens/Filmes/The-Dark-Knight.jpeg', @t);
+    ('Star Wars', 'Imagens/Filmes/Star-Wars.png', @t),
+    ('The Dark Knight', 'Imagens/Filmes/The-Dark-Knight.jpeg', @t),
+    ('The Departed', 'Imagens/Filmes/The-Departed.jpg', @t),
+    ('The Godfather', 'Imagens/Filmes/The-Godfather.jpg', @t),
+    ('The Lord of the Rings: The Fellowship of the Ring', 'Imagens/Filmes/The-Lord-of-the-Rings-The-Fellowship-of-the-Ring.jpg', @t),
+    ('The Shawshank Redemption', 'Imagens/Filmes/The-Shawshank-Redemption.jpg', @t),
+    ('The Silence of the Lambs', 'Imagens/Filmes/The-Silence-of-the-Lambs.jpg', @t),
+    ('Titanic', 'Imagens/Filmes/Titanic.png', @t),
+    ('Whiplash', 'Imagens/Filmes/Whiplash.jpg', @t);
 
 -- ---------- Portuguese Desserts ----------
 INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Portuguese Desserts', @dono, 1)
@@ -321,6 +341,43 @@ INSERT INTO competidor (nome, imagem, TemaId) VALUES
     ('Sonhos', 'Imagens/Portuguese-Desserts/Sonhos.jpg', @t),
     ('Toucinho do Ceu', 'Imagens/Portuguese-Desserts/Toucinho-do-Ceu.jpg', @t),
     ('Travesseiro', 'Imagens/Portuguese-Desserts/Travesseiro.jpg', @t);
+
+-- ---------- Portuguese Food ----------
+INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Portuguese Food', @dono, 1)
+    ON DUPLICATE KEY UPDATE publico = 1;
+SET @t = (SELECT id FROM tema WHERE nome = 'Portuguese Food' AND utilizadorId = @dono);
+DELETE FROM competidor WHERE TemaId = @t;
+INSERT INTO competidor (nome, imagem, TemaId) VALUES
+    ('Alheira', 'Imagens/Portuguese-Food/alheira.jpg', @t),
+    ('Amêijoas à Bulhão Pato', 'Imagens/Portuguese-Food/Ameijoas-a-Bulhao-Pato.jpg', @t),
+    ('Arroz de Cabidela', 'Imagens/Portuguese-Food/Arroz-de-cabidelas.jfif', @t),
+    ('Arroz de Marisco', 'Imagens/Portuguese-Food/Arroz-de-Marisco.jpg', @t),
+    ('Arroz de Pato', 'Imagens/Portuguese-Food/arroz_pato.jpg', @t),
+    ('Bacalhau à Gomes de Sá', 'Imagens/Portuguese-Food/Bacalhau-a-Gomes-de-Sa.jpg', @t),
+    ('Bacalhau à Lagareiro', 'Imagens/Portuguese-Food/Bacalhau-a-Lagareiro.jpg', @t),
+    ('Bacalhau à Brás', 'Imagens/Portuguese-Food/bacalhau_braz.jpg', @t),
+    ('Bifana', 'Imagens/Portuguese-Food/Bifana.jpg', @t),
+    ('Bola de Berlim', 'Imagens/Portuguese-Food/Bola-de-Berlim.jpg', @t),
+    ('Caldo Verde', 'Imagens/Portuguese-Food/Caldo-Verde.jpg', @t),
+    ('Carne de Porco à Alentejana', 'Imagens/Portuguese-Food/carne-de-porco-a-alentejana.jpg', @t),
+    ('Cheeseburger', 'Imagens/Portuguese-Food/cheeseburger.jpg', @t),
+    ('Cozido à Portuguesa', 'Imagens/Portuguese-Food/cozido.jpg', @t),
+    ('Dobrada', 'Imagens/Portuguese-Food/Dobrada.jpg', @t),
+    ('Feijoada à Transmontana', 'Imagens/Portuguese-Food/feijoada_transmontana.jpg', @t),
+    ('Francesinha', 'Imagens/Portuguese-Food/francesinha.jpg', @t),
+    ('Piri-Piri Chicken', 'Imagens/Portuguese-Food/Frango-Piri-Piri.jfif', @t),
+    ('Kebab', 'Imagens/Portuguese-Food/Kebab.jpg', @t),
+    ('Leitão à Bairrada', 'Imagens/Portuguese-Food/Leitao-a-Bairrada.jpg', @t),
+    ('Pastéis de Bacalhau', 'Imagens/Portuguese-Food/Pasteis-de-Bacalhau.jpg', @t),
+    ('Polvo à Lagareiro', 'Imagens/Portuguese-Food/polvo_Lagareiro.jpg', @t),
+    ('Presunto', 'Imagens/Portuguese-Food/Presunto.jpg', @t),
+    ('Queijo da Serra', 'Imagens/Portuguese-Food/Queijo-da-Serra.jpg', @t),
+    ('Rojões', 'Imagens/Portuguese-Food/rojoes.jfif', @t),
+    ('Grilled Sardines', 'Imagens/Portuguese-Food/Sardinhas.jpg', @t),
+    ('Sushi', 'Imagens/Portuguese-Food/sushi.jpg', @t),
+    ('Tacos', 'Imagens/Portuguese-Food/Tacos.jpg', @t),
+    ('Tripas à Moda do Porto', 'Imagens/Portuguese-Food/Tripas-a-modo-do-Porto.jfif', @t),
+    ('Vinho do Porto', 'Imagens/Portuguese-Food/Vinho-do-Porto.jpg', @t);
 
 -- ---------- Portuguese Landmarks ----------
 INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Portuguese Landmarks', @dono, 1)
@@ -376,6 +433,37 @@ INSERT INTO competidor (nome, imagem, TemaId) VALUES
     ('The Jimi Hendrix Experience', 'Imagens/Bandas-de-Rock/The-Jimi-Hendrix-Experience.jpg', @t),
     ('The Rolling Stones', 'Imagens/Bandas-de-Rock/The-Rolling-Stones.jpg', @t);
 
+-- ---------- TV Shows ----------
+INSERT INTO tema (nome, utilizadorId, publico) VALUES ('TV Shows', @dono, 1)
+    ON DUPLICATE KEY UPDATE publico = 1;
+SET @t = (SELECT id FROM tema WHERE nome = 'TV Shows' AND utilizadorId = @dono);
+DELETE FROM competidor WHERE TemaId = @t;
+INSERT INTO competidor (nome, imagem, TemaId) VALUES
+    ('Band of Brothers', 'Imagens/TV-Shows/Band-of-Brothers.jpg', @t),
+    ('Better Call Saul', 'Imagens/TV-Shows/Better-Call-Saul.png', @t),
+    ('Breaking Bad', 'Imagens/TV-Shows/Breaking-Bad.png', @t),
+    ('Bridgerton', 'Imagens/TV-Shows/Bridgerton.png', @t),
+    ('Chernobyl', 'Imagens/TV-Shows/Chernobyl.jpg', @t),
+    ('Dexter', 'Imagens/TV-Shows/Dexter.png', @t),
+    ('Downton Abbey', 'Imagens/TV-Shows/Downton-Abbey.jpg', @t),
+    ('Fargo', 'Imagens/TV-Shows/Fargo.png', @t),
+    ('Game of Thrones', 'Imagens/TV-Shows/Game-of-Thrones.jpg', @t),
+    ('Homeland', 'Imagens/TV-Shows/Homeland.jpg', @t),
+    ('How I Met Your Mother', 'Imagens/TV-Shows/How-I-Met-Your-Mother.png', @t),
+    ('Lost', 'Imagens/TV-Shows/Lost.png', @t),
+    ('Mad Men', 'Imagens/TV-Shows/Mad-Men.jpg', @t),
+    ('Narcos', 'Imagens/TV-Shows/Narcos.jpg', @t),
+    ('Peaky Blinders', 'Imagens/TV-Shows/Peaky-Blinders.jpg', @t),
+    ('Sherlock', 'Imagens/TV-Shows/Sherlock.jpg', @t),
+    ('Stranger Things', 'Imagens/TV-Shows/Stranger-Things.png', @t),
+    ('The Big Bang Theory', 'Imagens/TV-Shows/The-Big-Bang-Theory.png', @t),
+    ('The Boys', 'Imagens/TV-Shows/The-Boys.png', @t),
+    ('The Crown', 'Imagens/TV-Shows/The-Crown.jpg', @t),
+    ('The Simpsons', 'Imagens/TV-Shows/The-Simpsons.png', @t),
+    ('The Wire', 'Imagens/TV-Shows/The-Wire.png', @t),
+    ('True Detective', 'Imagens/TV-Shows/True-Detective.jpg', @t),
+    ('Vikings', 'Imagens/TV-Shows/Vikings.png', @t);
+
 -- ---------- Video Games ----------
 INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Video Games', @dono, 1)
     ON DUPLICATE KEY UPDATE publico = 1;
@@ -387,28 +475,40 @@ INSERT INTO competidor (nome, imagem, TemaId) VALUES
     ('BioShock Trilogy', 'Imagens/VideoGames/BioShock-Trilogy.jpg', @t),
     ('Borderlands', 'Imagens/VideoGames/Borderlands.jpg', @t),
     ('Call of Duty 4: Modern Warfare', 'Imagens/VideoGames/Call-of-Duty-4-Modern-Warfare.jpg', @t),
+    ('Celeste', 'Imagens/VideoGames/Celeste.png', @t),
     ('Civilization V', 'Imagens/VideoGames/Civ-V.jpg', @t),
     ('Counter-Strike 1.6', 'Imagens/VideoGames/Counter-Strike-1.6.jpg', @t),
     ('Dark Souls Trilogy', 'Imagens/VideoGames/Dark-Souls-Trilogy.jpg', @t),
+    ('Diablo II', 'Imagens/VideoGames/Diablo-II.png', @t),
     ('Dishonored', 'Imagens/VideoGames/Dishonored.png', @t),
+    ('Doom (2016)', 'Imagens/VideoGames/Doom-2016-video-game.jpg', @t),
+    ('Elden Ring', 'Imagens/VideoGames/Elden-Ring.jpg', @t),
     ('Fallout: New Vegas', 'Imagens/VideoGames/Fallout-NV.jfif', @t),
     ('Final Fantasy X', 'Imagens/VideoGames/Final-Fantasy-X.webp', @t),
     ('God of War (2018)', 'Imagens/VideoGames/God-of-War-Reboot.avif', @t),
     ('God of War Trilogy', 'Imagens/VideoGames/God-of-War-Trilogy.jpg', @t),
     ('Grand Theft Auto V', 'Imagens/VideoGames/Grand-Theft-Auto-V.jpg', @t),
     ('GTA: San Andreas', 'Imagens/VideoGames/GTA-San-Andreas.jfif', @t),
+    ('Half-Life 2', 'Imagens/VideoGames/Half-Life-2.jpg', @t),
+    ('Hollow Knight', 'Imagens/VideoGames/Hollow-Knight.jpg', @t),
     ('League of Legends', 'Imagens/VideoGames/League-of-Legends.jpg', @t),
     ('Mass Effect Trilogy', 'Imagens/VideoGames/Mass-Effect-Trilogy.jpg', @t),
     ('Metal Gear Solid Trilogy', 'Imagens/VideoGames/Metal-Gear-Solid-Trilogy.jpg', @t),
     ('Metal Gear Solid V', 'Imagens/VideoGames/Metal-Gear-Solid-V.jpg', @t),
     ('Minecraft', 'Imagens/VideoGames/Minecraft.avif', @t),
+    ('Overwatch', 'Imagens/VideoGames/Overwatch.jpg', @t),
     ('Portal 2', 'Imagens/VideoGames/Portal-2.jpg', @t),
     ('Red Dead Redemption 2', 'Imagens/VideoGames/Red-Dead-Redemption-2.jpg', @t),
     ('Resident Evil 4', 'Imagens/VideoGames/Resident-Evil-4.jpg', @t),
     ('Skyrim', 'Imagens/VideoGames/Skyrim.jpg', @t),
+    ('StarCraft II', 'Imagens/VideoGames/StarCraft-II.png', @t),
+    ('Stardew Valley', 'Imagens/VideoGames/Stardew-Valley.png', @t),
+    ('Super Mario 64', 'Imagens/VideoGames/Super-Mario-64.png', @t),
+    ('Terraria', 'Imagens/VideoGames/Terraria.jpg', @t),
     ('The Last of Us', 'Imagens/VideoGames/The-Last-of-Us.webp', @t),
     ('Zelda: Breath of the Wild', 'Imagens/VideoGames/The-Legend-of-Zelda-Breath-of-the-Wild.jpg', @t),
     ('The Witcher 3: Wild Hunt', 'Imagens/VideoGames/The-Witcher-3-Wild-Hunt.avif', @t),
+    ('World of Warcraft', 'Imagens/VideoGames/World-of-Warcraft.png', @t),
     ('XCOM', 'Imagens/VideoGames/Xcom.jpg', @t);
 
 -- ---------- World Landmarks ----------

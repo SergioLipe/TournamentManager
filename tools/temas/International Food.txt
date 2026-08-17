@@ -1,0 +1,24 @@
+# International Food — more entries, added straight into Imagens/International-Food/
+# (that folder used to be the single "Food" theme; slug("International Food")
+# is "International-Food", so no --pasta override is needed here.)
+#
+#   php tools/buscar-imagens.php "International Food"
+
+Pizza
+Croissant
+Dim Sum
+Butter Chicken
+Pho
+Fish and Chips
+Burrito
+Hummus
+Falafel
+Dumpling
+Churro
+Tiramisu
+Ceviche
+Poutine
+Croque Monsieur
+Baklava
+Curry
+Paella | Paella

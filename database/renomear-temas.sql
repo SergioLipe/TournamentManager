@@ -24,6 +24,9 @@ UPDATE IGNORE tema SET nome = 'Movies'      WHERE utilizadorId = @dono AND nome 
 UPDATE IGNORE tema SET nome = 'Rock Bands'  WHERE utilizadorId = @dono AND nome = 'Bandas de Rock';
 UPDATE IGNORE tema SET nome = 'Video Games' WHERE utilizadorId = @dono AND nome = 'VideoGames';
 
--- 'Food' já estava em inglês e fica como está.
+-- 'Food' virou dois temas: os pratos internacionais que já lá estavam ficam
+-- com o tema (e o id, e as estatísticas), 'Portuguese Food' nasce de novo no
+-- seed a seguir com as receitas portuguesas que saíram de 'Food'.
+UPDATE IGNORE tema SET nome = 'International Food' WHERE utilizadorId = @dono AND nome = 'Food';
 
 SELECT id, nome, publico FROM tema WHERE utilizadorId = @dono ORDER BY nome;
