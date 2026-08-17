@@ -1,0 +1,28 @@
+# European Capitals
+#
+#   php tools/buscar-imagens.php "European Capitals"
+
+Lisbon
+Madrid
+Paris
+London
+Rome
+Berlin
+Amsterdam
+Brussels
+Vienna
+Prague
+Budapest
+Warsaw
+Copenhagen
+Stockholm
+Oslo
+Helsinki
+Dublin
+Athens
+Bucharest
+Zagreb
+Ljubljana
+Bratislava
+Tallinn
+Reykjavik | Reykjavík

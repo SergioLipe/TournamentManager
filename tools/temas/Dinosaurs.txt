@@ -1,0 +1,31 @@
+# Dinosaurs
+#
+#   php tools/buscar-imagens.php Dinosaurs
+#
+# The lead image is usually a skeleton mount or a palaeoart reconstruction,
+# both freely licensed on Commons.
+
+Tyrannosaurus
+Triceratops
+Velociraptor
+Stegosaurus
+Brachiosaurus
+Diplodocus
+Spinosaurus
+Allosaurus
+Ankylosaurus
+Apatosaurus
+Archaeopteryx
+Argentinosaurus
+Carnotaurus
+Deinonychus
+Dilophosaurus
+Giganotosaurus
+Iguanodon
+Parasaurolophus
+Pachycephalosaurus
+Pteranodon
+Quetzalcoatlus
+Therizinosaurus
+Utahraptor
+Mosasaurus

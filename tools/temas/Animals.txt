@@ -1,0 +1,31 @@
+# Animals
+#
+#   php tools/buscar-imagens.php Animals
+#
+# Format: "Display name | Wikipedia article". The right-hand side is only
+# needed when the display name is not the article title.
+
+Lion
+Tiger
+Elephant | African bush elephant
+Giraffe
+Wolf
+Brown Bear | Brown bear
+Polar Bear | Polar bear
+Gorilla
+Chimpanzee
+Dolphin | Common bottlenose dolphin
+Orca
+Blue Whale | Blue whale
+Great White Shark | Great white shark
+Golden Eagle | Golden eagle
+Barn Owl | Barn owl
+Emperor Penguin | Emperor penguin
+Nile Crocodile | Nile crocodile
+King Cobra | King cobra
+Cheetah
+White Rhinoceros | White rhinoceros
+Hippopotamus
+Red Kangaroo | Red kangaroo
+Giant Panda | Giant panda
+Red Fox | Red fox

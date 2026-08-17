@@ -1,0 +1,28 @@
+# Dog Breeds
+#
+#   php tools/buscar-imagens.php "Dog Breeds"
+
+Labrador | Labrador Retriever
+Golden Retriever
+German Shepherd
+Siberian Husky
+Rottweiler
+Dobermann
+Boxer | Boxer (dog)
+Bulldog
+French Bulldog
+Beagle
+Dalmatian | Dalmatian dog
+Border Collie
+Chihuahua | Chihuahua (dog breed)
+Pug
+Shih Tzu
+Yorkshire Terrier
+Cocker Spaniel | English Cocker Spaniel
+Saint Bernard | St. Bernard (dog breed)
+Great Dane
+Akita | Akita (dog breed)
+Shiba Inu
+Poodle
+Australian Shepherd
+Portuguese Water Dog

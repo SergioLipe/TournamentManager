@@ -1,0 +1,28 @@
+# Classic Cars
+#
+#   php tools/buscar-imagens.php "Classic Cars"
+
+Ford Mustang | Ford Mustang (first generation)
+Chevrolet Corvette | Chevrolet Corvette (C2)
+Porsche 911 | Porsche 911 (classic)
+Ferrari F40
+Ferrari 250 GTO
+Lamborghini Miura
+Lamborghini Countach
+Jaguar E-Type
+Aston Martin DB5
+Mercedes 300 SL | Mercedes-Benz 300 SL
+BMW M3 | BMW M3 (E30)
+Volkswagen Beetle
+Mini Cooper | Mini (Mark I)
+Fiat 500 | Fiat 500 (1957)
+Citroen DS | Citroën DS
+Alfa Romeo Giulia | Alfa Romeo Giulia (105)
+Lancia Delta | Lancia Delta
+Toyota Supra
+Nissan Skyline GT-R
+Mazda RX-7
+Dodge Charger | Dodge Charger (B-body)
+Shelby Cobra | AC Cobra
+DeLorean | DMC DeLorean
+Peugeot 205 GTI | Peugeot 205

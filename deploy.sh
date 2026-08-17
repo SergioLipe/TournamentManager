@@ -24,7 +24,12 @@ ESTADO="$RAIZ/.deploy-state"
 # pasta backup-live-* com a versão antiga do site foi parar ao servidor, e com
 # ela os endpoints vulneráveis que esta reescrita tinha removido. O .gitignore
 # trata disso, e esta lista é a segunda barreira caso alguém faça `git add -f`.
-EXCLUIR_REGEX='^(deploy-obsolete\.txt|README\.md|\.gitignore|\.env\.example|deploy\.sh|database/|tests/|backup-live-|\.last-backup|\.deploy)'
+#
+# tools/ são as ferramentas de linha de comandos que preparam os temas
+# públicos (buscar-imagens.php, gerar-seed.php). Correm neste computador e não
+# têm nada que fazer no servidor: as listas e os CSVs não são precisos lá, e um
+# .php a mais na raiz do site é superfície de ataque a mais.
+EXCLUIR_REGEX='^(deploy-obsolete\.txt|README\.md|\.gitignore|\.env\.example|deploy\.sh|database/|tests/|tools/|backup-live-|\.last-backup|\.deploy)'
 
 FULL=0
 DRY=0

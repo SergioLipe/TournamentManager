@@ -62,9 +62,12 @@ PHP handlers — but the check that is supposed to catch it is skipped. Verify w
    mysql -u root -p torneio_db < database/seed-temas-publicos.sql
    ```
 
-   Creates the four built-in themes and their 94 competitors, pointing at the
-   images in `Imagens/`. Safe to re-run: existing themes keep their IDs and only
-   their competitors are replaced.
+   Creates the built-in themes and their competitors, pointing at the images in
+   `Imagens/`. Safe to re-run: existing themes keep their IDs and only their
+   competitors are replaced.
+
+   This file is **generated** by `tools/gerar-seed.php` from whatever is in
+   `Imagens/` — don't edit it by hand. See "Adding themes in bulk" below.
 
    Note the display names keep their accents (`Bacalhau à Lagareiro`) while the
    files on disk are plain ASCII (`Bacalhau-a-Lagareiro.jpg`). That split is
@@ -83,6 +86,27 @@ PHP handlers — but the check that is supposed to catch it is skipped. Verify w
    ```
 
    Or point Apache/nginx at the project root.
+
+## Adding themes in bulk
+
+Uploading images one theme at a time through the site is fine for a personal
+theme, but the public ones are built from the command line instead. Write a
+list of names, fetch the pictures, regenerate the SQL:
+
+```sh
+PHP="C:/xampp/php/php.exe"                       # PHP is not on PATH here
+
+$PHP tools/buscar-imagens.php Animals            # names -> Imagens/Animals/
+$PHP tools/gerar-seed.php                        # Imagens/ -> the seed SQL
+mysql -u root -p torneio_db < database/seed-temas-publicos.sql
+```
+
+A theme is a text file in `tools/temas/` whose filename is the theme name, one
+competitor per line. Images come from the lead image of the matching Wikipedia
+article. Full details, including how to fix a name that came out wrong, are in
+[`tools/README.md`](tools/README.md).
+
+`tools/` never reaches the server — `deploy.sh` excludes it.
 
 ## Tests
 

@@ -1,0 +1,28 @@
+# Cocktails
+#
+#   php tools/buscar-imagens.php Cocktails
+
+Margarita
+Mojito
+Negroni
+Old Fashioned | Old fashioned (cocktail)
+Manhattan | Manhattan (cocktail)
+Martini | Martini (cocktail)
+Daiquiri
+Pina Colada | Piña colada
+Caipirinha
+Cosmopolitan | Cosmopolitan (cocktail)
+Bloody Mary | Bloody Mary (cocktail)
+Aperol Spritz | Spritz (cocktail)
+Whiskey Sour | Whiskey sour
+Espresso Martini
+Sangria | Sangria
+Mai Tai
+Long Island Iced Tea
+Moscow Mule
+Gin and Tonic | Gin and tonic
+Sazerac
+Tom Collins
+Bellini | Bellini (cocktail)
+White Russian | White Russian (cocktail)
+Porto Tonico | Port wine

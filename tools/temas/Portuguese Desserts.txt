@@ -1,0 +1,36 @@
+# Portuguese Desserts
+#
+#   php tools/buscar-imagens.php "Portuguese Desserts"
+#
+# The dish names stay in Portuguese because that is what they are called in
+# English too — the theme name and everything around it is English.
+#
+# Some of these have no article of their own. If one comes back SEM IMAGEM,
+# either point it at the right article after the bar, or drop the line and
+# drop a photo into the folder by hand — gerar-seed.php picks up whatever
+# files are in there.
+
+Pastel de Nata | Pastel de nata
+Ovos Moles | Ovos moles
+Queijada
+Travesseiro | Travesseiro (pastry)
+Bolo Rei | Bolo Rei
+Toucinho do Ceu | Toucinho do céu
+Pao de Lo | Pão de ló
+Arroz Doce | Arroz doce
+Leite Creme | Crema catalana
+Aletria
+Rabanadas | Torrija
+Filhos | Filhós
+Sonhos | Sonho
+Broa
+Bolo de Mel | Bolo de mel
+Papos de Anjo | Papo de anjo
+Fatias de Tomar
+Salame de Chocolate | Chocolate salami
+Chocolate Mousse | Chocolate mousse
+Serradura
+Baba de Camelo
+Bolo de Bolacha
+Pastel de Tentugal | Pastel de Tentúgal
+Encharcada

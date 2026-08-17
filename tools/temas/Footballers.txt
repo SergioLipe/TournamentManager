@@ -1,0 +1,31 @@
+# Footballers
+#
+#   php tools/buscar-imagens.php Footballers
+#
+# Commons photos of players come from matches and press conferences, so they
+# are not always the most recent shot — but they are freely licensed.
+
+Cristiano Ronaldo
+Lionel Messi
+Pele | Pelé
+Diego Maradona
+Zinedine Zidane
+Ronaldo | Ronaldo (Brazilian footballer)
+Ronaldinho
+Eusebio | Eusébio
+Luis Figo | Luís Figo
+Rui Costa | Rui Costa (footballer)
+Deco
+Kylian Mbappe | Kylian Mbappé
+Neymar
+Erling Haaland
+Kevin De Bruyne
+Robert Lewandowski
+Luka Modric | Luka Modrić
+Virgil van Dijk
+Mohamed Salah
+Andres Iniesta | Andrés Iniesta
+Xavi
+Iker Casillas
+Gianluigi Buffon
+Bernardo Silva

@@ -1,0 +1,28 @@
+# World Landmarks
+#
+#   php tools/buscar-imagens.php "World Landmarks"
+
+Eiffel Tower
+Colosseum
+Taj Mahal
+Great Wall of China
+Machu Picchu
+Petra
+Christ the Redeemer | Christ the Redeemer (statue)
+Chichen Itza | Chichen Itza
+Pyramids of Giza | Giza pyramid complex
+Stonehenge
+Acropolis of Athens
+Sagrada Familia | Sagrada Família
+Big Ben
+Statue of Liberty
+Golden Gate Bridge
+Sydney Opera House
+Burj Khalifa
+Angkor Wat
+Hagia Sophia
+Neuschwanstein Castle
+Mount Rushmore | Mount Rushmore National Memorial
+Leaning Tower of Pisa
+Alhambra
+Moai | Moai

@@ -151,6 +151,15 @@ hr {
     gap: 0.5rem;
 }
 
+/* A lista de temas públicos deixou de caber num ecrã: com uma dúzia de temas
+   o menu passava para lá do fundo da janela e os últimos ficavam inalcançáveis,
+   porque um dropdown do Bootstrap não tem limite de altura próprio. */
+.app-nav .dropdown-menu {
+    max-height: min(60vh, 26rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
 .app-nav__brand {
     font-weight: 700;
     letter-spacing: 0.08em;
