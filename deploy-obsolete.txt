@@ -32,6 +32,36 @@ Extras/
 # Substituído por Imagens/placeholder.jpg (nome só ASCII).
 Imagens/interrogaçao_food.jpg
 
+# 'Food' virou 'International-Food' + 'Portuguese-Food' — as 26 imagens
+# mudaram de pasta, nenhuma ficou para trás.
+Imagens/Food/alheira.jpg
+Imagens/Food/arroz_pato.jpg
+Imagens/Food/Arroz-de-cabidelas.jfif
+Imagens/Food/bacalhau_braz.jpg
+Imagens/Food/Bacalhau-a-Lagareiro.jpg
+Imagens/Food/bife.jpg
+Imagens/Food/Bolonhesa.webp
+Imagens/Food/Carbonara.jpg
+Imagens/Food/carne-de-porco-a-alentejana.jpg
+Imagens/Food/cheeseburger.jpg
+Imagens/Food/cozido.jpg
+Imagens/Food/Dobrada.jpg
+Imagens/Food/feijoada_transmontana.jpg
+Imagens/Food/francesinha.jpg
+Imagens/Food/Frango-Piri-Piri.jfif
+Imagens/Food/Kebab.jpg
+Imagens/Food/lasanha.jpg
+Imagens/Food/Pad-Thai.webp
+Imagens/Food/Paella-de-marisco.jpeg
+Imagens/Food/polvo_Lagareiro.jpg
+Imagens/Food/Ramen.jpg
+Imagens/Food/rojoes.jfif
+Imagens/Food/Sardinhas.jpg
+Imagens/Food/sushi.jpg
+Imagens/Food/Tacos.jpg
+Imagens/Food/Tripas-a-modo-do-Porto.jfif
+Imagens/Food/
+
 # Ficheiros que não são páginas e não pertencem a um servidor público.
 README.md
 .gitignore
