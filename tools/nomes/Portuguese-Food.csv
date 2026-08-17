@@ -1,4 +1,9 @@
-# ficheiro,nome a mostrar — gerado por tools/buscar-imagens.php
+# ficheiro,nome a mostrar
+#tema=Food in Portugal
+#
+# Todos os pratos internacionais de International-Food/ estão aqui também
+# (ficheiros duplicados) — este tema é a comida portuguesa MAIS tudo o que
+# também se come em Portugal.
 alheira.jpg,Alheira
 Ameijoas-a-Bulhao-Pato.jpg,"Amêijoas à Bulhão Pato"
 Arroz-de-cabidelas.jfif,"Arroz de Cabidela"
@@ -7,25 +12,49 @@ arroz_pato.jpg,"Arroz de Pato"
 Bacalhau-a-Gomes-de-Sa.jpg,"Bacalhau à Gomes de Sá"
 Bacalhau-a-Lagareiro.jpg,"Bacalhau à Lagareiro"
 bacalhau_braz.jpg,"Bacalhau à Brás"
+Baklava.png,Baklava
+bife.jpg,Steak
 Bifana.jpg,Bifana
 Bola-de-Berlim.jpg,"Bola de Berlim"
+Bolonhesa.webp,"Spaghetti Bolognese"
+Burrito.jpg,Burrito
+Butter-Chicken.jpg,"Butter Chicken"
 Caldo-Verde.jpg,"Caldo Verde"
+Carbonara.jpg,Carbonara
 carne-de-porco-a-alentejana.jpg,"Carne de Porco à Alentejana"
+Ceviche.jpg,Ceviche
 cheeseburger.jpg,Cheeseburger
+Churro.jpg,Churro
 cozido.jpg,"Cozido à Portuguesa"
+Croissant.jpg,Croissant
+Croque-Monsieur.jpg,"Croque Monsieur"
+Curry.jpg,Curry
+Dim-Sum.jpg,"Dim Sum"
 Dobrada.jpg,Dobrada
+Dumpling.jpg,Dumpling
+Falafel.jpg,Falafel
 feijoada_transmontana.jpg,"Feijoada à Transmontana"
+Fish-and-Chips.jpg,"Fish and Chips"
 francesinha.jpg,Francesinha
 Frango-Piri-Piri.jfif,"Piri-Piri Chicken"
+Hummus.jpg,Hummus
 Kebab.jpg,Kebab
+lasanha.jpg,Lasagna
 Leitao-a-Bairrada.jpg,"Leitão à Bairrada"
+Pad-Thai.webp,"Pad Thai"
+Paella-de-marisco.jpeg,"Seafood Paella"
 Pasteis-de-Bacalhau.jpg,"Pastéis de Bacalhau"
+Pho.jpg,Pho
+Pizza.jpg,Pizza
 polvo_Lagareiro.jpg,"Polvo à Lagareiro"
+Poutine.jpg,Poutine
 Presunto.jpg,Presunto
 Queijo-da-Serra.jpg,"Queijo da Serra"
+Ramen.jpg,Ramen
 rojoes.jfif,Rojões
 Sardinhas.jpg,"Grilled Sardines"
 sushi.jpg,Sushi
 Tacos.jpg,Tacos
+Tiramisu.jpg,Tiramisu
 Tripas-a-modo-do-Porto.jfif,"Tripas à Moda do Porto"
 Vinho-do-Porto.jpg,"Vinho do Porto"

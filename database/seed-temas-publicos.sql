@@ -205,6 +205,67 @@ INSERT INTO competidor (nome, imagem, TemaId) VALUES
     ('Warsaw', 'Imagens/European-Capitals/Warsaw.jpg', @t),
     ('Zagreb', 'Imagens/European-Capitals/Zagreb.jpg', @t);
 
+-- ---------- Food in Portugal ----------
+INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Food in Portugal', @dono, 1)
+    ON DUPLICATE KEY UPDATE publico = 1;
+SET @t = (SELECT id FROM tema WHERE nome = 'Food in Portugal' AND utilizadorId = @dono);
+DELETE FROM competidor WHERE TemaId = @t;
+INSERT INTO competidor (nome, imagem, TemaId) VALUES
+    ('Alheira', 'Imagens/Portuguese-Food/alheira.jpg', @t),
+    ('Amêijoas à Bulhão Pato', 'Imagens/Portuguese-Food/Ameijoas-a-Bulhao-Pato.jpg', @t),
+    ('Arroz de Cabidela', 'Imagens/Portuguese-Food/Arroz-de-cabidelas.jfif', @t),
+    ('Arroz de Marisco', 'Imagens/Portuguese-Food/Arroz-de-Marisco.jpg', @t),
+    ('Arroz de Pato', 'Imagens/Portuguese-Food/arroz_pato.jpg', @t),
+    ('Bacalhau à Gomes de Sá', 'Imagens/Portuguese-Food/Bacalhau-a-Gomes-de-Sa.jpg', @t),
+    ('Bacalhau à Lagareiro', 'Imagens/Portuguese-Food/Bacalhau-a-Lagareiro.jpg', @t),
+    ('Bacalhau à Brás', 'Imagens/Portuguese-Food/bacalhau_braz.jpg', @t),
+    ('Baklava', 'Imagens/Portuguese-Food/Baklava.png', @t),
+    ('Bifana', 'Imagens/Portuguese-Food/Bifana.jpg', @t),
+    ('Steak', 'Imagens/Portuguese-Food/bife.jpg', @t),
+    ('Bola de Berlim', 'Imagens/Portuguese-Food/Bola-de-Berlim.jpg', @t),
+    ('Spaghetti Bolognese', 'Imagens/Portuguese-Food/Bolonhesa.webp', @t),
+    ('Burrito', 'Imagens/Portuguese-Food/Burrito.jpg', @t),
+    ('Butter Chicken', 'Imagens/Portuguese-Food/Butter-Chicken.jpg', @t),
+    ('Caldo Verde', 'Imagens/Portuguese-Food/Caldo-Verde.jpg', @t),
+    ('Carbonara', 'Imagens/Portuguese-Food/Carbonara.jpg', @t),
+    ('Carne de Porco à Alentejana', 'Imagens/Portuguese-Food/carne-de-porco-a-alentejana.jpg', @t),
+    ('Ceviche', 'Imagens/Portuguese-Food/Ceviche.jpg', @t),
+    ('Cheeseburger', 'Imagens/Portuguese-Food/cheeseburger.jpg', @t),
+    ('Churro', 'Imagens/Portuguese-Food/Churro.jpg', @t),
+    ('Cozido à Portuguesa', 'Imagens/Portuguese-Food/cozido.jpg', @t),
+    ('Croissant', 'Imagens/Portuguese-Food/Croissant.jpg', @t),
+    ('Croque Monsieur', 'Imagens/Portuguese-Food/Croque-Monsieur.jpg', @t),
+    ('Curry', 'Imagens/Portuguese-Food/Curry.jpg', @t),
+    ('Dim Sum', 'Imagens/Portuguese-Food/Dim-Sum.jpg', @t),
+    ('Dobrada', 'Imagens/Portuguese-Food/Dobrada.jpg', @t),
+    ('Dumpling', 'Imagens/Portuguese-Food/Dumpling.jpg', @t),
+    ('Falafel', 'Imagens/Portuguese-Food/Falafel.jpg', @t),
+    ('Feijoada à Transmontana', 'Imagens/Portuguese-Food/feijoada_transmontana.jpg', @t),
+    ('Fish and Chips', 'Imagens/Portuguese-Food/Fish-and-Chips.jpg', @t),
+    ('Francesinha', 'Imagens/Portuguese-Food/francesinha.jpg', @t),
+    ('Piri-Piri Chicken', 'Imagens/Portuguese-Food/Frango-Piri-Piri.jfif', @t),
+    ('Hummus', 'Imagens/Portuguese-Food/Hummus.jpg', @t),
+    ('Kebab', 'Imagens/Portuguese-Food/Kebab.jpg', @t),
+    ('Lasagna', 'Imagens/Portuguese-Food/lasanha.jpg', @t),
+    ('Leitão à Bairrada', 'Imagens/Portuguese-Food/Leitao-a-Bairrada.jpg', @t),
+    ('Pad Thai', 'Imagens/Portuguese-Food/Pad-Thai.webp', @t),
+    ('Seafood Paella', 'Imagens/Portuguese-Food/Paella-de-marisco.jpeg', @t),
+    ('Pastéis de Bacalhau', 'Imagens/Portuguese-Food/Pasteis-de-Bacalhau.jpg', @t),
+    ('Pho', 'Imagens/Portuguese-Food/Pho.jpg', @t),
+    ('Pizza', 'Imagens/Portuguese-Food/Pizza.jpg', @t),
+    ('Polvo à Lagareiro', 'Imagens/Portuguese-Food/polvo_Lagareiro.jpg', @t),
+    ('Poutine', 'Imagens/Portuguese-Food/Poutine.jpg', @t),
+    ('Presunto', 'Imagens/Portuguese-Food/Presunto.jpg', @t),
+    ('Queijo da Serra', 'Imagens/Portuguese-Food/Queijo-da-Serra.jpg', @t),
+    ('Ramen', 'Imagens/Portuguese-Food/Ramen.jpg', @t),
+    ('Rojões', 'Imagens/Portuguese-Food/rojoes.jfif', @t),
+    ('Grilled Sardines', 'Imagens/Portuguese-Food/Sardinhas.jpg', @t),
+    ('Sushi', 'Imagens/Portuguese-Food/sushi.jpg', @t),
+    ('Tacos', 'Imagens/Portuguese-Food/Tacos.jpg', @t),
+    ('Tiramisu', 'Imagens/Portuguese-Food/Tiramisu.jpg', @t),
+    ('Tripas à Moda do Porto', 'Imagens/Portuguese-Food/Tripas-a-modo-do-Porto.jfif', @t),
+    ('Vinho do Porto', 'Imagens/Portuguese-Food/Vinho-do-Porto.jpg', @t);
+
 -- ---------- Footballers ----------
 INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Footballers', @dono, 1)
     ON DUPLICATE KEY UPDATE publico = 1;
@@ -342,69 +403,36 @@ INSERT INTO competidor (nome, imagem, TemaId) VALUES
     ('Toucinho do Ceu', 'Imagens/Portuguese-Desserts/Toucinho-do-Ceu.jpg', @t),
     ('Travesseiro', 'Imagens/Portuguese-Desserts/Travesseiro.jpg', @t);
 
--- ---------- Portuguese Food ----------
-INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Portuguese Food', @dono, 1)
+-- ---------- Rap Artists ----------
+INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Rap Artists', @dono, 1)
     ON DUPLICATE KEY UPDATE publico = 1;
-SET @t = (SELECT id FROM tema WHERE nome = 'Portuguese Food' AND utilizadorId = @dono);
+SET @t = (SELECT id FROM tema WHERE nome = 'Rap Artists' AND utilizadorId = @dono);
 DELETE FROM competidor WHERE TemaId = @t;
 INSERT INTO competidor (nome, imagem, TemaId) VALUES
-    ('Alheira', 'Imagens/Portuguese-Food/alheira.jpg', @t),
-    ('Amêijoas à Bulhão Pato', 'Imagens/Portuguese-Food/Ameijoas-a-Bulhao-Pato.jpg', @t),
-    ('Arroz de Cabidela', 'Imagens/Portuguese-Food/Arroz-de-cabidelas.jfif', @t),
-    ('Arroz de Marisco', 'Imagens/Portuguese-Food/Arroz-de-Marisco.jpg', @t),
-    ('Arroz de Pato', 'Imagens/Portuguese-Food/arroz_pato.jpg', @t),
-    ('Bacalhau à Gomes de Sá', 'Imagens/Portuguese-Food/Bacalhau-a-Gomes-de-Sa.jpg', @t),
-    ('Bacalhau à Lagareiro', 'Imagens/Portuguese-Food/Bacalhau-a-Lagareiro.jpg', @t),
-    ('Bacalhau à Brás', 'Imagens/Portuguese-Food/bacalhau_braz.jpg', @t),
-    ('Bifana', 'Imagens/Portuguese-Food/Bifana.jpg', @t),
-    ('Bola de Berlim', 'Imagens/Portuguese-Food/Bola-de-Berlim.jpg', @t),
-    ('Caldo Verde', 'Imagens/Portuguese-Food/Caldo-Verde.jpg', @t),
-    ('Carne de Porco à Alentejana', 'Imagens/Portuguese-Food/carne-de-porco-a-alentejana.jpg', @t),
-    ('Cheeseburger', 'Imagens/Portuguese-Food/cheeseburger.jpg', @t),
-    ('Cozido à Portuguesa', 'Imagens/Portuguese-Food/cozido.jpg', @t),
-    ('Dobrada', 'Imagens/Portuguese-Food/Dobrada.jpg', @t),
-    ('Feijoada à Transmontana', 'Imagens/Portuguese-Food/feijoada_transmontana.jpg', @t),
-    ('Francesinha', 'Imagens/Portuguese-Food/francesinha.jpg', @t),
-    ('Piri-Piri Chicken', 'Imagens/Portuguese-Food/Frango-Piri-Piri.jfif', @t),
-    ('Kebab', 'Imagens/Portuguese-Food/Kebab.jpg', @t),
-    ('Leitão à Bairrada', 'Imagens/Portuguese-Food/Leitao-a-Bairrada.jpg', @t),
-    ('Pastéis de Bacalhau', 'Imagens/Portuguese-Food/Pasteis-de-Bacalhau.jpg', @t),
-    ('Polvo à Lagareiro', 'Imagens/Portuguese-Food/polvo_Lagareiro.jpg', @t),
-    ('Presunto', 'Imagens/Portuguese-Food/Presunto.jpg', @t),
-    ('Queijo da Serra', 'Imagens/Portuguese-Food/Queijo-da-Serra.jpg', @t),
-    ('Rojões', 'Imagens/Portuguese-Food/rojoes.jfif', @t),
-    ('Grilled Sardines', 'Imagens/Portuguese-Food/Sardinhas.jpg', @t),
-    ('Sushi', 'Imagens/Portuguese-Food/sushi.jpg', @t),
-    ('Tacos', 'Imagens/Portuguese-Food/Tacos.jpg', @t),
-    ('Tripas à Moda do Porto', 'Imagens/Portuguese-Food/Tripas-a-modo-do-Porto.jfif', @t),
-    ('Vinho do Porto', 'Imagens/Portuguese-Food/Vinho-do-Porto.jpg', @t);
-
--- ---------- Portuguese Landmarks ----------
-INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Portuguese Landmarks', @dono, 1)
-    ON DUPLICATE KEY UPDATE publico = 1;
-SET @t = (SELECT id FROM tema WHERE nome = 'Portuguese Landmarks' AND utilizadorId = @dono);
-DELETE FROM competidor WHERE TemaId = @t;
-INSERT INTO competidor (nome, imagem, TemaId) VALUES
-    ('Aguas Livres Aqueduct', 'Imagens/Portuguese-Landmarks/Aguas-Livres-Aqueduct.jpg', @t),
-    ('Alcobaca Monastery', 'Imagens/Portuguese-Landmarks/Alcobaca-Monastery.jpg', @t),
-    ('Batalha Monastery', 'Imagens/Portuguese-Landmarks/Batalha-Monastery.jpg', @t),
-    ('Belem Tower', 'Imagens/Portuguese-Landmarks/Belem-Tower.jpg', @t),
-    ('Bom Jesus do Monte', 'Imagens/Portuguese-Landmarks/Bom-Jesus-do-Monte.jpg', @t),
-    ('Cabo da Roca', 'Imagens/Portuguese-Landmarks/Cabo-da-Roca.jpg', @t),
-    ('Chapel of Bones', 'Imagens/Portuguese-Landmarks/Chapel-of-Bones.jpg', @t),
-    ('Clerigos Tower', 'Imagens/Portuguese-Landmarks/Clerigos-Tower.jpg', @t),
-    ('Convent of Christ', 'Imagens/Portuguese-Landmarks/Convent-of-Christ.jpg', @t),
-    ('Guimaraes Castle', 'Imagens/Portuguese-Landmarks/Guimaraes-Castle.jpg', @t),
-    ('Jeronimos Monastery', 'Imagens/Portuguese-Landmarks/Jeronimos-Monastery.png', @t),
-    ('Livraria Lello', 'Imagens/Portuguese-Landmarks/Livraria-Lello.jpg', @t),
-    ('Mafra Palace', 'Imagens/Portuguese-Landmarks/Mafra-Palace.jpg', @t),
-    ('Padrao dos Descobrimentos', 'Imagens/Portuguese-Landmarks/Padrao-dos-Descobrimentos.jpg', @t),
-    ('Pena Palace', 'Imagens/Portuguese-Landmarks/Pena-Palace.jpg', @t),
-    ('Porto Cathedral', 'Imagens/Portuguese-Landmarks/Porto-Cathedral.jpg', @t),
-    ('Queluz Palace', 'Imagens/Portuguese-Landmarks/Queluz-Palace.jpg', @t),
-    ('Quinta da Regaleira', 'Imagens/Portuguese-Landmarks/Quinta-da-Regaleira.jpg', @t),
-    ('Sao Jorge Castle', 'Imagens/Portuguese-Landmarks/Sao-Jorge-Castle.jpg', @t),
-    ('University of Coimbra', 'Imagens/Portuguese-Landmarks/University-of-Coimbra.png', @t);
+    ('50 Cent', 'Imagens/Rap-Artists/50-Cent.jpg', @t),
+    ('A Tribe Called Quest', 'Imagens/Rap-Artists/A-Tribe-Called-Quest.png', @t),
+    ('Cardi B', 'Imagens/Rap-Artists/Cardi-B.jpg', @t),
+    ('Dr. Dre', 'Imagens/Rap-Artists/Dr-Dre.png', @t),
+    ('Drake', 'Imagens/Rap-Artists/Drake.jpg', @t),
+    ('Eminem', 'Imagens/Rap-Artists/Eminem.jpg', @t),
+    ('Ice Cube', 'Imagens/Rap-Artists/Ice-Cube.png', @t),
+    ('J. Cole', 'Imagens/Rap-Artists/J-Cole.jpg', @t),
+    ('Jay-Z', 'Imagens/Rap-Artists/Jay-Z.webp', @t),
+    ('Kanye West', 'Imagens/Rap-Artists/Kanye-West.jpg', @t),
+    ('Kendrick Lamar', 'Imagens/Rap-Artists/Kendrick-Lamar.jpg', @t),
+    ('Lil Wayne', 'Imagens/Rap-Artists/Lil-Wayne.jpg', @t),
+    ('LL Cool J', 'Imagens/Rap-Artists/LL-Cool-J.jpg', @t),
+    ('Missy Elliott', 'Imagens/Rap-Artists/Missy-Elliott.jpg', @t),
+    ('Nas', 'Imagens/Rap-Artists/Nas.jpg', @t),
+    ('Nicki Minaj', 'Imagens/Rap-Artists/Nicki-Minaj.jpg', @t),
+    ('OutKast', 'Imagens/Rap-Artists/OutKast.jpg', @t),
+    ('Public Enemy', 'Imagens/Rap-Artists/Public-Enemy.jpg', @t),
+    ('Run-DMC', 'Imagens/Rap-Artists/Run-DMC.jpg', @t),
+    ('Snoop Dogg', 'Imagens/Rap-Artists/Snoop-Dogg.jpg', @t),
+    ('The Notorious B.I.G.', 'Imagens/Rap-Artists/The-Notorious-B-I-G.jpg', @t),
+    ('Travis Scott', 'Imagens/Rap-Artists/Travis-Scott.png', @t),
+    ('Tupac Shakur', 'Imagens/Rap-Artists/Tupac-Shakur.jpg', @t),
+    ('Wu-Tang Clan', 'Imagens/Rap-Artists/Wu-Tang-Clan.jpg', @t);
 
 -- ---------- Rock Bands ----------
 INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Rock Bands', @dono, 1)
@@ -415,23 +443,39 @@ INSERT INTO competidor (nome, imagem, TemaId) VALUES
     ('AC/DC', 'Imagens/Bandas-de-Rock/AC-DC.jpg', @t),
     ('Aerosmith', 'Imagens/Bandas-de-Rock/Aerosmith.jpg', @t),
     ('Black Sabbath', 'Imagens/Bandas-de-Rock/Black-Sabbath.jpg', @t),
+    ('Bon Jovi', 'Imagens/Bandas-de-Rock/Bon-Jovi.png', @t),
+    ('Creedence Clearwater Revival', 'Imagens/Bandas-de-Rock/Creedence-Clearwater-Revival.jpg', @t),
+    ('Deep Purple', 'Imagens/Bandas-de-Rock/Deep-Purple.jpg', @t),
     ('Dire Straits', 'Imagens/Bandas-de-Rock/Dire-Straits.jpg', @t),
+    ('Eagles', 'Imagens/Bandas-de-Rock/Eagles.jpg', @t),
     ('Fleetwood Mac', 'Imagens/Bandas-de-Rock/Fleetwood-Mac.webp', @t),
+    ('Foo Fighters', 'Imagens/Bandas-de-Rock/Foo-Fighters.jpg', @t),
+    ('Green Day', 'Imagens/Bandas-de-Rock/Green-Day.jpg', @t),
     ('Guns N'' Roses', 'Imagens/Bandas-de-Rock/Guns-n-Roses.jpg', @t),
     ('Iron Maiden', 'Imagens/Bandas-de-Rock/Iron-Maiden.jpg', @t),
     ('Kiss', 'Imagens/Bandas-de-Rock/Kiss.jpg', @t),
     ('Led Zeppelin', 'Imagens/Bandas-de-Rock/Led-Zeppelin.jpg', @t),
+    ('Linkin Park', 'Imagens/Bandas-de-Rock/Linkin-Park.jpg', @t),
     ('Metallica', 'Imagens/Bandas-de-Rock/Metallica.png', @t),
+    ('Muse', 'Imagens/Bandas-de-Rock/Muse.jpg', @t),
     ('Nirvana', 'Imagens/Bandas-de-Rock/Nirvana.jpg', @t),
     ('Oasis', 'Imagens/Bandas-de-Rock/Oasis.webp', @t),
+    ('Pearl Jam', 'Imagens/Bandas-de-Rock/Pearl-Jam.jpg', @t),
     ('Pink Floyd', 'Imagens/Bandas-de-Rock/Pink-Floyd.jpg', @t),
     ('Queen', 'Imagens/Bandas-de-Rock/Queen.jpg', @t),
     ('Radiohead', 'Imagens/Bandas-de-Rock/RadioHead.png', @t),
     ('Rage Against the Machine', 'Imagens/Bandas-de-Rock/Rage-Against-The-Machine.jpg', @t),
+    ('Red Hot Chili Peppers', 'Imagens/Bandas-de-Rock/Red-Hot-Chili-Peppers.jpg', @t),
+    ('Scorpions', 'Imagens/Bandas-de-Rock/Scorpions.jpg', @t),
     ('The Beatles', 'Imagens/Bandas-de-Rock/The-Beatles.webp', @t),
+    ('The Clash', 'Imagens/Bandas-de-Rock/The-Clash.jpg', @t),
     ('The Doors', 'Imagens/Bandas-de-Rock/The-Doors.jfif', @t),
     ('The Jimi Hendrix Experience', 'Imagens/Bandas-de-Rock/The-Jimi-Hendrix-Experience.jpg', @t),
-    ('The Rolling Stones', 'Imagens/Bandas-de-Rock/The-Rolling-Stones.jpg', @t);
+    ('The Rolling Stones', 'Imagens/Bandas-de-Rock/The-Rolling-Stones.jpg', @t),
+    ('The Who', 'Imagens/Bandas-de-Rock/The-Who.jpg', @t),
+    ('U2', 'Imagens/Bandas-de-Rock/U2.jpg', @t),
+    ('Van Halen', 'Imagens/Bandas-de-Rock/Van-Halen.jpg', @t),
+    ('ZZ Top', 'Imagens/Bandas-de-Rock/ZZ-Top.jpg', @t);
 
 -- ---------- TV Shows ----------
 INSERT INTO tema (nome, utilizadorId, publico) VALUES ('TV Shows', @dono, 1)

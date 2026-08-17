@@ -1,0 +1,23 @@
+#tema=Rock Bands
+#
+# Folder stays "Bandas-de-Rock" (that's where the original 20 already live),
+# so this has to run with an explicit --pasta override:
+#
+#   php tools/buscar-imagens.php "More Rock Bands" --pasta=Bandas-de-Rock
+
+The Who
+Deep Purple
+Van Halen
+Red Hot Chili Peppers
+Foo Fighters
+U2
+Muse | Muse (band)
+Linkin Park
+Green Day
+Pearl Jam
+The Clash
+Bon Jovi
+Scorpions | Scorpions (band)
+ZZ Top
+Eagles | Eagles (band)
+Creedence Clearwater Revival

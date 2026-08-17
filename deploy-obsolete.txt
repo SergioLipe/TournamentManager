@@ -62,6 +62,29 @@ Imagens/Food/Tacos.jpg
 Imagens/Food/Tripas-a-modo-do-Porto.jfif
 Imagens/Food/
 
+# Tema removido a pedido.
+Imagens/Portuguese-Landmarks/Aguas-Livres-Aqueduct.jpg
+Imagens/Portuguese-Landmarks/Alcobaca-Monastery.jpg
+Imagens/Portuguese-Landmarks/Batalha-Monastery.jpg
+Imagens/Portuguese-Landmarks/Belem-Tower.jpg
+Imagens/Portuguese-Landmarks/Bom-Jesus-do-Monte.jpg
+Imagens/Portuguese-Landmarks/Cabo-da-Roca.jpg
+Imagens/Portuguese-Landmarks/Chapel-of-Bones.jpg
+Imagens/Portuguese-Landmarks/Clerigos-Tower.jpg
+Imagens/Portuguese-Landmarks/Convent-of-Christ.jpg
+Imagens/Portuguese-Landmarks/Guimaraes-Castle.jpg
+Imagens/Portuguese-Landmarks/Jeronimos-Monastery.png
+Imagens/Portuguese-Landmarks/Livraria-Lello.jpg
+Imagens/Portuguese-Landmarks/Mafra-Palace.jpg
+Imagens/Portuguese-Landmarks/Padrao-dos-Descobrimentos.jpg
+Imagens/Portuguese-Landmarks/Pena-Palace.jpg
+Imagens/Portuguese-Landmarks/Porto-Cathedral.jpg
+Imagens/Portuguese-Landmarks/Queluz-Palace.jpg
+Imagens/Portuguese-Landmarks/Quinta-da-Regaleira.jpg
+Imagens/Portuguese-Landmarks/Sao-Jorge-Castle.jpg
+Imagens/Portuguese-Landmarks/University-of-Coimbra.png
+Imagens/Portuguese-Landmarks/
+
 # Ficheiros que não são páginas e não pertencem a um servidor público.
 README.md
 .gitignore

@@ -1,0 +1,28 @@
+# Rap Artists
+#
+#   php tools/buscar-imagens.php "Rap Artists"
+
+Tupac Shakur
+The Notorious B.I.G.
+Eminem
+Jay-Z
+Kendrick Lamar
+Drake | Drake (musician)
+Kanye West
+Nas
+Snoop Dogg
+Dr. Dre
+50 Cent
+Ice Cube
+Lil Wayne
+J. Cole
+Travis Scott
+Nicki Minaj
+Cardi B
+Missy Elliott
+Run-DMC
+Public Enemy | Public Enemy (band)
+Wu-Tang Clan
+OutKast
+A Tribe Called Quest
+LL Cool J

@@ -29,4 +29,17 @@ UPDATE IGNORE tema SET nome = 'Video Games' WHERE utilizadorId = @dono AND nome 
 -- seed a seguir com as receitas portuguesas que saíram de 'Food'.
 UPDATE IGNORE tema SET nome = 'International Food' WHERE utilizadorId = @dono AND nome = 'Food';
 
+-- 'Portuguese Food' passou a conter também todos os pratos internacionais,
+-- por isso já não é só português — o nome muda para reflectir isso. Sem
+-- efeito se este ficheiro corre antes de o tema alguma vez ter existido.
+UPDATE IGNORE tema SET nome = 'Food in Portugal' WHERE utilizadorId = @dono AND nome = 'Portuguese Food';
+
+-- 'Portuguese Landmarks' foi removido a pedido. Isto só apaga alguma coisa se
+-- o seed anterior já tiver corrido numa base de dados; se nunca chegou a
+-- correr, as duas linhas seguintes não encontram nada e não fazem nada.
+DELETE competidor FROM competidor
+    JOIN tema ON tema.id = competidor.TemaId
+    WHERE tema.utilizadorId = @dono AND tema.nome = 'Portuguese Landmarks';
+DELETE FROM tema WHERE utilizadorId = @dono AND nome = 'Portuguese Landmarks';
+
 SELECT id, nome, publico FROM tema WHERE utilizadorId = @dono ORDER BY nome;
