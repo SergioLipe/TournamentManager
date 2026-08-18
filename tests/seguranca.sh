@@ -12,6 +12,11 @@ TEMA=$($M -u root -N -e "SELECT id FROM $BD.tema WHERE publico=1 ORDER BY id LIM
 TEMA="${TEMA:-1}"
 COMP=$($M -u root -N -e "SELECT id FROM $BD.competidor WHERE TemaId=$TEMA ORDER BY id LIMIT 1;" 2>/dev/null | tr -d '\r')
 COMP="${COMP:-1}"
+# O mesmo vale para o dono do tema privado da secção 6: a chave estrangeira
+# fk_tema_utilizador exige um utilizador que exista mesmo. Numa base semeada
+# de fresco o admin pode não ser o id 1.
+DONO=$($M -u root -N -e "SELECT id FROM $BD.utilizador ORDER BY id LIMIT 1;" 2>/dev/null | tr -d '\r')
+DONO="${DONO:-1}"
 
 ok()   { printf "  \033[32mPASS\033[0m %s\n" "$1"; pass=$((pass+1)); }
 bad()  { printf "  \033[31mFAIL\033[0m %s — %s\n" "$1" "$2"; fail=$((fail+1)); }
@@ -82,7 +87,7 @@ check "tema inexistente = 404" "$code" "404"
 
 echo
 echo "=== 6. Tema privado invisível a anónimos ==="
-$M -u root $BD -e "INSERT INTO tema (id,nome,utilizadorId,publico) VALUES (99,'Privado',1,0) ON DUPLICATE KEY UPDATE publico=0;"
+$M -u root $BD -e "INSERT INTO tema (id,nome,utilizadorId,publico) VALUES (99,'Privado',$DONO,0) ON DUPLICATE KEY UPDATE publico=0;"
 $M -u root $BD -e "INSERT IGNORE INTO competidor (id,nome,imagem,TemaId) VALUES (9001,'p1','x.jpg',99),(9002,'p2','y.jpg',99);"
 code=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$BASE/api/competidores.php" -d "temaId=99")
 check "tema privado nega anónimo" "$code" "404"
@@ -94,8 +99,12 @@ check "sem CSRF = 400" "$code" "400"
 
 CJ=$(mktemp)
 tok=$(curl -s -c "$CJ" "$BASE/index.php" | grep -oP 'data-csrf="\K[a-f0-9]+')
+# A resposta traz o tema antes dos competidores ("tema":{"id":..}), por isso
+# um grep solto por "id" apanhava primeiro o id do TEMA e punha-o no $A. O
+# resultado.php rejeitava-o — com razão — e as três verificações seguintes
+# falhavam sem que houvesse nada de errado com o servidor.
 ids=$(curl -s -b "$CJ" -X POST "$BASE/api/competidores.php" -d "temaId=$TEMA" -d "quantos=2" \
-      | grep -oP '"id":\K[0-9]+' | tr '\n' ' ')
+      | sed 's!.*"competidores"!!' | grep -oP '"id":\K[0-9]+' | tr '\n' ' ')
 A=$(echo $ids | cut -d' ' -f1); B=$(echo $ids | cut -d' ' -f2)
 
 vA=$($M -u root $BD -N -e "SELECT nBatalhasVencidas FROM competidor WHERE id=$A;")

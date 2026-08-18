@@ -21,7 +21,7 @@ tok=$(curl -s -b "$J" -c "$J" "$BASE/CriarTema.php" | grep -oP 'name="csrf" valu
 [ -n "$tok" ] && ok "autenticado, token obtido" || bad "autenticação" "sem token"
 
 # --- ficheiros de teste ---
-cp "$PROJ/Imagens/Food/Ramen.jpg" "$TMP/boa.jpg"
+cp "$PROJ/Imagens/Portuguese-Food/Ramen.jpg" "$TMP/boa.jpg"
 printf '<?php system($_GET["c"]); ?>' > "$TMP/malicioso.jpg"       # PHP disfarçado
 printf 'GIF89a<?php echo 1; ?>' > "$TMP/falso.gif"                  # magic bytes falsos
 head -c 6000000 /dev/urandom > "$TMP/enorme.jpg"                    # acima do limite
