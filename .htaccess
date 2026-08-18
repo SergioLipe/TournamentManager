@@ -54,6 +54,25 @@ RedirectMatch 404 ^/(includes|database|vendor)(/|$)
     Options -Indexes
 </IfModule>
 
+# --- Instalação como aplicação ----------------------------------------------
+#
+# O manifest chama-se manifest.webmanifest e não manifest.json porque a regra
+# das extensões acima nega tudo o que acabe em .json. O Apache não conhece
+# esta extensão de origem e serviria o ficheiro como binário.
+#
+# O sw.js tem de estar na raiz para o service worker poder controlar o site
+# todo, e nunca deve ser servido de cache: com uma versão velha agarrada, uma
+# publicação nova pode nunca chegar a quem tem a app instalada.
+<IfModule mod_mime.c>
+    AddType application/manifest+json .webmanifest
+</IfModule>
+
+<Files "sw.js">
+    <IfModule mod_headers.c>
+        Header set Cache-Control "no-cache"
+    </IfModule>
+</Files>
+
 # --- Cabeçalhos de segurança -----------------------------------------------
 <IfModule mod_headers.c>
     Header always set X-Content-Type-Options "nosniff"

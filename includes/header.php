@@ -9,14 +9,16 @@ require_once __DIR__ . '/temas.php';
  * Cada página pode definir antes do include:
  *   $tituloPagina      — título do separador do browser
  *   $controlosTorneio  — true para mostrar o selector de tema e de tamanho
+ *   $modoApp           — true na aplicação Android (ver app.php)
  */
 $tituloPagina     = $tituloPagina ?? 'Tournament';
 $controlosTorneio = $controlosTorneio ?? false;
+$modoApp          = $modoApp ?? false;
 
 // Prefixo próprio: as páginas têm as suas listas de temas e o include
 // partilha o mesmo scope, por isso nomes genéricos atropelavam-se.
 $navTemasPublicos = temasPublicos();
-$navTemasPessoais = autenticado() ? temasDoUtilizador((int) utilizadorId()) : [];
+$navTemasPessoais = (!$modoApp && autenticado()) ? temasDoUtilizador((int) utilizadorId()) : [];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +27,21 @@ $navTemasPessoais = autenticado() ? temasDoUtilizador((int) utilizadorId()) : []
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e($tituloPagina) ?> · Tournament</title>
+
+    <!--
+        Instalação como aplicação. O manifest é o mesmo em todas as páginas,
+        por isso o site é instalável a partir de qualquer uma; o start_url lá
+        dentro é que aponta ao app.php.
+
+        A extensão é .webmanifest e não .json de propósito: o .htaccess da raiz
+        nega tudo o que acabe em .json (para o .env e os dumps da base de dados
+        não serem descarregáveis) e o manifest ia no meio.
+    -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#2f6fed">
+    <link rel="icon" href="icons/icon-192.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="CSS/style.css" rel="stylesheet">
 </head>
@@ -59,7 +76,7 @@ $navTemasPessoais = autenticado() ? temasDoUtilizador((int) utilizadorId()) : []
                     </ul>
                 </div>
 
-                <?php if (autenticado()) { ?>
+                <?php if (!$modoApp && autenticado()) { ?>
                     <div class="dropdown">
                         <button class="btn btn-outline-secondary dropdown-toggle" type="button"
                                 id="dropdownTemasUtilizador" data-bs-toggle="dropdown" aria-expanded="false">
@@ -92,10 +109,17 @@ $navTemasPessoais = autenticado() ? temasDoUtilizador((int) utilizadorId()) : []
         </div>
 
         <div class="app-nav__group app-nav__group--center">
-            <a href="index.php" class="app-nav__brand">TOURNAMENT</a>
+            <a href="<?= $modoApp ? 'app.php' : 'index.php' ?>" class="app-nav__brand">TOURNAMENT</a>
         </div>
 
+        <!--
+            Na aplicação Android não há contas: nem login, nem registo, nem
+            criação de temas, nem estatísticas. Só temas públicos e a bracket.
+            Isto não é só cosmética — sem links para fora, a app nunca sai do
+            /app.php e nunca abre um separador do browser por cima de si.
+        -->
         <div class="app-nav__group app-nav__group--end">
+            <?php if (!$modoApp) { ?>
             <a href="CriarTema.php" class="btn btn-outline-success">Create theme</a>
             <a href="Estatisticas.php" class="btn btn-outline-secondary">Statistics</a>
             <a href="sobre.php" class="btn btn-outline-secondary">About</a>
@@ -108,6 +132,7 @@ $navTemasPessoais = autenticado() ? temasDoUtilizador((int) utilizadorId()) : []
             <?php } else { ?>
                 <a href="Login.php" class="btn btn-outline-secondary">Log in</a>
                 <a href="Registar.php" class="btn btn-outline-secondary">Register</a>
+            <?php } ?>
             <?php } ?>
         </div>
     </div>

@@ -29,7 +29,12 @@ ESTADO="$RAIZ/.deploy-state"
 # públicos (buscar-imagens.php, gerar-seed.php). Correm neste computador e não
 # têm nada que fazer no servidor: as listas e os CSVs não são precisos lá, e um
 # .php a mais na raiz do site é superfície de ataque a mais.
-EXCLUIR_REGEX='^(deploy-obsolete\.txt|README\.md|\.gitignore|\.env\.example|deploy\.sh|database/|tests/|tools/|backup-live-|\.last-backup|\.deploy)'
+#
+# android/ é o projecto da aplicação (Bubblewrap, Gradle, chave de assinatura).
+# É a app que aponta ao site, não o contrário — nada disso pertence ao htdocs.
+# O que a app precisa do servidor são o manifest.webmanifest, o sw.js, os
+# icons/ e o .well-known/assetlinks.json, e esses vão normalmente.
+EXCLUIR_REGEX='^(deploy-obsolete\.txt|README\.md|\.gitignore|\.env\.example|deploy\.sh|database/|tests/|tools/|android/|backup-live-|\.last-backup|\.deploy)'
 
 FULL=0
 DRY=0

@@ -118,7 +118,9 @@ for my $p (sort @php) {
 print "  all balanced\n" unless @problems;
 
 print "\n== JS bracket balance ==\n";
-for my $fn (sort glob("$ROOT/JavaScript/*.js")) {
+# O sw.js tem de estar na raiz — um service worker só controla a pasta onde
+# está e as de baixo — por isso não é apanhado pelo glob do JavaScript/.
+for my $fn (sort(glob("$ROOT/JavaScript/*.js"), glob("$ROOT/sw.js"))) {
     my $err = balance(strip(slurp($fn)));
     printf "  %-5s %s%s\n", ($err ? 'FAIL' : 'ok'), basename($fn), ($err ? ": $err" : '');
     push @problems, basename($fn) . ": $err" if $err;

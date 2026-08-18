@@ -33,3 +33,19 @@ composer.lock
 # Backups do site em producao e estado de publicacao — nunca publicar
 /backup-live-*/
 /.last-backup
+
+# Aplicação Android (Bubblewrap/Gradle).
+#
+# A chave de assinatura é o ficheiro mais importante de todo o projecto: perdê-la
+# significa nunca mais poder actualizar a app na Play Store, e entregá-la a
+# alguém significa deixar essa pessoa publicar actualizações em teu nome.
+# Guarda-a fora do repositório e faz cópia dela.
+/android/*.keystore
+/android/*.jks
+/android/twa-manifest.json
+/android/build/
+/android/app/build/
+/android/.gradle/
+/android/local.properties
+/android/*.apk
+/android/*.aab

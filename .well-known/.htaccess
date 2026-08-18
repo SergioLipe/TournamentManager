@@ -1,0 +1,32 @@
+# ---------------------------------------------------------------------------
+# Digital Asset Links.
+#
+# O .htaccess da raiz nega tudo o que acabe em .json — é o que impede que o
+# .env e os dumps de database/ sejam descarregáveis, e não se mexe nele. Mas
+# o assetlinks.json tem de ser servido, e o nome não é negociável: o Chrome
+# procura-o em /.well-known/assetlinks.json e mais lado nenhum.
+#
+# Sem ele a TWA instala e abre, mas o Chrome não confirma que a app e o site
+# são do mesmo dono e mantém a barra do endereço por cima da aplicação. É a
+# avaria clássica de uma TWA "quase" a funcionar.
+#
+# A excepção tem de vir dentro de um <Files>: o Apache junta primeiro todo o
+# contexto de directoria e só depois as secções <Files>/<FilesMatch>, por
+# ordem de leitura. Um "Require all granted" solto aqui seria aplicado ANTES
+# do <FilesMatch> da raiz e perdia para ele; dentro de um <Files>, este é o
+# último a ser lido e é o que fica.
+# ---------------------------------------------------------------------------
+
+<Files "assetlinks.json">
+    <IfModule mod_authz_core.c>
+        Require all granted
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Allow from all
+    </IfModule>
+
+    <IfModule mod_headers.c>
+        Header set Content-Type "application/json"
+    </IfModule>
+</Files>
