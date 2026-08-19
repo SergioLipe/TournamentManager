@@ -645,13 +645,18 @@ hr {
     display: none;
 }
 
+/* O título do grupo é o que divide a grelha: em cinzento claro passava
+   despercebido entre duas filas de cartões, e a grelha lia-se como uma lista
+   comprida outra vez. Fica na cor do texto, com um risco por baixo. */
 .selector__grupo-titulo {
-    margin: 0 0 0.6rem;
-    font-size: 0.75rem;
+    margin: 0 0 0.7rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--borda);
+    font-size: 0.8125rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--texto-suave);
+    color: var(--texto);
 }
 
 .selector__grelha {
@@ -672,11 +677,22 @@ hr {
     padding: 0;
     text-align: left;
     background-color: var(--fundo-elevado);
+    /* Um <button> não herda a cor do texto da página: sem esta linha o nome
+       do tema saía na cor por omissão do browser, que é preto, e no tema
+       escuro ficava preto sobre um cartão quase preto. A variante <a> das
+       estatísticas tinha o problema inverso — azul de link e sublinhado. */
+    color: var(--texto);
+    text-decoration: none;
     border: 1px solid var(--borda);
     border-radius: var(--raio);
     cursor: pointer;
     overflow: hidden;
     transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tema-cartao:hover,
+.tema-cartao:focus-visible {
+    color: var(--texto);
 }
 
 .tema-cartao[hidden] {
