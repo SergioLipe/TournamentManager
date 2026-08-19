@@ -18,8 +18,12 @@
  * jogou o tema Dinosaurs antes de as imagens passarem de esqueletos a
  * reconstituições continuava a ver esqueletos: o Allosaurus.jpg guardado no
  * telemóvel nunca mais era pedido ao servidor. Mudar a versão deita fora as
- * caches antigas no activate. */
-var VERSAO = 'v2';
+ * caches antigas no activate.
+ *
+ * O mesmo vale para o CSS e o JavaScript, que também são lidos da cache antes
+ * da rede: publicar um style.css novo sem subir isto dá a quem já cá esteve o
+ * HTML novo com a folha de estilos antiga. */
+var VERSAO = 'v3';
 var CACHE_ESTATICO = 'tournament-estatico-' + VERSAO;
 var CACHE_IMAGENS = 'tournament-imagens-' + VERSAO;
 

@@ -13,6 +13,8 @@ declare(strict_types=1);
  */
 ?>
 
+<?php require __DIR__ . '/selector-temas.php'; ?>
+
 <div class="tournament">
     <div class="tournament__toolbar">
         <button type="button" class="btn btn-primary" id="btnCarregarImagens">Load images</button>

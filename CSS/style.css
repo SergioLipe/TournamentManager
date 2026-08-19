@@ -516,7 +516,8 @@ hr {
 
 .duelo,
 .vencedor,
-.modal-simples {
+.modal-simples,
+.selector {
     position: fixed;
     inset: 0;
     z-index: 1000;
@@ -528,13 +529,15 @@ hr {
 
 .duelo[hidden],
 .vencedor[hidden],
-.modal-simples[hidden] {
+.modal-simples[hidden],
+.selector[hidden] {
     display: none;
 }
 
 .duelo__fundo,
 .vencedor__fundo,
-.modal-simples__fundo {
+.modal-simples__fundo,
+.selector__fundo {
     position: absolute;
     inset: 0;
     background-color: rgba(8, 12, 16, 0.88);
@@ -566,6 +569,152 @@ hr {
     gap: 0.5rem;
     margin-top: 1rem;
 }
+
+/* --- Selector de temas --- */
+
+.selector__caixa {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: min(1100px, 100%);
+    max-height: min(90vh, 900px);
+    text-align: left;
+    background-color: var(--fundo-elevado);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra-forte);
+    overflow: hidden;
+}
+
+/* A barra de cima fica fora do bloco que rola: com dezoito temas a procura
+   saía do ecrã ao descer, que é justamente quando dá jeito. */
+.selector__topo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 3rem 1rem 1.25rem;
+    border-bottom: 1px solid var(--borda);
+}
+
+.selector__titulo {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.selector__procura {
+    flex: 1 1 12rem;
+    min-width: 0;
+    max-width: 22rem;
+}
+
+.selector__fechar {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--texto-suave);
+    background: none;
+    border: 0;
+    border-radius: var(--raio-pequeno);
+    cursor: pointer;
+}
+
+.selector__fechar:hover {
+    color: var(--texto);
+    background-color: var(--fundo-subtil);
+}
+
+.selector__corpo {
+    padding: 0.5rem 1.25rem 1.25rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.selector__grupo {
+    margin-top: 1.25rem;
+}
+
+.selector__grupo[hidden] {
+    display: none;
+}
+
+.selector__grupo-titulo {
+    margin: 0 0 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+}
+
+.selector__grelha {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+    gap: 0.75rem;
+}
+
+.selector__vazio {
+    margin: 1.5rem 0;
+    color: var(--texto-suave);
+}
+
+.tema-cartao {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0;
+    text-align: left;
+    background-color: var(--fundo-elevado);
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tema-cartao[hidden] {
+    display: none;
+}
+
+.tema-cartao:hover,
+.tema-cartao:focus-visible {
+    transform: translateY(-2px);
+    border-color: var(--acento);
+    box-shadow: var(--sombra);
+    outline: none;
+}
+
+.tema-cartao__img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    /* Sem altura mínima, um browser sem aspect-ratio desenhava a imagem com
+       zero de altura e o cartão ficava só com o texto. */
+    min-height: 6rem;
+    object-fit: cover;
+    background-color: var(--fundo-subtil);
+    display: block;
+}
+
+.tema-cartao__nome {
+    padding: 0.5rem 0.6rem 0;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.tema-cartao__conta {
+    padding: 0 0.6rem 0.6rem;
+    font-size: 0.75rem;
+    color: var(--texto-suave);
+}
+
+/* Os ecrãs pequenos do selector estão na secção 9. */
 
 /* --- Duelo --- */
 
@@ -715,10 +864,52 @@ hr {
    7. Cartões (estatísticas e gestão de temas)
    -------------------------------------------------------------------------- */
 
+/* A lista dos temas próprios no CriarTema.php: são poucos e cabem numa linha
+   de botões, sem precisarem da grelha de cartões. */
 .seletor-temas {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+}
+
+/* A escolha do tema nas estatísticas: a mesma grelha do selector do torneio,
+   dentro de um <details> que se fecha quando já há um tema aberto. */
+.escolher-tema {
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+    background-color: var(--fundo-elevado);
+}
+
+.escolher-tema__resumo {
+    padding: 0.65rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+}
+
+.escolher-tema__resumo::-webkit-details-marker {
+    display: none;
+}
+
+.escolher-tema__resumo::before {
+    content: '▸';
+    display: inline-block;
+    margin-right: 0.5rem;
+    color: var(--texto-suave);
+    transition: transform 0.15s ease;
+}
+
+.escolher-tema[open] .escolher-tema__resumo::before {
+    transform: rotate(90deg);
+}
+
+.escolher-tema__corpo {
+    padding: 0 1rem 1rem;
+    /* A grelha inteira são dezoito cartões; num ecrã de telemóvel isso é uma
+       página e meia de deslocamento antes de se chegar às estatísticas. */
+    max-height: 60vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
 }
 
 .tema-cabecalho {
@@ -957,5 +1148,30 @@ hr {
     .tournament__toolbar {
         padding-left: 1rem;
         padding-right: 1rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .selector__caixa {
+        max-height: 94vh;
+    }
+
+    .selector__topo {
+        padding: 0.85rem 3rem 0.85rem 1rem;
+    }
+
+    .selector__corpo {
+        padding: 0.25rem 1rem 1rem;
+    }
+
+    /* Cartões mais pequenos: com 9.5rem cabia um por linha num telemóvel
+       estreito, e uma coluna única é a lista comprida outra vez. */
+    .selector__grelha {
+        grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+        gap: 0.5rem;
+    }
+
+    .tema-cartao__nome {
+        font-size: 0.875rem;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/includes/temas.php';
+require_once __DIR__ . '/includes/temas-view.php';
 
 // Consulta por GET: assim a página fica ligável e pode ser recarregada sem
 // reenviar um formulário.
@@ -10,8 +10,8 @@ $tema   = $temaId > 0 ? temaVisivelOuNull($temaId) : null;
 
 $competidores = $tema !== null ? competidoresDoTema((int) $tema['id']) : [];
 
-$listaPublicos = temasPublicos();
-$listaPessoais = autenticado() ? temasDoUtilizador((int) utilizadorId()) : [];
+$listaPublicos = temasParaEscolher();
+$listaPessoais = autenticado() ? temasParaEscolher((int) utilizadorId()) : [];
 
 $tituloPagina = 'Statistics';
 require __DIR__ . '/includes/header.php';
@@ -20,47 +20,30 @@ require __DIR__ . '/includes/header.php';
 <div class="container form-largo">
     <h1 class="h2 mb-4">Statistics</h1>
 
-    <div class="seletor-temas">
-        <div class="dropdown">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button"
-                    id="dropdownStatsPublicos" data-bs-toggle="dropdown" aria-expanded="false">
-                Public themes
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownStatsPublicos">
-                <?php if ($listaPublicos === []) { ?>
-                    <li><span class="dropdown-item-text text-muted">No public themes yet</span></li>
-                <?php } ?>
-                <?php foreach ($listaPublicos as $opcao) { ?>
-                    <li>
-                        <a class="dropdown-item" href="Estatisticas.php?temaId=<?= (int) $opcao['id'] ?>">
-                            <?= e($opcao['nome']) ?>
-                        </a>
-                    </li>
-                <?php } ?>
-            </ul>
-        </div>
+    <!--
+        A escolha do tema é a mesma grelha de cartões do torneio, mas de
+        ligações em vez de botões — aqui a página recarrega com ?temaId=.
 
-        <?php if (autenticado()) { ?>
-            <div class="dropdown">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button"
-                        id="dropdownStatsPessoais" data-bs-toggle="dropdown" aria-expanded="false">
-                    Your themes
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownStatsPessoais">
-                    <?php if ($listaPessoais === []) { ?>
-                        <li><span class="dropdown-item-text text-muted">You have no themes yet</span></li>
-                    <?php } ?>
-                    <?php foreach ($listaPessoais as $opcao) { ?>
-                        <li>
-                            <a class="dropdown-item" href="Estatisticas.php?temaId=<?= (int) $opcao['id'] ?>">
-                                <?= e($opcao['nome']) ?>
-                            </a>
-                        </li>
-                    <?php } ?>
-                </ul>
-            </div>
-        <?php } ?>
-    </div>
+        Com um tema aberto a grelha fecha-se: dezoito cartões por cima das
+        estatísticas empurravam a tabela para fora do ecrã. O <details> faz
+        isso sem JavaScript nenhum, e mantém-se aberto enquanto não houver
+        tema escolhido, que é quando é a única coisa a fazer na página.
+    -->
+    <details class="escolher-tema" <?= $tema === null ? 'open' : '' ?>>
+        <summary class="escolher-tema__resumo">
+            <?= $tema === null ? 'Choose a theme' : 'Change theme' ?>
+        </summary>
+
+        <div class="escolher-tema__corpo">
+            <?php seccaoDeTemas('Your themes', $listaPessoais, 'Estatisticas.php?temaId='); ?>
+
+            <?php if ($listaPublicos === []) { ?>
+                <p class="selector__vazio">No public themes yet.</p>
+            <?php } ?>
+
+            <?php seccoesDeTemasPublicos($listaPublicos, 'Estatisticas.php?temaId='); ?>
+        </div>
+    </details>
 
     <?php if ($temaId > 0 && $tema === null) { ?>
         <div class="alert alert-warning">That theme does not exist, or you cannot see it.</div>

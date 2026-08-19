@@ -15,10 +15,10 @@ $tituloPagina     = $tituloPagina ?? 'Tournament';
 $controlosTorneio = $controlosTorneio ?? false;
 $modoApp          = $modoApp ?? false;
 
-// Prefixo próprio: as páginas têm as suas listas de temas e o include
-// partilha o mesmo scope, por isso nomes genéricos atropelavam-se.
-$navTemasPublicos = temasPublicos();
-$navTemasPessoais = (!$modoApp && autenticado()) ? temasDoUtilizador((int) utilizadorId()) : [];
+// A lista de temas já não se lê aqui: quem a mostra é o selector-temas.php,
+// incluído pelo torneio-view.php, e é ele que faz a consulta — com a capa e a
+// contagem, que a barra não precisa. Fazê-la também aqui era pedir os mesmos
+// temas duas vezes por página.
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,45 +57,16 @@ $navTemasPessoais = (!$modoApp && autenticado()) ? temasDoUtilizador((int) utili
 
         <div class="app-nav__group app-nav__group--start">
             <?php if ($controlosTorneio) { ?>
-                <div class="dropdown">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button"
-                            id="dropdownTemas" data-bs-toggle="dropdown" aria-expanded="false">
-                        Choose theme
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownTemas">
-                        <?php if ($navTemasPublicos === []) { ?>
-                            <li><span class="dropdown-item-text text-muted">No public themes yet</span></li>
-                        <?php } ?>
-                        <?php foreach ($navTemasPublicos as $tema) { ?>
-                            <li>
-                                <button class="dropdown-item js-escolhe-tema" type="button"
-                                        data-tema-id="<?= (int) $tema['id'] ?>"
-                                        data-tema-nome="<?= e($tema['nome']) ?>"><?= e($tema['nome']) ?></button>
-                            </li>
-                        <?php } ?>
-                    </ul>
-                </div>
-
-                <?php if (!$modoApp && autenticado()) { ?>
-                    <div class="dropdown">
-                        <button class="btn btn-outline-secondary dropdown-toggle" type="button"
-                                id="dropdownTemasUtilizador" data-bs-toggle="dropdown" aria-expanded="false">
-                            Your themes
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownTemasUtilizador">
-                            <?php if ($navTemasPessoais === []) { ?>
-                                <li><span class="dropdown-item-text text-muted">You have no themes yet</span></li>
-                            <?php } ?>
-                            <?php foreach ($navTemasPessoais as $tema) { ?>
-                                <li>
-                                    <button class="dropdown-item js-escolhe-tema" type="button"
-                                            data-tema-id="<?= (int) $tema['id'] ?>"
-                                            data-tema-nome="<?= e($tema['nome']) ?>"><?= e($tema['nome']) ?></button>
-                                </li>
-                            <?php } ?>
-                        </ul>
-                    </div>
-                <?php } ?>
+                <!--
+                    Os temas escolhem-se na janela do selector-temas.php, não
+                    num menu suspenso: com dezoito temas públicos a lista já
+                    não cabia no ecrã e era só texto, sem as imagens que são
+                    a única coisa que distingue um tema do outro.
+                -->
+                <button type="button" class="btn btn-primary" id="btnSelectorTemas"
+                        aria-haspopup="dialog" aria-expanded="false">
+                    <span id="rotuloTemaEscolhido">Choose theme</span>
+                </button>
 
                 <div class="qty" role="group" aria-label="Number of competitors">
                     <span class="qty__label">Competitors</span>

@@ -137,6 +137,13 @@
   function carregarTema(temaId, nomeTema) {
     dizer('Loading ' + nomeTema + '…');
 
+    // O botão da barra passa a dizer o tema em vez de "Choose theme": com a
+    // barra escondida a meio de um torneio, era a única coisa que dizia qual
+    // dos dezoito estava a jogar.
+    if (rotuloTema) {
+      rotuloTema.textContent = nomeTema;
+    }
+
     var corpo = new URLSearchParams();
     corpo.set('temaId', String(temaId));
     corpo.set('quantos', String(window.Bracket.MAX));
@@ -406,8 +413,118 @@
   /*  Ligações                                                              */
   /* ---------------------------------------------------------------------- */
 
-  Array.prototype.forEach.call(document.querySelectorAll('.js-escolhe-tema'), function (botao) {
+  /* --- Selector de temas --- */
+
+  var elSelector = document.getElementById('selectorTemas');
+  var btnSelector = document.getElementById('btnSelectorTemas');
+  var campoProcura = document.getElementById('selectorProcura');
+  var semResultados = document.getElementById('selectorSemResultados');
+  var rotuloTema = document.getElementById('rotuloTemaEscolhido');
+  var cartoes = document.querySelectorAll('.js-escolhe-tema');
+
+  function abrirSelector() {
+    if (!elSelector) {
+      return;
+    }
+    elSelector.hidden = false;
+    document.body.classList.add('modal-aberto');
+    if (btnSelector) {
+      btnSelector.setAttribute('aria-expanded', 'true');
+    }
+
+    // Abre sempre com a lista toda à vista. Sem isto, quem procurou "dino" na
+    // vez anterior reabria o selector com dezassete temas escondidos e sem
+    // nada que explicasse porquê.
+    if (campoProcura && campoProcura.value !== '') {
+      campoProcura.value = '';
+      filtrar('');
+    }
+    // Num telemóvel isto abre o teclado por cima da grelha, que é o oposto do
+    // que quem vai escolher pela imagem quer; no rato e teclado é o atalho
+    // óbvio. O ponteiro grosseiro é o critério que separa os dois.
+    if (campoProcura && window.matchMedia('(pointer: fine)').matches) {
+      campoProcura.focus();
+      campoProcura.select();
+    }
+  }
+
+  function fecharSelector() {
+    if (!elSelector) {
+      return;
+    }
+    elSelector.hidden = true;
+    document.body.classList.remove('modal-aberto');
+    if (btnSelector) {
+      btnSelector.setAttribute('aria-expanded', 'false');
+      btnSelector.focus();
+    }
+  }
+
+  /** Esconde os cartões que não correspondem, e os grupos que ficam vazios. */
+  function filtrar(termo) {
+    termo = termo.trim().toLowerCase();
+    var visiveis = 0;
+
+    Array.prototype.forEach.call(cartoes, function (cartao) {
+      var corresponde = termo === '' || (cartao.dataset.procura || '').indexOf(termo) !== -1;
+      cartao.hidden = !corresponde;
+      if (corresponde) {
+        visiveis++;
+      }
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll('[data-grupo]'), function (grupo) {
+      grupo.hidden = grupo.querySelectorAll('.js-escolhe-tema:not([hidden])').length === 0;
+    });
+
+    if (semResultados) {
+      semResultados.hidden = visiveis > 0;
+    }
+  }
+
+  if (btnSelector && elSelector) {
+    btnSelector.addEventListener('click', abrirSelector);
+
+    Array.prototype.forEach.call(elSelector.querySelectorAll('[data-fechar]'), function (el) {
+      el.addEventListener('click', fecharSelector);
+    });
+  }
+
+  if (campoProcura) {
+    campoProcura.addEventListener('input', function () {
+      filtrar(campoProcura.value);
+    });
+
+    // Enter com um só tema à vista carrega-o: procurar "dino" e carregar em
+    // Enter é mais rápido do que ir buscar o cartão com o rato.
+    campoProcura.addEventListener('keydown', function (evento) {
+      if (evento.key !== 'Enter') {
+        return;
+      }
+      evento.preventDefault();
+      var visiveis = elSelector.querySelectorAll('.js-escolhe-tema:not([hidden])');
+      if (visiveis.length > 0) {
+        visiveis[0].click();
+      }
+    });
+  }
+
+  var btnAleatorio = document.getElementById('btnTemaAleatorio');
+  if (btnAleatorio) {
+    btnAleatorio.addEventListener('click', function () {
+      // À sorte entre os que estão à vista: com uma procura activa, o dado
+      // rola só sobre o que ela deixou passar.
+      var visiveis = elSelector.querySelectorAll('.js-escolhe-tema:not([hidden])');
+      if (visiveis.length === 0) {
+        return;
+      }
+      visiveis[Math.floor(Math.random() * visiveis.length)].click();
+    });
+  }
+
+  Array.prototype.forEach.call(cartoes, function (botao) {
     botao.addEventListener('click', function () {
+      fecharSelector();
       carregarTema(parseInt(botao.dataset.temaId, 10), botao.dataset.temaNome || 'theme');
     });
   });
@@ -424,14 +541,14 @@
         return;
       }
 
-      // Sem tema escolhido, arranca com um público à sorte.
-      var botoes = document.querySelectorAll('.js-escolhe-tema');
-      if (botoes.length === 0) {
+      // Sem tema escolhido não se adivinha: abre-se o selector. Antes disto
+      // carregava um tema à sorte, o que agora é o "Surprise me" que está lá
+      // dentro — e escolhido de propósito, não por engano.
+      if (cartoes.length === 0) {
         dizer('There are no themes to load yet.', 'aviso');
         return;
       }
-      var sorteado = botoes[Math.floor(Math.random() * botoes.length)];
-      carregarTema(parseInt(sorteado.dataset.temaId, 10), sorteado.dataset.temaNome || 'theme');
+      abrirSelector();
     });
   }
 
@@ -494,6 +611,8 @@
     } else if (elNomes && !elNomes.hidden) {
       elNomes.hidden = true;
       document.body.classList.remove('modal-aberto');
+    } else if (elSelector && !elSelector.hidden) {
+      fecharSelector();
     }
   });
 
