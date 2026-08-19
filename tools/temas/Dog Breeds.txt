@@ -26,3 +26,35 @@ Shiba Inu
 Poodle
 Australian Shepherd
 Portuguese Water Dog
+
+# Segunda leva.
+Bernese Mountain Dog
+Cane Corso
+Chow Chow
+Dachshund
+Greyhound
+Jack Russell Terrier | Jack Russell terrier
+Maltese | Maltese dog
+Newfoundland | Newfoundland dog
+Pomeranian | Pomeranian dog
+Samoyed | Samoyed dog
+Schnauzer | Standard Schnauzer
+Shar Pei
+Basset Hound
+Boston Terrier
+Bull Terrier
+Corgi | Pembroke Welsh Corgi
+Weimaraner
+Whippet
+Vizsla
+Alaskan Malamute
+Staffordshire Bull Terrier
+Bloodhound
+Rhodesian Ridgeback
+Australian Cattle Dog
+Belgian Malinois | File:Grupp 1, BELGISK VALLHUND, MALINOIS, Krokasmedens Epic (24014622180).jpg
+Old English Sheepdog
+Tibetan Mastiff
+West Highland White Terrier
+Shetland Sheepdog
+Irish Setter

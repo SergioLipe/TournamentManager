@@ -12,7 +12,14 @@
 
 'use strict';
 
-var VERSAO = 'v1';
+/* Sobe quando o conteúdo de um ficheiro muda sem o nome mudar.
+ *
+ * A cache de imagens é lida antes da rede e a chave é o URL, por isso quem
+ * jogou o tema Dinosaurs antes de as imagens passarem de esqueletos a
+ * reconstituições continuava a ver esqueletos: o Allosaurus.jpg guardado no
+ * telemóvel nunca mais era pedido ao servidor. Mudar a versão deita fora as
+ * caches antigas no activate. */
+var VERSAO = 'v2';
 var CACHE_ESTATICO = 'tournament-estatico-' + VERSAO;
 var CACHE_IMAGENS = 'tournament-imagens-' + VERSAO;
 

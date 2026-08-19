@@ -29,3 +29,37 @@ Hippopotamus
 Red Kangaroo | Red kangaroo
 Giant Panda | Giant panda
 Red Fox | Red fox
+
+# Segunda leva. Onde o nome comum dá um artigo sobre outra coisa — ou sobre
+# a família toda em vez do bicho — vai o artigo à direita da barra.
+Leopard
+Jaguar
+Snow Leopard | Snow leopard
+Arctic Fox | Arctic fox
+Koala
+Orangutan | Bornean orangutan
+Sloth | Brown-throated sloth
+Sea Otter | Sea otter
+Raccoon
+Meerkat
+Hedgehog | European hedgehog
+Platypus
+Moose
+American Bison | American bison
+Zebra | Plains zebra
+Bald Eagle | Bald eagle
+Flamingo | American flamingo
+Toucan | Toco toucan
+Peacock | Indian peafowl
+Atlantic Puffin | Atlantic puffin
+Ostrich | Common ostrich
+Komodo Dragon | Komodo dragon
+Chameleon | Veiled chameleon
+Green Sea Turtle | Green sea turtle
+Octopus | Common octopus
+Manta Ray | Giant oceanic manta ray
+Seahorse | Longsnout seahorse
+Axolotl
+Narwhal
+Honey Bee | Western honey bee
+Monarch Butterfly | Monarch butterfly

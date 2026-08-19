@@ -1,0 +1,61 @@
+# Superheroes
+#
+#   php tools/buscar-imagens.php Superheroes
+#
+# A imagem principal destes artigos é arte de banda desenhada, que a
+# Wikipédia usa ao abrigo de fair use — não é livre, como já acontece com os
+# cartazes do tema Movies e as capas do Video Games. Vem pelo REST, não pela
+# pageimages.
+#
+# O artigo "Captain America" não tem imagem nenhuma; a do Steve Rogers do
+# universo dos filmes tem, e é essa que se usa. O mesmo para o Bucky Barnes.
+# Fora estes dois, é tudo banda desenhada.
+
+Superman
+Batman
+Spider-Man
+Iron Man
+Captain America | Steve Rogers (Marvel Cinematic Universe)
+Thor | Thor (Marvel Comics)
+Hulk
+Black Widow | Black Widow (Natasha Romanova)
+Wonder Woman
+The Flash | Barry Allen
+Aquaman
+Green Lantern
+Doctor Strange
+Black Panther | Black Panther (character)
+Wolverine | Wolverine (character)
+Deadpool
+Daredevil | Daredevil (Marvel Comics character)
+Captain Marvel | Captain Marvel (Carol Danvers)
+Ant-Man | Ant-Man (Scott Lang)
+Hawkeye | Hawkeye (Clint Barton)
+Star-Lord
+Scarlet Witch
+Vision | Vision (Marvel Comics)
+Groot
+Rocket Raccoon
+Nightwing
+Supergirl | Kara Zor-El
+Batgirl
+Robin | Damian Wayne
+Storm | Storm (Marvel Comics)
+Cyclops | Cyclops (Marvel Comics)
+Jean Grey
+Professor X
+Magneto | Magneto (Marvel Comics)
+Silver Surfer
+Green Arrow
+Shazam | Shazam (DC Comics)
+Martian Manhunter
+Punisher
+Ghost Rider
+Venom | Venom (character)
+Blade | Blade (character)
+Moon Knight
+She-Hulk
+Luke Cage
+Hellboy
+Spawn | Spawn (character)
+Invincible | Invincible (comics)

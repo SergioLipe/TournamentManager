@@ -1,0 +1,45 @@
+# Cat Breeds
+#
+#   php tools/buscar-imagens.php "Cat Breeds"
+#
+# Os artigos de raças de gato quase sempre têm fotografia livre no Commons,
+# como os de cães. O que não se pode é escrever só "Persian": o artigo desse
+# nome é sobre a Pérsia. Daí a maior parte das linhas trazer o artigo à
+# direita da barra.
+
+Persian | Persian cat
+Siamese | Siamese cat
+Maine Coon
+Bengal | Bengal cat
+Ragdoll
+British Shorthair
+Sphynx | Sphynx cat
+Scottish Fold
+Russian Blue
+Abyssinian | Abyssinian cat
+Norwegian Forest Cat | Norwegian Forest cat
+Siberian | Siberian cat
+Birman
+Burmese | Burmese cat
+Devon Rex
+Cornish Rex
+Turkish Angora
+Turkish Van
+Savannah | Savannah cat
+Bombay | Bombay cat
+Chartreux
+Himalayan | Himalayan cat
+Manx | Manx cat
+Munchkin | Munchkin cat
+Oriental Shorthair
+American Shorthair
+Exotic Shorthair
+Egyptian Mau
+Japanese Bobtail
+Ocicat
+Balinese | Balinese cat
+Somali | Somali cat
+Tonkinese | Tonkinese cat
+Selkirk Rex
+Nebelung
+Korat
