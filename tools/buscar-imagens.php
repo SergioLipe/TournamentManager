@@ -29,6 +29,8 @@ require_once __DIR__ . '/comum.php';
  *     #tema=Raças de Cães             <- opcional: nome do tema com acentos
  *     Leão | Lion                      <- à esquerda o nome a mostrar,
  *     Tigre | Tiger                       à direita o artigo a procurar
+ *     T. rex | File:Trex.jpg           <- ou um ficheiro do Commons, quando a
+ *                                         imagem principal do artigo não serve
  *     # linhas com cardinal são notas
  *
  * Sem a linha #tema, o nome do tema é o nome do ficheiro da lista. As imagens
@@ -257,6 +259,107 @@ function imagemViaResumo(string $titulo, string $lingua, string $agente): ?strin
     return is_string($fonte) && $fonte !== '' ? $fonte : null;
 }
 
+/**
+ * Uma entrada aponta a um ficheiro do Commons em vez de a um artigo?
+ *
+ * Escreve-se 'Nome | File:Alguma coisa.jpg' na lista. Serve para os casos em
+ * que a imagem principal do artigo não é o que se quer mostrar: nos dinossauros
+ * é quase sempre um esqueleto de museu, e o que interessa é a reconstituição
+ * do animal vivo, que está no Commons mas não é a imagem principal.
+ */
+function eFicheiroCommons(string $artigo): bool
+{
+    return preg_match('/^\s*(File|Image|Ficheiro|Imagem)\s*:/i', $artigo) === 1;
+}
+
+/** 'Imagem:pe_na_areia.jpg' -> 'File:Pe na areia.jpg', que é como o Commons o trata. */
+function tituloCommons(string $artigo): string
+{
+    $nome = preg_replace('/^\s*(File|Image|Ficheiro|Imagem)\s*:\s*/i', '', trim($artigo)) ?? '';
+    $nome = str_replace('_', ' ', $nome);
+
+    return 'File:' . mb_strtoupper(mb_substr($nome, 0, 1)) . mb_substr($nome, 1);
+}
+
+/**
+ * URLs de miniatura de ficheiros do Commons, num pedido por lote.
+ *
+ * Devolve um mapa `entrada da lista => URL`, sem as que não existem — um nome
+ * de ficheiro errado desaparece do mapa e sai depois como SEM IMAGEM, em vez
+ * de passar por uma imagem qualquer.
+ */
+function imagensDeFicheiros(array $artigos, string $agente): array
+{
+    $encontradas = [];
+
+    if ($artigos === []) {
+        return $encontradas;
+    }
+
+    // O título canónico é a chave do lado do Commons; a entrada da lista é a
+    // chave do lado de cá. Duas listas com o mesmo ficheiro pedem-no uma vez.
+    $porTitulo = [];
+    foreach (array_unique($artigos) as $artigo) {
+        $porTitulo[tituloCommons($artigo)][] = $artigo;
+    }
+
+    foreach (array_chunk(array_keys($porTitulo), LOTE) as $lote) {
+        $dados = obterJson('https://commons.wikimedia.org/w/api.php?' . http_build_query([
+            'format'      => 'json',
+            'formatversion' => '2',
+            'action'      => 'query',
+            'prop'        => 'imageinfo',
+            'iiprop'      => 'url',
+            'iiurlwidth'  => (string) TAMANHO_THUMB,
+            'redirects'   => '1',
+            'titles'      => implode('|', $lote),
+        ]), $agente);
+
+        if ($dados === null) {
+            continue;
+        }
+
+        $consulta = $dados['query'] ?? [];
+
+        // Como nos artigos: a resposta vem pelo título final, e é preciso
+        // desfazer a normalização e os redireccionamentos para voltar ao
+        // título que foi pedido.
+        $passos = [];
+        foreach (['normalized', 'redirects'] as $tabela) {
+            foreach ($consulta[$tabela] ?? [] as $par) {
+                if (isset($par['from'], $par['to'])) {
+                    $passos[$par['from']] = $par['to'];
+                }
+            }
+        }
+
+        $urlPorTituloFinal = [];
+        foreach ($consulta['pages'] ?? [] as $pagina) {
+            $url = $pagina['imageinfo'][0]['thumburl'] ?? ($pagina['imageinfo'][0]['url'] ?? null);
+
+            if (isset($pagina['title']) && is_string($url) && $url !== '') {
+                $urlPorTituloFinal[$pagina['title']] = $url;
+            }
+        }
+
+        foreach ($lote as $pedido) {
+            $titulo = $pedido;
+
+            for ($salto = 0; $salto < 5 && isset($passos[$titulo]); $salto++) {
+                $titulo = $passos[$titulo];
+            }
+
+            if (isset($urlPorTituloFinal[$titulo])) {
+                foreach ($porTitulo[$pedido] as $entrada) {
+                    $encontradas[$entrada] = $urlPorTituloFinal[$titulo];
+                }
+            }
+        }
+    }
+
+    return $encontradas;
+}
+
 /** Título do artigo que melhor corresponde a um nome, ou null. */
 function procurarArtigo(string $nome, string $lingua, string $agente): ?string
 {
@@ -420,14 +523,30 @@ foreach ($listas as $caminhoLista) {
         continue;
     }
 
-    // 2. Um pedido por lote resolve os títulos todos de uma vez.
-    $urls = imagensDosArtigos(array_column($porBuscar, 'artigo'), $lingua, $agente);
+    // 2. As entradas que apontam a um ficheiro do Commons resolvem-se lá; as
+    //    outras vão à Wikipédia, num pedido por lote.
+    $ficheiros = [];
+    $artigos   = [];
+
+    foreach ($porBuscar as $entrada) {
+        if (eFicheiroCommons($entrada['artigo'])) {
+            $ficheiros[] = $entrada['artigo'];
+        } else {
+            $artigos[] = $entrada['artigo'];
+        }
+    }
+
+    $urls = imagensDeFicheiros($ficheiros, $agente)
+        + ($artigos === [] ? [] : imagensDosArtigos($artigos, $lingua, $agente));
 
     // 3. Os que não deram nada tentam-se pela pesquisa, um a um: resolve os
     //    acentos, os plurais e os nomes aproximados.
+    // Um ficheiro do Commons que não exista não se procura na Wikipédia: o
+    // título seria 'File:...' e a pesquisa devolveria qualquer coisa. Fica
+    // por resolver, e sai como SEM IMAGEM.
     $semTitulo = array_values(array_filter(
         $porBuscar,
-        static fn(array $e): bool => !isset($urls[$e['artigo']])
+        static fn(array $e): bool => !isset($urls[$e['artigo']]) && !eFicheiroCommons($e['artigo'])
     ));
 
     $encontrados = [];
@@ -456,7 +575,7 @@ foreach ($listas as $caminhoLista) {
     //      cartazes de filme e capas de jogo, que a via rápida (passo 2) nunca
     //      devolve por não serem de licença livre.
     foreach ($porBuscar as $entrada) {
-        if (isset($urls[$entrada['artigo']])) {
+        if (isset($urls[$entrada['artigo']]) || eFicheiroCommons($entrada['artigo'])) {
             continue;
         }
 

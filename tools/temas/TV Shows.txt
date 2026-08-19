@@ -31,3 +31,39 @@ Homeland | Homeland (TV series)
 Bridgerton
 Band of Brothers | Band of Brothers (miniseries)
 The Boys | The Boys (TV series)
+
+# Segunda leva.
+#
+# A nota lá de cima continua a valer, e agora com números: das 24 séries que
+# esta lista tinha à primeira, 19 vieram SEM IMAGEM. The Sopranos, Friends,
+# The Office, House, Black Mirror, The Mandalorian, Money Heist, Twin Peaks,
+# Severance, Succession, Arcane — todas com um logótipo não-livre no infobox,
+# que nem a pageimages nem o REST devolvem. Não é preciso voltar a tentar:
+# ficaram aqui pelo nome para não serem acrescentadas outra vez.
+#
+# As que ficaram são as que têm mesmo imagem. Antes de acrescentar outra,
+# vale a pena confirmar com --dry-run, que diz logo se há URL.
+Seinfeld
+Squid Game
+Attack on Titan
+Avatar: The Last Airbender
+The Bear | The Bear (TV series)
+Brooklyn Nine-Nine
+Sons of Anarchy
+Ted Lasso
+Loki | Loki (TV series)
+The Witcher | The Witcher (TV series)
+The Last Kingdom | The Last Kingdom (TV series)
+Rome | Rome (TV series)
+Andor | Andor (TV series)
+House of the Dragon
+The Umbrella Academy | The Umbrella Academy (TV series)
+Gomorrah | Gomorrah (TV series)
+The Handmaid's Tale | The Handmaid's Tale (TV series)
+Barry | Barry (TV series)
+Fleabag
+Atlanta | Atlanta (TV series)
+Silicon Valley | Silicon Valley (TV series)
+Death Note
+Naruto
+Fullmetal Alchemist

@@ -8,13 +8,17 @@
 # Some of these have no article of their own. If one comes back SEM IMAGEM,
 # either point it at the right article after the bar, or drop the line and
 # drop a photo into the folder by hand — gerar-seed.php picks up whatever
-# files are in there.
+# files are in there. Bolo Rei and Bolo de Bolacha did exactly that, so they
+# now point straight at a Commons file.
+#
+# Broa used to be on this list and is gone: it is maize bread, eaten with
+# soup and chouriço, and has no business in a desserts theme.
 
 Pastel de Nata | Pastel de nata
 Ovos Moles | Ovos moles
 Queijada
 Travesseiro | Travesseiro (pastry)
-Bolo Rei | Bolo Rei
+Bolo Rei | File:Bolo Rei - Natal.JPG
 Toucinho do Ceu | Toucinho do céu
 Pao de Lo | Pão de ló
 Arroz Doce | Arroz doce
@@ -23,7 +27,6 @@ Aletria
 Rabanadas | Torrija
 Filhos | Filhós
 Sonhos | Sonho
-Broa
 Bolo de Mel | Bolo de mel
 Papos de Anjo | Papo de anjo
 Fatias de Tomar
@@ -31,6 +34,6 @@ Salame de Chocolate | Chocolate salami
 Chocolate Mousse | Chocolate mousse
 Serradura
 Baba de Camelo
-Bolo de Bolacha
+Bolo de Bolacha | File:Bolo de bolacha.jpg
 Pastel de Tentugal | Pastel de Tentúgal
 Encharcada

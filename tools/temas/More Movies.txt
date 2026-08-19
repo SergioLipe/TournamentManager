@@ -20,3 +20,39 @@ Joker | Joker (2019 film)
 The Departed
 Se7en | Se7en
 American History X
+
+# Terceira leva. O cartaz é fair use na Wikipédia, como já acontecia com os
+# outros filmes deste tema — vem pelo endpoint REST, não pela pageimages.
+The Godfather Part II
+Goodfellas
+Schindler's List
+Alien | Alien (film)
+Terminator 2 | Terminator 2: Judgment Day
+The Lion King
+Toy Story
+Spirited Away
+The Green Mile | The Green Mile (film)
+Leon: The Professional | Léon: The Professional
+Mad Max: Fury Road
+The Wolf of Wall Street | The Wolf of Wall Street (2013 film)
+The Prestige | The Prestige (film)
+Oppenheimer | Oppenheimer (film)
+Dune | Dune (2021 film)
+Jaws | Jaws (film)
+Raiders of the Lost Ark
+E.T. the Extra-Terrestrial
+The Big Lebowski
+Heat | Heat (1995 film)
+Scarface | Scarface (1983 film)
+Rocky
+Up | Up (2009 film)
+WALL-E
+John Wick | John Wick (film)
+The Truman Show
+Catch Me If You Can
+Avengers: Endgame
+# A pesquisa do passo 3 pode ir para o filme ao lado: pedido "Into the
+# Spider-Verse", veio o cartaz do "Across". O nome fica a combinar com o
+# cartaz que a Wikipédia dá.
+Spider-Man: Across the Spider-Verse
+La La Land

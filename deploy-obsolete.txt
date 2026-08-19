@@ -85,6 +85,22 @@ Imagens/Portuguese-Landmarks/Sao-Jorge-Castle.jpg
 Imagens/Portuguese-Landmarks/University-of-Coimbra.png
 Imagens/Portuguese-Landmarks/
 
+# Os dinossauros passaram de esqueletos de museu a reconstituições do animal
+# vivo. A maior parte manteve o nome do ficheiro e é substituída pelo envio
+# normal; estes cinco não têm substituto com o mesmo nome — o Tyrannosaurus
+# passou a T-rex.jpg, o Apatosaurus a Brontosaurus.jpg, e os outros três
+# saíram do tema por serem nomes que ninguém reconhece.
+
+Imagens/Dinosaurs/Apatosaurus.jpg
+Imagens/Dinosaurs/Argentinosaurus.png
+Imagens/Dinosaurs/Quetzalcoatlus.jpg
+Imagens/Dinosaurs/Tyrannosaurus.jpg
+Imagens/Dinosaurs/Utahraptor.jpg
+
+# A broa é pão de milho, não é doce.
+
+Imagens/Portuguese-Desserts/Broa.jpg
+
 # Ficheiros que não são páginas e não pertencem a um servidor público.
 README.md
 .gitignore

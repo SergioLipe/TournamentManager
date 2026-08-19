@@ -103,7 +103,11 @@ mysql -u root -p torneio_db < database/seed-temas-publicos.sql
 
 A theme is a text file in `tools/temas/` whose filename is the theme name, one
 competitor per line. Images come from the lead image of the matching Wikipedia
-article. Full details, including how to fix a name that came out wrong, are in
+article, unless the line names a Wikimedia Commons file instead — which is how
+`Dinosaurs` shows the animals rather than the museum skeletons the articles
+lead with. Illustrations then go through `tools/quadrar-imagens.php`, which
+crops and squares them so the square cards have nothing left to crop. Full
+details, including how to fix a name that came out wrong, are in
 [`tools/README.md`](tools/README.md).
 
 `tools/` never reaches the server — `deploy.sh` excludes it.

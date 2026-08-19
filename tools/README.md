@@ -8,7 +8,7 @@ Tudo o que está aqui é em inglês, como o resto do site. Os temas sobre
 Portugal existem, mas têm nome inglês (`Portuguese Landmarks`,
 `Portuguese Desserts`) e ficam ao lado dos outros.
 
-## Os dois comandos
+## Os três comandos
 
 O PHP do XAMPP não está no PATH, por isso o caminho vai completo:
 
@@ -20,9 +20,15 @@ $PHP tools/buscar-imagens.php Animals
 $PHP tools/buscar-imagens.php                    # todas as listas
 $PHP tools/buscar-imagens.php Animals --dry-run  # ver sem descarregar
 
-# 2. Reescrever o SQL a partir do que está em Imagens/
+# 2. (opcional) Cortar a margem e pôr num quadrado de fundo branco
+$PHP tools/quadrar-imagens.php Dinosaurs
+
+# 3. Reescrever o SQL a partir do que está em Imagens/
 $PHP tools/gerar-seed.php
 ```
+
+O passo 2 só é preciso em temas de ilustrações — ver
+"Ilustrações em vez de fotografias", mais abaixo.
 
 Depois é correr o SQL na base de dados e publicar:
 
@@ -65,6 +71,50 @@ uma linha `#tema=` no topo da lista, que manda sobre o nome do ficheiro:
 ```
 #tema=Rock Bands
 ```
+
+## Escolher a imagem à mão
+
+A imagem que vem por omissão é a principal do artigo, e nem sempre é a que se
+quer. O caso claro é o dos dinossauros: a imagem principal é quase sempre o
+esqueleto montado num museu, e vinte e quatro esqueletos castanhos não se
+distinguem uns dos outros num jogo em que se escolhe pela imagem.
+
+Nesses casos põe-se, depois da barra, um ficheiro do Wikimedia Commons em vez
+de um artigo:
+
+```
+T. rex | File:202007 Tyrannosaurus rex.svg
+Velociraptor | File:Fred Wierum Velociraptor.png
+```
+
+O nome tem de ser o do ficheiro no Commons, com a extensão certa (há muito
+`.svg` onde se esperaria `.png`). Se estiver errado, a entrada sai como
+SEM IMAGEM — não se procura o nome na Wikipédia, que devolveria outra coisa
+qualquer. Para encontrar o nome exacto, a categoria
+`Category:<Género> life restorations` costuma ser o melhor sítio.
+
+## Ilustrações em vez de fotografias
+
+Uma ilustração não se comporta como uma fotografia nos cartões do site, e é
+por isso que existe o `quadrar-imagens.php`:
+
+- O cartão do duelo é quadrado e usa `object-fit: cover`. Uma reconstituição
+  de 960×320 fica reduzida ao tronco, sem cabeça nem cauda.
+- Muitas ilustrações do Commons são PNG de fundo transparente, e no tema
+  escuro do site um bicho escuro sobre transparente desaparece.
+
+O comando corta a margem vazia à volta, achata sobre branco e grava um JPEG
+quadrado — o que o `cover` já não tem como cortar:
+
+```sh
+$PHP tools/quadrar-imagens.php Dinosaurs
+$PHP tools/quadrar-imagens.php Dinosaurs --dry-run   # ver sem mexer
+$PHP tools/quadrar-imagens.php Dinosaurs --refazer   # tratar também os já quadrados
+```
+
+Corre-se **depois** do `buscar-imagens.php` e **antes** do `gerar-seed.php`,
+porque muda a extensão dos ficheiros (`.png` -> `.jpg`) e acerta o CSV. Correr
+outra vez sem `--refazer` não toca no que já está quadrado.
 
 ## Onde fica cada coisa
 

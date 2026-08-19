@@ -17,3 +17,49 @@ Celeste | Celeste (video game)
 Super Mario 64
 Doom (2016 video game) | Doom (2016 video game)
 World of Warcraft
+
+# Terceira leva. Capas e cartazes, como o resto do tema.
+Tetris
+Pac-Man
+Super Mario Bros.
+Ocarina of Time | The Legend of Zelda: Ocarina of Time
+Pokemon Red and Blue | Pokémon Red and Blue
+Sonic the Hedgehog | Sonic the Hedgehog (1991 video game)
+Street Fighter II
+Halo: Combat Evolved
+Among Us
+Rocket League
+Cyberpunk 2077
+Hades | Hades (video game)
+Sekiro | Sekiro: Shadows Die Twice
+Bloodborne
+Ghost of Tsushima
+Horizon Zero Dawn
+Uncharted 4 | Uncharted 4: A Thief's End
+Baldur's Gate 3
+Apex Legends
+Age of Empires II
+The Sims | The Sims (video game)
+Cuphead
+Subnautica
+Dead Cells
+Slay the Spire
+Journey | Journey (2012 video game)
+
+# Quarta leva. O Fortnite e o Undertale saíram da lista acima: o infobox de
+# ambos é um logótipo não-livre, que nem a pageimages nem o REST devolvem.
+Valorant
+Rainbow Six Siege
+Team Fortress 2
+Left 4 Dead 2
+Titanfall 2
+Nier: Automata
+Persona 5
+Monster Hunter: World
+Death Stranding
+Control | Control (video game)
+Disco Elysium
+Outer Wilds
+Return of the Obra Dinn
+Hotline Miami
+Limbo | Limbo (video game)

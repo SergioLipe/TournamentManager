@@ -1,31 +1,48 @@
 # Dinosaurs
 #
-#   php tools/buscar-imagens.php Dinosaurs
+#   php tools/buscar-imagens.php Dinosaurs --refazer
+#   php tools/quadrar-imagens.php Dinosaurs
 #
-# The lead image is usually a skeleton mount or a palaeoart reconstruction,
-# both freely licensed on Commons.
+# Duas coisas correram mal na primeira versão desta lista, e é por isso que
+# ela agora tem esta cara:
+#
+# 1. A imagem principal do artigo de um dinossauro é quase sempre o esqueleto
+#    montado num museu. Vinte e quatro esqueletos castanhos são impossíveis de
+#    distinguir uns dos outros num jogo em que se escolhe pela imagem, por
+#    isso cada linha aponta agora a um ficheiro do Commons — uma reconstituição
+#    do animal vivo — em vez de deixar a API escolher.
+#
+# 2. Os nomes eram os do género, todos em latim. Ficaram os que se reconhecem
+#    (o Tyrannosaurus mostra-se como 'T. rex'); os que ninguém identifica de
+#    cor — Argentinosaurus, Utahraptor, Quetzalcoatlus — deram lugar a
+#    dinossauros conhecidos dos filmes. O Apatosaurus passou a Brontosaurus,
+#    que é o mesmo bicho pelo nome que toda a gente usa.
+#
+# As imagens do Commons cujo nome começa por um número (202007, 202009, ...)
+# são da série do DBCLS, CC BY 4.0: fundo transparente, animal inteiro e o
+# mesmo traço em todas. O quadrar-imagens.php trata do fundo.
 
-Tyrannosaurus
-Triceratops
-Velociraptor
-Stegosaurus
-Brachiosaurus
-Diplodocus
-Spinosaurus
-Allosaurus
-Ankylosaurus
-Apatosaurus
-Archaeopteryx
-Argentinosaurus
-Carnotaurus
-Deinonychus
-Dilophosaurus
-Giganotosaurus
-Iguanodon
-Parasaurolophus
-Pachycephalosaurus
-Pteranodon
-Quetzalcoatlus
-Therizinosaurus
-Utahraptor
-Mosasaurus
+T. rex | File:202007 Tyrannosaurus rex.svg
+Velociraptor | File:Fred Wierum Velociraptor.png
+Triceratops | File:202007 Triceratops horridus.svg
+Stegosaurus | File:202009 Stegosaurus stenops.png
+Brachiosaurus | File:202009 Brachiosaurus altithorax.png
+Brontosaurus | File:Brontosaurus TD.png
+Diplodocus | File:202005 Diplodocus carnegii.png
+Spinosaurus | File:202005 Spinosaurus aegyptiacus.png
+Allosaurus | File:202009 Allosaurus fragilis.png
+Ankylosaurus | File:202007 Ankylosaurus magniventris.svg
+Archaeopteryx | File:202010 Archaeopteryx lithographica.png
+Carnotaurus | File:Carnotaurus 2017.png
+Dilophosaurus | File:Dilophosaurus 039AD.JPG
+Giganotosaurus | File:Giganotosaurus BW.jpg
+Iguanodon | File:Iguanadon.jpg
+Parasaurolophus | File:Life reconstruction of Parasaurolophus walkeri.png
+Pachycephalosaurus | File:202004 Pachycephalosaurus wyomingensis.png
+Pteranodon | File:202009 Pteranodon longiceps.png
+Therizinosaurus | File:202007 Therizinosaurus cheloniformis.svg
+Mosasaurus | File:Mosasaurus beaugei1DB.jpg
+Baryonyx | File:Baryonyx TD.png
+Gallimimus | File:Gallimimus Restoration.png
+Compsognathus | File:Compsognathus BW.jpg
+Deinonychus | File:202005 Deinonychus antirrhopus.png

@@ -23,6 +23,16 @@ require __DIR__ . '/includes/header.php';
 
             <hr>
 
+            <p class="sobre__creditos">
+                The pictures in the built-in themes come from Wikipedia and
+                Wikimedia Commons and belong to their authors. The dinosaurs
+                are life restorations, several of them by the
+                <a href="https://commons.wikimedia.org/wiki/Category:Life_science_images_from_DBCLS"
+                   rel="noopener">DBCLS</a>, used under
+                <a href="https://creativecommons.org/licenses/by/4.0/"
+                   rel="noopener">CC BY 4.0</a>.
+            </p>
+
             <p class="sobre__autor">
                 <strong>Sérgio Filipe Azevedo Gonçalves</strong><br>
                 <a href="mailto:lipewtf@hotmail.com">lipewtf@hotmail.com</a>

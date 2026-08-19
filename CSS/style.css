@@ -819,6 +819,11 @@ hr {
     font-size: 1.0625rem;
 }
 
+.sobre__creditos {
+    color: var(--texto-suave);
+    font-size: 0.875rem;
+}
+
 .sobre__autor {
     color: var(--texto-suave);
 }
