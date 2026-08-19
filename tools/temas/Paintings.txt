@@ -1,0 +1,51 @@
+# Paintings
+#
+#   php tools/buscar-imagens.php Paintings
+#
+# A maior parte é domínio público — o quadro tem séculos e a fotografia de
+# uma pintura plana não cria direitos novos — e vem em altíssima resolução do
+# Commons. As do século XX (Guernica, A Persistência da Memória, Nighthawks,
+# O Filho do Homem, Christina's World) ainda têm direitos e a Wikipédia usa-as
+# ao abrigo de fair use, como os cartazes do Movies.
+#
+# Nos títulos há armadilhas: "The Night Watch" traz o quadro do Rembrandt mas
+# "Night Watch (Rembrandt)" não existe, e "Nighthawks" sozinho não devolve
+# imagem — é preciso "Nighthawks (Hopper)".
+
+Mona Lisa
+The Starry Night
+The Scream
+Girl with a Pearl Earring
+The Last Supper | The Last Supper (Leonardo)
+The Night Watch
+Las Meninas
+The Birth of Venus
+Primavera | Primavera (Botticelli)
+The Creation of Adam
+The School of Athens
+The Garden of Earthly Delights
+The Arnolfini Portrait | Arnolfini Portrait
+The Great Wave off Kanagawa
+Liberty Leading the People
+Napoleon Crossing the Alps
+The Third of May 1808
+Saturn Devouring His Son
+The Death of Marat
+The Swing | The Swing (Fragonard)
+Wanderer above the Sea of Fog
+The Hay Wain
+The Fighting Temeraire
+Impression, Sunrise
+Water Lilies | File:Claude Monet - Water Lilies - Google Art Project.jpg
+Bal du moulin de la Galette
+A Sunday on La Grande Jatte | A Sunday Afternoon on the Island of La Grande Jatte
+Sunflowers | Sunflowers (Van Gogh series)
+Cafe Terrace at Night | Café Terrace at Night
+The Kiss | The Kiss (Klimt)
+Whistler's Mother
+American Gothic
+Nighthawks | Nighthawks (Hopper)
+The Persistence of Memory
+Guernica | Guernica (Picasso)
+The Son of Man
+Christina's World

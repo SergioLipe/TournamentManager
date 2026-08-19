@@ -1,0 +1,54 @@
+# Anime
+#
+#   php tools/buscar-imagens.php Anime
+#
+# A capa é do mangá ou do DVD, fair use na Wikipédia como os cartazes do
+# Movies. Vem pelo REST, não pela pageimages.
+#
+# Vários destes precisam do artigo do mangá em vez do da série: "Dragon Ball"
+# e "Vinland Saga" sozinhos não devolvem imagem nenhuma, "Dragon Ball (manga)"
+# devolve. Antes de acrescentar um título novo, --dry-run diz logo se há URL.
+
+Attack on Titan
+One Piece
+Dragon Ball | Dragon Ball (manga)
+Naruto
+Bleach | Bleach (manga)
+Death Note
+Demon Slayer | Demon Slayer: Kimetsu no Yaiba
+Jujutsu Kaisen
+My Hero Academia
+Hunter x Hunter | Hunter × Hunter
+Fullmetal Alchemist
+Cowboy Bebop
+Neon Genesis Evangelion
+Steins;Gate
+Code Geass
+Tokyo Ghoul
+Sword Art Online
+One-Punch Man
+Mob Psycho 100
+Chainsaw Man
+Spy x Family | Spy × Family
+Vinland Saga | Vinland Saga (manga)
+Berserk | Berserk (manga)
+Haikyu!!
+JoJo's Bizarre Adventure
+Fairy Tail
+Black Clover
+Dr. Stone
+Re:Zero
+KonoSuba
+Overlord | Overlord (novel series)
+Gintama
+Samurai Champloo
+Trigun
+Ghost in the Shell | Ghost in the Shell (1995 film)
+Akira | Akira (1988 film)
+Sailor Moon
+Yu Yu Hakusho
+Inuyasha
+Monster | Monster (manga)
+Your Lie in April
+Parasyte
+Made in Abyss

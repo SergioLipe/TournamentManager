@@ -35,10 +35,11 @@ function temasDoUtilizador(int $utilizadorId): array
  */
 const GRUPOS_TEMAS = [
     'Animals'         => ['Animals', 'Cat Breeds', 'Dog Breeds', 'Dinosaurs'],
-    'Food & drink'    => ['Food in Portugal', 'International Food', 'Portuguese Desserts', 'Cocktails'],
-    'Screen & play'   => ['Movies', 'TV Shows', 'Video Games', 'Superheroes'],
+    'Food & drink'    => ['Food in Portugal', 'International Food', 'Portuguese Desserts', 'Cocktails', 'Beers'],
+    'Screen & play'   => ['Movies', 'TV Shows', 'Anime', 'Video Games', 'Superheroes'],
     'Music & sport'   => ['Rock Bands', 'Rap Artists', 'Footballers'],
-    'Places & things' => ['European Capitals', 'World Landmarks', 'Classic Cars'],
+    'History & art'   => ['Historical Figures', 'Generals', 'Paintings'],
+    'Places & things' => ['European Capitals', 'World Landmarks', 'Classic Cars', 'Aircraft'],
 ];
 
 /** Nome do grupo a que um tema pertence. */

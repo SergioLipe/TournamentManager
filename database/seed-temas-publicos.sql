@@ -22,6 +22,54 @@ SET NAMES utf8mb4;
 
 SET @dono = (SELECT id FROM utilizador WHERE username = 'admin');
 
+-- ---------- Aircraft ----------
+INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Aircraft', @dono, 1)
+    ON DUPLICATE KEY UPDATE publico = 1;
+SET @t = (SELECT id FROM tema WHERE nome = 'Aircraft' AND utilizadorId = @dono);
+DELETE FROM competidor WHERE TemaId = @t;
+INSERT INTO competidor (nome, imagem, TemaId) VALUES
+    ('A-10 Thunderbolt II', 'Imagens/Aircraft/A-10-Thunderbolt-II.jpg', @t),
+    ('AH-64 Apache', 'Imagens/Aircraft/AH-64-Apache.jpg', @t),
+    ('Airbus A320', 'Imagens/Aircraft/Airbus-A320.jpg', @t),
+    ('Airbus A380', 'Imagens/Aircraft/Airbus-A380.jpg', @t),
+    ('Antonov An-225', 'Imagens/Aircraft/Antonov-An-225.jpg', @t),
+    ('Avro Lancaster', 'Imagens/Aircraft/Avro-Lancaster.jpg', @t),
+    ('B-2 Spirit', 'Imagens/Aircraft/B-2-Spirit.jpg', @t),
+    ('B-17 Flying Fortress', 'Imagens/Aircraft/B-17-Flying-Fortress.jpg', @t),
+    ('B-52 Stratofortress', 'Imagens/Aircraft/B-52-Stratofortress.jpg', @t),
+    ('Boeing 737', 'Imagens/Aircraft/Boeing-737.jpg', @t),
+    ('Boeing 747', 'Imagens/Aircraft/Boeing-747.jpg', @t),
+    ('Boeing 787 Dreamliner', 'Imagens/Aircraft/Boeing-787-Dreamliner.jpg', @t),
+    ('C-130 Hercules', 'Imagens/Aircraft/C-130-Hercules.jpg', @t),
+    ('Cessna 172', 'Imagens/Aircraft/Cessna-172.jpg', @t),
+    ('CH-47 Chinook', 'Imagens/Aircraft/CH-47-Chinook.jpg', @t),
+    ('Concorde', 'Imagens/Aircraft/Concorde.jpg', @t),
+    ('Dassault Rafale', 'Imagens/Aircraft/Dassault-Rafale.jpg', @t),
+    ('Douglas DC-3', 'Imagens/Aircraft/Douglas-DC-3.jpg', @t),
+    ('Eurofighter Typhoon', 'Imagens/Aircraft/Eurofighter-Typhoon.jpg', @t),
+    ('F-4 Phantom II', 'Imagens/Aircraft/F-4-Phantom-II.jpg', @t),
+    ('F-14 Tomcat', 'Imagens/Aircraft/F-14-Tomcat.jpg', @t),
+    ('F-15 Eagle', 'Imagens/Aircraft/F-15-Eagle.jpg', @t),
+    ('F-16 Fighting Falcon', 'Imagens/Aircraft/F-16-Fighting-Falcon.jpg', @t),
+    ('F-22 Raptor', 'Imagens/Aircraft/F-22-Raptor.jpg', @t),
+    ('F-35 Lightning II', 'Imagens/Aircraft/F-35-Lightning-II.jpg', @t),
+    ('Harrier', 'Imagens/Aircraft/Harrier.jpg', @t),
+    ('Hawker Hurricane', 'Imagens/Aircraft/Hawker-Hurricane.jpg', @t),
+    ('Junkers Ju 87 Stuka', 'Imagens/Aircraft/Junkers-Ju-87-Stuka.jpg', @t),
+    ('Messerschmitt Bf 109', 'Imagens/Aircraft/Messerschmitt-Bf-109.jpg', @t),
+    ('MiG-21', 'Imagens/Aircraft/MiG-21.jpg', @t),
+    ('MiG-29', 'Imagens/Aircraft/MiG-29.jpg', @t),
+    ('Mitsubishi A6M Zero', 'Imagens/Aircraft/Mitsubishi-A6M-Zero.jpg', @t),
+    ('P-51 Mustang', 'Imagens/Aircraft/P-51-Mustang.jpg', @t),
+    ('Saab Gripen', 'Imagens/Aircraft/Saab-Gripen.jpg', @t),
+    ('Spitfire', 'Imagens/Aircraft/Spitfire.jpg', @t),
+    ('SR-71 Blackbird', 'Imagens/Aircraft/SR-71-Blackbird.jpg', @t),
+    ('Su-27', 'Imagens/Aircraft/Su-27.jpg', @t),
+    ('U-2', 'Imagens/Aircraft/U-2.jpg', @t),
+    ('UH-60 Black Hawk', 'Imagens/Aircraft/UH-60-Black-Hawk.jpg', @t),
+    ('V-22 Osprey', 'Imagens/Aircraft/V-22-Osprey.jpg', @t),
+    ('Wright Flyer', 'Imagens/Aircraft/Wright-Flyer.jpg', @t);
+
 -- ---------- Animals ----------
 INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Animals', @dono, 1)
     ON DUPLICATE KEY UPDATE publico = 1;
@@ -83,6 +131,100 @@ INSERT INTO competidor (nome, imagem, TemaId) VALUES
     ('White Rhinoceros', 'Imagens/Animals/White-Rhinoceros.jpg', @t),
     ('Wolf', 'Imagens/Animals/Wolf.jpg', @t),
     ('Zebra', 'Imagens/Animals/Zebra.jpg', @t);
+
+-- ---------- Anime ----------
+INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Anime', @dono, 1)
+    ON DUPLICATE KEY UPDATE publico = 1;
+SET @t = (SELECT id FROM tema WHERE nome = 'Anime' AND utilizadorId = @dono);
+DELETE FROM competidor WHERE TemaId = @t;
+INSERT INTO competidor (nome, imagem, TemaId) VALUES
+    ('Akira', 'Imagens/Anime/Akira.jpg', @t),
+    ('Attack on Titan', 'Imagens/Anime/Attack-on-Titan.jpg', @t),
+    ('Berserk', 'Imagens/Anime/Berserk.png', @t),
+    ('Black Clover', 'Imagens/Anime/Black-Clover.jpg', @t),
+    ('Bleach', 'Imagens/Anime/Bleach.png', @t),
+    ('Chainsaw Man', 'Imagens/Anime/Chainsaw-Man.jpg', @t),
+    ('Code Geass', 'Imagens/Anime/Code-Geass.jpg', @t),
+    ('Cowboy Bebop', 'Imagens/Anime/Cowboy-Bebop.jpg', @t),
+    ('Death Note', 'Imagens/Anime/Death-Note.jpg', @t),
+    ('Demon Slayer', 'Imagens/Anime/Demon-Slayer.jpg', @t),
+    ('Dr. Stone', 'Imagens/Anime/Dr-Stone.jpg', @t),
+    ('Dragon Ball', 'Imagens/Anime/Dragon-Ball.png', @t),
+    ('Fairy Tail', 'Imagens/Anime/Fairy-Tail.jpg', @t),
+    ('Fullmetal Alchemist', 'Imagens/Anime/Fullmetal-Alchemist.jpg', @t),
+    ('Ghost in the Shell', 'Imagens/Anime/Ghost-in-the-Shell.jpg', @t),
+    ('Gintama', 'Imagens/Anime/Gintama.png', @t),
+    ('Haikyu!!', 'Imagens/Anime/Haikyu.jpg', @t),
+    ('Hunter x Hunter', 'Imagens/Anime/Hunter-x-Hunter.png', @t),
+    ('Inuyasha', 'Imagens/Anime/Inuyasha.png', @t),
+    ('JoJo''s Bizarre Adventure', 'Imagens/Anime/JoJo-s-Bizarre-Adventure.jpg', @t),
+    ('Jujutsu Kaisen', 'Imagens/Anime/Jujutsu-Kaisen.jpg', @t),
+    ('KonoSuba', 'Imagens/Anime/KonoSuba.jpg', @t),
+    ('Made in Abyss', 'Imagens/Anime/Made-in-Abyss.jpg', @t),
+    ('Mob Psycho 100', 'Imagens/Anime/Mob-Psycho-100.jpg', @t),
+    ('Monster', 'Imagens/Anime/Monster.jpg', @t),
+    ('My Hero Academia', 'Imagens/Anime/My-Hero-Academia.png', @t),
+    ('Naruto', 'Imagens/Anime/Naruto.jpg', @t),
+    ('Neon Genesis Evangelion', 'Imagens/Anime/Neon-Genesis-Evangelion.png', @t),
+    ('One Piece', 'Imagens/Anime/One-Piece.jpg', @t),
+    ('One-Punch Man', 'Imagens/Anime/One-Punch-Man.png', @t),
+    ('Overlord', 'Imagens/Anime/Overlord.jpg', @t),
+    ('Parasyte', 'Imagens/Anime/Parasyte.png', @t),
+    ('Re:Zero', 'Imagens/Anime/Re-Zero.jpg', @t),
+    ('Sailor Moon', 'Imagens/Anime/Sailor-Moon.jpg', @t),
+    ('Samurai Champloo', 'Imagens/Anime/Samurai-Champloo.jpg', @t),
+    ('Spy x Family', 'Imagens/Anime/Spy-x-Family.jpg', @t),
+    ('Steins;Gate', 'Imagens/Anime/Steins-Gate.jpg', @t),
+    ('Sword Art Online', 'Imagens/Anime/Sword-Art-Online.jpg', @t),
+    ('Tokyo Ghoul', 'Imagens/Anime/Tokyo-Ghoul.jpg', @t),
+    ('Trigun', 'Imagens/Anime/Trigun.png', @t),
+    ('Vinland Saga', 'Imagens/Anime/Vinland-Saga.jpg', @t),
+    ('Your Lie in April', 'Imagens/Anime/Your-Lie-in-April.png', @t),
+    ('Yu Yu Hakusho', 'Imagens/Anime/Yu-Yu-Hakusho.png', @t);
+
+-- ---------- Beers ----------
+INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Beers', @dono, 1)
+    ON DUPLICATE KEY UPDATE publico = 1;
+SET @t = (SELECT id FROM tema WHERE nome = 'Beers' AND utilizadorId = @dono);
+DELETE FROM competidor WHERE TemaId = @t;
+INSERT INTO competidor (nome, imagem, TemaId) VALUES
+    ('Amstel', 'Imagens/Beers/Amstel.jpg', @t),
+    ('Asahi', 'Imagens/Beers/Asahi.jpg', @t),
+    ('Beck''s', 'Imagens/Beers/Beck-s.jpg', @t),
+    ('Brahma', 'Imagens/Beers/Brahma.jpg', @t),
+    ('Carlsberg', 'Imagens/Beers/Carlsberg.png', @t),
+    ('Castle Lager', 'Imagens/Beers/Castle-Lager.jpg', @t),
+    ('Chimay', 'Imagens/Beers/Chimay.png', @t),
+    ('Coors Light', 'Imagens/Beers/Coors-Light.jpg', @t),
+    ('Corona', 'Imagens/Beers/Corona.png', @t),
+    ('Delirium Tremens', 'Imagens/Beers/Delirium-Tremens.jpg', @t),
+    ('Duvel', 'Imagens/Beers/Duvel.gif', @t),
+    ('Erdinger', 'Imagens/Beers/Erdinger.png', @t),
+    ('Estrella Damm', 'Imagens/Beers/Estrella-Damm.jpg', @t),
+    ('Franziskaner', 'Imagens/Beers/Franziskaner.jpg', @t),
+    ('Grolsch', 'Imagens/Beers/Grolsch.jpg', @t),
+    ('Guinness', 'Imagens/Beers/Guinness.png', @t),
+    ('Heineken', 'Imagens/Beers/Heineken.jpg', @t),
+    ('Hoegaarden', 'Imagens/Beers/Hoegaarden.jpg', @t),
+    ('Kirin', 'Imagens/Beers/Kirin.jpg', @t),
+    ('Kronenbourg 1664', 'Imagens/Beers/Kronenbourg-1664.jpg', @t),
+    ('Leffe', 'Imagens/Beers/Leffe.png', @t),
+    ('Miller Lite', 'Imagens/Beers/Miller-Lite.png', @t),
+    ('Modelo Especial', 'Imagens/Beers/Modelo-Especial.jpg', @t),
+    ('Paulaner', 'Imagens/Beers/Paulaner.jpg', @t),
+    ('Peroni', 'Imagens/Beers/Peroni.jpg', @t),
+    ('Pilsner Urquell', 'Imagens/Beers/Pilsner-Urquell.png', @t),
+    ('Quilmes', 'Imagens/Beers/Quilmes.png', @t),
+    ('Rochefort', 'Imagens/Beers/Rochefort.jpg', @t),
+    ('Sagres', 'Imagens/Beers/Sagres.jpg', @t),
+    ('Sapporo', 'Imagens/Beers/Sapporo.png', @t),
+    ('Singha', 'Imagens/Beers/Singha.jpg', @t),
+    ('Stella Artois', 'Imagens/Beers/Stella-Artois.jpg', @t),
+    ('Super Bock', 'Imagens/Beers/Super-Bock.png', @t),
+    ('Tsingtao', 'Imagens/Beers/Tsingtao.jpg', @t),
+    ('Vedett', 'Imagens/Beers/Vedett.jpg', @t),
+    ('Weihenstephaner', 'Imagens/Beers/Weihenstephaner.png', @t),
+    ('Westvleteren', 'Imagens/Beers/Westvleteren.jpg', @t);
 
 -- ---------- Cat Breeds ----------
 INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Cat Breeds', @dono, 1)
@@ -401,6 +543,108 @@ INSERT INTO competidor (nome, imagem, TemaId) VALUES
     ('Xavi', 'Imagens/Footballers/Xavi.jpg', @t),
     ('Zinedine Zidane', 'Imagens/Footballers/Zinedine-Zidane.jpg', @t);
 
+-- ---------- Generals ----------
+INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Generals', @dono, 1)
+    ON DUPLICATE KEY UPDATE publico = 1;
+SET @t = (SELECT id FROM tema WHERE nome = 'Generals' AND utilizadorId = @dono);
+DELETE FROM competidor WHERE TemaId = @t;
+INSERT INTO competidor (nome, imagem, TemaId) VALUES
+    ('Afonso de Albuquerque', 'Imagens/Generals/Afonso-de-Albuquerque.png', @t),
+    ('Alexander Suvorov', 'Imagens/Generals/Alexander-Suvorov.jpg', @t),
+    ('Alexander the Great', 'Imagens/Generals/Alexander-the-Great.jpg', @t),
+    ('Attila', 'Imagens/Generals/Attila.jpg', @t),
+    ('Belisarius', 'Imagens/Generals/Belisarius.jpg', @t),
+    ('Bernard Montgomery', 'Imagens/Generals/Bernard-Montgomery.jpg', @t),
+    ('Charles Martel', 'Imagens/Generals/Charles-Martel.jpg', @t),
+    ('Douglas MacArthur', 'Imagens/Generals/Douglas-MacArthur.jpg', @t),
+    ('Duke of Marlborough', 'Imagens/Generals/Duke-of-Marlborough.jpg', @t),
+    ('Duke of Wellington', 'Imagens/Generals/Duke-of-Wellington.jpg', @t),
+    ('Dwight D. Eisenhower', 'Imagens/Generals/Dwight-D-Eisenhower.jpg', @t),
+    ('El Cid', 'Imagens/Generals/El-Cid.jpg', @t),
+    ('Erwin Rommel', 'Imagens/Generals/Erwin-Rommel.jpg', @t),
+    ('Frederick the Great', 'Imagens/Generals/Frederick-the-Great.jpg', @t),
+    ('Genghis Khan', 'Imagens/Generals/Genghis-Khan.jpg', @t),
+    ('George S. Patton', 'Imagens/Generals/George-S-Patton.jpg', @t),
+    ('George Washington', 'Imagens/Generals/George-Washington.jpg', @t),
+    ('Georgy Zhukov', 'Imagens/Generals/Georgy-Zhukov.jpg', @t),
+    ('Gustavus Adolphus', 'Imagens/Generals/Gustavus-Adolphus.jpg', @t),
+    ('Hannibal', 'Imagens/Generals/Hannibal.jpg', @t),
+    ('Horatio Nelson', 'Imagens/Generals/Horatio-Nelson.jpg', @t),
+    ('Joan of Arc', 'Imagens/Generals/Joan-of-Arc.jpg', @t),
+    ('Julius Caesar', 'Imagens/Generals/Julius-Caesar.jpg', @t),
+    ('Mikhail Kutuzov', 'Imagens/Generals/Mikhail-Kutuzov.jpg', @t),
+    ('Napoleon', 'Imagens/Generals/Napoleon.jpg', @t),
+    ('Nuno Alvares Pereira', 'Imagens/Generals/Nuno-Alvares-Pereira.jpg', @t),
+    ('Oda Nobunaga', 'Imagens/Generals/Oda-Nobunaga.jpg', @t),
+    ('Oliver Cromwell', 'Imagens/Generals/Oliver-Cromwell.jpg', @t),
+    ('Prince Eugene of Savoy', 'Imagens/Generals/Prince-Eugene-of-Savoy.png', @t),
+    ('Robert E. Lee', 'Imagens/Generals/Robert-E-Lee.jpg', @t),
+    ('Saladin', 'Imagens/Generals/Saladin.jpg', @t),
+    ('Scipio Africanus', 'Imagens/Generals/Scipio-Africanus.jpg', @t),
+    ('Shaka Zulu', 'Imagens/Generals/Shaka-Zulu.jpg', @t),
+    ('Stonewall Jackson', 'Imagens/Generals/Stonewall-Jackson.jpg', @t),
+    ('Subutai', 'Imagens/Generals/Subutai.jpg', @t),
+    ('Sun Tzu', 'Imagens/Generals/Sun-Tzu.jpg', @t),
+    ('Timur', 'Imagens/Generals/Timur.jpg', @t),
+    ('Tokugawa Ieyasu', 'Imagens/Generals/Tokugawa-Ieyasu.jpg', @t),
+    ('Ulysses S. Grant', 'Imagens/Generals/Ulysses-S-Grant.jpg', @t),
+    ('Vo Nguyen Giap', 'Imagens/Generals/Vo-Nguyen-Giap.jpg', @t),
+    ('William Tecumseh Sherman', 'Imagens/Generals/William-Tecumseh-Sherman.jpg', @t),
+    ('Yi Sun-sin', 'Imagens/Generals/Yi-Sun-sin.jpg', @t);
+
+-- ---------- Historical Figures ----------
+INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Historical Figures', @dono, 1)
+    ON DUPLICATE KEY UPDATE publico = 1;
+SET @t = (SELECT id FROM tema WHERE nome = 'Historical Figures' AND utilizadorId = @dono);
+DELETE FROM competidor WHERE TemaId = @t;
+INSERT INTO competidor (nome, imagem, TemaId) VALUES
+    ('Abraham Lincoln', 'Imagens/Historical-Figures/Abraham-Lincoln.jpg', @t),
+    ('Ada Lovelace', 'Imagens/Historical-Figures/Ada-Lovelace.png', @t),
+    ('Alan Turing', 'Imagens/Historical-Figures/Alan-Turing.jpg', @t),
+    ('Albert Einstein', 'Imagens/Historical-Figures/Albert-Einstein.jpg', @t),
+    ('Amelia Earhart', 'Imagens/Historical-Figures/Amelia-Earhart.jpg', @t),
+    ('Archimedes', 'Imagens/Historical-Figures/Archimedes.jpg', @t),
+    ('Aristotle', 'Imagens/Historical-Figures/Aristotle.jpg', @t),
+    ('Catherine the Great', 'Imagens/Historical-Figures/Catherine-the-Great.jpg', @t),
+    ('Charlemagne', 'Imagens/Historical-Figures/Charlemagne.jpg', @t),
+    ('Charles Darwin', 'Imagens/Historical-Figures/Charles-Darwin.jpg', @t),
+    ('Christopher Columbus', 'Imagens/Historical-Figures/Christopher-Columbus.jpg', @t),
+    ('Cleopatra', 'Imagens/Historical-Figures/Cleopatra.jpg', @t),
+    ('Confucius', 'Imagens/Historical-Figures/Confucius.jpg', @t),
+    ('Elizabeth I', 'Imagens/Historical-Figures/Elizabeth-I.jpg', @t),
+    ('Ferdinand Magellan', 'Imagens/Historical-Figures/Ferdinand-Magellan.jpg', @t),
+    ('Galileo Galilei', 'Imagens/Historical-Figures/Galileo-Galilei.jpg', @t),
+    ('George Washington', 'Imagens/Historical-Figures/George-Washington.jpg', @t),
+    ('Henry the Navigator', 'Imagens/Historical-Figures/Henry-the-Navigator.jpg', @t),
+    ('Isaac Newton', 'Imagens/Historical-Figures/Isaac-Newton.jpg', @t),
+    ('Joan of Arc', 'Imagens/Historical-Figures/Joan-of-Arc.jpg', @t),
+    ('Leonardo da Vinci', 'Imagens/Historical-Figures/Leonardo-da-Vinci.png', @t),
+    ('Ludwig van Beethoven', 'Imagens/Historical-Figures/Ludwig-van-Beethoven.jpg', @t),
+    ('Mahatma Gandhi', 'Imagens/Historical-Figures/Mahatma-Gandhi.jpg', @t),
+    ('Mansa Musa', 'Imagens/Historical-Figures/Mansa-Musa.jpg', @t),
+    ('Marco Polo', 'Imagens/Historical-Figures/Marco-Polo.png', @t),
+    ('Marcus Aurelius', 'Imagens/Historical-Figures/Marcus-Aurelius.jpg', @t),
+    ('Marie Curie', 'Imagens/Historical-Figures/Marie-Curie.jpg', @t),
+    ('Martin Luther King Jr.', 'Imagens/Historical-Figures/Martin-Luther-King-Jr.jpg', @t),
+    ('Michelangelo', 'Imagens/Historical-Figures/Michelangelo.jpg', @t),
+    ('Neil Armstrong', 'Imagens/Historical-Figures/Neil-Armstrong.jpg', @t),
+    ('Nelson Mandela', 'Imagens/Historical-Figures/Nelson-Mandela.jpg', @t),
+    ('Nicolaus Copernicus', 'Imagens/Historical-Figures/Nicolaus-Copernicus.jpg', @t),
+    ('Nikola Tesla', 'Imagens/Historical-Figures/Nikola-Tesla.jpg', @t),
+    ('Peter the Great', 'Imagens/Historical-Figures/Peter-the-Great.jpg', @t),
+    ('Plato', 'Imagens/Historical-Figures/Plato.png', @t),
+    ('Ramesses II', 'Imagens/Historical-Figures/Ramesses-II.jpg', @t),
+    ('Rosa Parks', 'Imagens/Historical-Figures/Rosa-Parks.jpg', @t),
+    ('Socrates', 'Imagens/Historical-Figures/Socrates.jpg', @t),
+    ('Suleiman the Magnificent', 'Imagens/Historical-Figures/Suleiman-the-Magnificent.jpg', @t),
+    ('Thomas Edison', 'Imagens/Historical-Figures/Thomas-Edison.jpg', @t),
+    ('Tutankhamun', 'Imagens/Historical-Figures/Tutankhamun.jpg', @t),
+    ('Vasco da Gama', 'Imagens/Historical-Figures/Vasco-da-Gama.jpg', @t),
+    ('William Shakespeare', 'Imagens/Historical-Figures/William-Shakespeare.jpg', @t),
+    ('Winston Churchill', 'Imagens/Historical-Figures/Winston-Churchill.jpg', @t),
+    ('Wolfgang Amadeus Mozart', 'Imagens/Historical-Figures/Wolfgang-Amadeus-Mozart.jpg', @t),
+    ('Yuri Gagarin', 'Imagens/Historical-Figures/Yuri-Gagarin.jpg', @t);
+
 -- ---------- International Food ----------
 INSERT INTO tema (nome, utilizadorId, publico) VALUES ('International Food', @dono, 1)
     ON DUPLICATE KEY UPDATE publico = 1;
@@ -507,6 +751,50 @@ INSERT INTO competidor (nome, imagem, TemaId) VALUES
     ('Up', 'Imagens/Filmes/Up.jpg', @t),
     ('WALL-E', 'Imagens/Filmes/WALL-E.jpg', @t),
     ('Whiplash', 'Imagens/Filmes/Whiplash.jpg', @t);
+
+-- ---------- Paintings ----------
+INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Paintings', @dono, 1)
+    ON DUPLICATE KEY UPDATE publico = 1;
+SET @t = (SELECT id FROM tema WHERE nome = 'Paintings' AND utilizadorId = @dono);
+DELETE FROM competidor WHERE TemaId = @t;
+INSERT INTO competidor (nome, imagem, TemaId) VALUES
+    ('A Sunday on La Grande Jatte', 'Imagens/Paintings/A-Sunday-on-La-Grande-Jatte.jpg', @t),
+    ('American Gothic', 'Imagens/Paintings/American-Gothic.jpg', @t),
+    ('Bal du moulin de la Galette', 'Imagens/Paintings/Bal-du-moulin-de-la-Galette.jpg', @t),
+    ('Cafe Terrace at Night', 'Imagens/Paintings/Cafe-Terrace-at-Night.jpg', @t),
+    ('Christina''s World', 'Imagens/Paintings/Christina-s-World.jpg', @t),
+    ('Girl with a Pearl Earring', 'Imagens/Paintings/Girl-with-a-Pearl-Earring.jpg', @t),
+    ('Guernica', 'Imagens/Paintings/Guernica.jpg', @t),
+    ('Impression, Sunrise', 'Imagens/Paintings/Impression-Sunrise.jpg', @t),
+    ('Las Meninas', 'Imagens/Paintings/Las-Meninas.jpg', @t),
+    ('Liberty Leading the People', 'Imagens/Paintings/Liberty-Leading-the-People.jpg', @t),
+    ('Mona Lisa', 'Imagens/Paintings/Mona-Lisa.jpg', @t),
+    ('Napoleon Crossing the Alps', 'Imagens/Paintings/Napoleon-Crossing-the-Alps.jpg', @t),
+    ('Nighthawks', 'Imagens/Paintings/Nighthawks.jpg', @t),
+    ('Primavera', 'Imagens/Paintings/Primavera.jpg', @t),
+    ('Saturn Devouring His Son', 'Imagens/Paintings/Saturn-Devouring-His-Son.jpg', @t),
+    ('Sunflowers', 'Imagens/Paintings/Sunflowers.jpg', @t),
+    ('The Arnolfini Portrait', 'Imagens/Paintings/The-Arnolfini-Portrait.jpg', @t),
+    ('The Birth of Venus', 'Imagens/Paintings/The-Birth-of-Venus.jpg', @t),
+    ('The Creation of Adam', 'Imagens/Paintings/The-Creation-of-Adam.jpg', @t),
+    ('The Death of Marat', 'Imagens/Paintings/The-Death-of-Marat.jpg', @t),
+    ('The Fighting Temeraire', 'Imagens/Paintings/The-Fighting-Temeraire.jpg', @t),
+    ('The Garden of Earthly Delights', 'Imagens/Paintings/The-Garden-of-Earthly-Delights.jpg', @t),
+    ('The Great Wave off Kanagawa', 'Imagens/Paintings/The-Great-Wave-off-Kanagawa.jpg', @t),
+    ('The Hay Wain', 'Imagens/Paintings/The-Hay-Wain.jpg', @t),
+    ('The Kiss', 'Imagens/Paintings/The-Kiss.jpg', @t),
+    ('The Last Supper', 'Imagens/Paintings/The-Last-Supper.jpg', @t),
+    ('The Night Watch', 'Imagens/Paintings/The-Night-Watch.jpg', @t),
+    ('The Persistence of Memory', 'Imagens/Paintings/The-Persistence-of-Memory.jpg', @t),
+    ('The School of Athens', 'Imagens/Paintings/The-School-of-Athens.jpg', @t),
+    ('The Scream', 'Imagens/Paintings/The-Scream.jpg', @t),
+    ('The Son of Man', 'Imagens/Paintings/The-Son-of-Man.jpg', @t),
+    ('The Starry Night', 'Imagens/Paintings/The-Starry-Night.jpg', @t),
+    ('The Swing', 'Imagens/Paintings/The-Swing.jpg', @t),
+    ('The Third of May 1808', 'Imagens/Paintings/The-Third-of-May-1808.jpg', @t),
+    ('Wanderer above the Sea of Fog', 'Imagens/Paintings/Wanderer-above-the-Sea-of-Fog.jpg', @t),
+    ('Water Lilies', 'Imagens/Paintings/Water-Lilies.jpg', @t),
+    ('Whistler''s Mother', 'Imagens/Paintings/Whistler-s-Mother.jpg', @t);
 
 -- ---------- Portuguese Desserts ----------
 INSERT INTO tema (nome, utilizadorId, publico) VALUES ('Portuguese Desserts', @dono, 1)

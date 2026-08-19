@@ -1,0 +1,49 @@
+# Beers
+#
+#   php tools/buscar-imagens.php Beers
+#
+# Cervejas pelo nome da marca. O que vem é o que a Wikipédia tem no infobox:
+# umas vezes o copo cheio, outras a garrafa, outras o logótipo. Vale a pena
+# olhar para a pasta depois de descarregar e trocar as que ficaram feias por
+# um File: do Commons.
+#
+# Heineken e Carlsberg só respondem pelo artigo da empresa; a Budweiser não
+# responde de todo — o infobox é um logótipo não-livre.
+
+Guinness
+Heineken | File:Heineken Bottle.jpg
+Super Bock
+Sagres | Sagres (beer)
+Carlsberg | Carlsberg Group
+Stella Artois
+Corona | Corona (beer)
+Peroni | File:Peroni Nastro Azzurro Beer Oct 2012.jpg
+Asahi | File:Asahi superdry japan.JPG
+Sapporo | Sapporo Brewery
+Kirin | File:Kirin ichiban(beer can).jpg
+Tsingtao | File:Bottle and glas of Chinese Tsingtao beer.jpg
+Singha
+Beck's | File:Becks-ukr1.jpg
+Kronenbourg 1664
+Grolsch | Grolsch Brewery
+Amstel | Amstel (beer)
+Estrella Damm
+Coors Light
+Miller Lite
+Quilmes | Quilmes (beer)
+Brahma | Brahma (beer)
+Modelo Especial
+Castle Lager
+Chimay | Chimay Brewery
+Duvel
+Leffe
+Hoegaarden | File:HoegaardenGlass.jpg
+Erdinger
+Paulaner
+Franziskaner | File:Franziskaner Weissbier.jpg
+Weihenstephaner
+Pilsner Urquell
+Westvleteren | File:Trappist Westvleteren XII.jpg
+Rochefort | Rochefort Brewery
+Delirium Tremens | File:DT and a Glass.jpg
+Vedett | File:Vedett Extra White bottle.JPG

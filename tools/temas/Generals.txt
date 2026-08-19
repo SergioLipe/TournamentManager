@@ -1,0 +1,53 @@
+# Generals
+#
+#   php tools/buscar-imagens.php Generals
+#
+# Comandantes militares. Os que também são figuras históricas por outras
+# razões estão aqui e não no Historical Figures, para os dois temas não se
+# repetirem um ao outro.
+#
+# O nome a mostrar é o curto: o artigo do Wellington é "Arthur Wellesley,
+# 1st Duke of Wellington", que não cabe num cartão.
+
+Alexander the Great
+Julius Caesar
+Hannibal
+Scipio Africanus
+Sun Tzu
+Attila | Attila the Hun
+Belisarius
+Charles Martel
+El Cid
+Saladin | File:Saladin portrait (imaginary), by Giovio Paolo, 1483-1552, published 1575.jpg
+Genghis Khan
+Subutai
+Timur
+Joan of Arc
+Nuno Alvares Pereira | Nuno Álvares Pereira
+Afonso de Albuquerque
+Gustavus Adolphus
+Oliver Cromwell
+Duke of Marlborough | John Churchill, 1st Duke of Marlborough
+Prince Eugene of Savoy
+Frederick the Great
+Alexander Suvorov
+George Washington
+Napoleon | Napoleon
+Duke of Wellington | Arthur Wellesley, 1st Duke of Wellington
+Horatio Nelson
+Mikhail Kutuzov
+Ulysses S. Grant
+Robert E. Lee
+Stonewall Jackson
+William Tecumseh Sherman
+Shaka Zulu | Shaka
+Yi Sun-sin
+Oda Nobunaga
+Tokugawa Ieyasu
+Erwin Rommel
+Georgy Zhukov
+Bernard Montgomery
+Dwight D. Eisenhower
+George S. Patton
+Douglas MacArthur
+Vo Nguyen Giap | Võ Nguyên Giáp

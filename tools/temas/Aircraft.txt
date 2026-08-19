@@ -1,0 +1,49 @@
+# Aircraft
+#
+#   php tools/buscar-imagens.php Aircraft
+#
+# Fotografias livres do Commons — aviões são dos assuntos mais fotografados
+# que lá há. O nome do artigo é quase sempre o do fabricante mais o modelo
+# ("Boeing 747"), e o nome a mostrar fica só com o modelo.
+
+Boeing 747
+Airbus A380
+Concorde
+Boeing 737
+Airbus A320 | Airbus A320 family
+Boeing 787 Dreamliner
+Antonov An-225 | Antonov An-225 Mriya
+Douglas DC-3
+Cessna 172
+Wright Flyer
+Spitfire | Supermarine Spitfire
+P-51 Mustang | North American P-51 Mustang
+Hawker Hurricane
+Messerschmitt Bf 109
+Mitsubishi A6M Zero
+Junkers Ju 87 Stuka | Junkers Ju 87
+B-17 Flying Fortress | Boeing B-17 Flying Fortress
+Avro Lancaster
+SR-71 Blackbird | Lockheed SR-71 Blackbird
+U-2 | Lockheed U-2
+F-4 Phantom II | McDonnell Douglas F-4 Phantom II
+F-14 Tomcat | Grumman F-14 Tomcat
+F-15 Eagle | McDonnell Douglas F-15 Eagle
+F-16 Fighting Falcon | General Dynamics F-16 Fighting Falcon
+F-22 Raptor | Lockheed Martin F-22 Raptor
+F-35 Lightning II | Lockheed Martin F-35 Lightning II
+A-10 Thunderbolt II | Fairchild Republic A-10 Thunderbolt II
+B-2 Spirit | Northrop B-2 Spirit
+B-52 Stratofortress | Boeing B-52 Stratofortress
+Eurofighter Typhoon
+Dassault Rafale
+Saab Gripen | Saab JAS 39 Gripen
+MiG-21 | Mikoyan-Gurevich MiG-21
+MiG-29 | Mikoyan MiG-29
+Su-27 | Sukhoi Su-27
+Harrier | Hawker Siddeley Harrier
+C-130 Hercules | Lockheed C-130 Hercules
+AH-64 Apache | Boeing AH-64 Apache
+CH-47 Chinook | Boeing CH-47 Chinook
+UH-60 Black Hawk | Sikorsky UH-60 Black Hawk
+V-22 Osprey | Bell Boeing V-22 Osprey

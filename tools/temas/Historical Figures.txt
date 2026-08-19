@@ -1,0 +1,57 @@
+# Historical Figures
+#
+#   php tools/buscar-imagens.php "Historical Figures"
+#
+# Retratos: pintados nos antigos, fotográficos nos recentes, e livres em
+# ambos os casos.
+#
+# Os generais têm tema próprio (Generals). Quem cabia nos dois — César,
+# Alexandre, Napoleão, Gengis Khan — ficou lá, para os dois temas não serem
+# metade a mesma coisa.
+
+Cleopatra
+Tutankhamun
+Ramesses II
+Confucius
+Socrates
+Plato
+Aristotle
+Archimedes
+Marcus Aurelius
+Charlemagne | File:Albrecht Dürer - Emperor Charlemagne (cropped).jpg
+Joan of Arc
+Marco Polo
+Leonardo da Vinci
+Michelangelo
+William Shakespeare
+Galileo Galilei
+Isaac Newton
+Nicolaus Copernicus
+Christopher Columbus
+Vasco da Gama
+Ferdinand Magellan
+Henry the Navigator | Prince Henry the Navigator
+Elizabeth I
+Catherine the Great
+Peter the Great
+Suleiman the Magnificent
+Mansa Musa
+Wolfgang Amadeus Mozart
+Ludwig van Beethoven
+Charles Darwin
+Abraham Lincoln
+George Washington
+Nikola Tesla
+Thomas Edison
+Marie Curie
+Albert Einstein
+Mahatma Gandhi
+Winston Churchill
+Nelson Mandela
+Martin Luther King Jr.
+Rosa Parks
+Amelia Earhart
+Yuri Gagarin
+Neil Armstrong
+Ada Lovelace
+Alan Turing
