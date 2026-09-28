@@ -11,7 +11,6 @@ $tema   = $temaId > 0 ? temaVisivelOuNull($temaId) : null;
 $competidores = $tema !== null ? competidoresDoTema((int) $tema['id']) : [];
 
 $listaPublicos = temasParaEscolher();
-$listaPessoais = autenticado() ? temasParaEscolher((int) utilizadorId()) : [];
 
 $tituloPagina = 'Statistics';
 require __DIR__ . '/includes/header.php';
@@ -35,8 +34,6 @@ require __DIR__ . '/includes/header.php';
         </summary>
 
         <div class="escolher-tema__corpo">
-            <?php seccaoDeTemas('Your themes', $listaPessoais, 'Estatisticas.php?temaId='); ?>
-
             <?php if ($listaPublicos === []) { ?>
                 <p class="selector__vazio">No public themes yet.</p>
             <?php } ?>
@@ -46,7 +43,7 @@ require __DIR__ . '/includes/header.php';
     </details>
 
     <?php if ($temaId > 0 && $tema === null) { ?>
-        <div class="alert alert-warning">That theme does not exist, or you cannot see it.</div>
+        <div class="alert alert-warning">That theme does not exist.</div>
     <?php } elseif ($tema !== null) { ?>
         <h2 class="h4 mt-4 mb-3"><?= e($tema['nome']) ?></h2>
 

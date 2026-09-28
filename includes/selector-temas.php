@@ -20,7 +20,6 @@ require_once __DIR__ . '/temas-view.php';
  */
 
 $selTemasPublicos = temasParaEscolher();
-$selTemasPessoais = (!$modoApp && autenticado()) ? temasParaEscolher((int) utilizadorId()) : [];
 ?>
 
 <div class="selector" id="selectorTemas" hidden>
@@ -39,8 +38,6 @@ $selTemasPessoais = (!$modoApp && autenticado()) ? temasParaEscolher((int) utili
         </div>
 
         <div class="selector__corpo">
-            <?php seccaoDeTemas('Your themes', $selTemasPessoais); ?>
-
             <?php if ($selTemasPublicos === []) { ?>
                 <p class="selector__vazio">No public themes yet.</p>
             <?php } ?>

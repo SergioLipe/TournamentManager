@@ -8,28 +8,21 @@ Useful when you cannot make up your mind, or as a friendly competition with frie
 
 ## Features
 
-- Play with the built-in themes, or create your own and upload images to them.
+- Play with the built-in themes. There are no accounts: nobody signs up, logs in or uploads anything.
 - Anywhere from 2 to 16 competitors. Odd numbers work too — the extras get a bye.
 - Play with plain names instead of images.
 - Every battle is recorded, so the Statistics page shows which entries actually win.
 
 ## Requirements
 
-- PHP 7.4 or newer, with `pdo_mysql`, `fileinfo`, `mbstring` and **`gd`**
+- PHP 7.4 or newer, with `pdo_mysql` and `mbstring`
 - MySQL 5.7 / MariaDB 10.2 or newer
 - A web server pointed at the project root
 
 Composer is optional. If `vendor/` exists it gets autoloaded, but nothing here needs it.
 
-**`gd` is not optional in practice.** Upload validation uses it to actually decode
-each file. Without it, a file starting with the bytes `GIF89a` followed by arbitrary
-content passes both `finfo` and `getimagesize` and gets stored. Such a file still
-cannot execute — it is saved with an image extension and `Imagens/.htaccess` strips
-PHP handlers — but the check that is supposed to catch it is skipped. Verify with:
-
-```php
-<?php var_dump(function_exists('imagecreatefromstring'));
-```
+The tools in `tools/` that fetch and crop the theme images run on your own
+machine and also need `fileinfo` and `gd` there. The server does not.
 
 ## Setup
 
@@ -48,15 +41,7 @@ PHP handlers — but the check that is supposed to catch it is skipped. Verify w
 
    Then edit `.env` with your database credentials.
 
-3. **Create the admin account and the public themes**
-
-   ```sh
-   php database/criar-admin.php admin
-   ```
-
-   The password is asked interactively, so it never ends up in your shell history.
-
-4. **Load the public themes**
+3. **Load the public themes**
 
    ```sh
    mysql -u root -p torneio_db < database/seed-temas-publicos.sql
@@ -73,13 +58,7 @@ PHP handlers — but the check that is supposed to catch it is skipped. Verify w
    files on disk are plain ASCII (`Bacalhau-a-Lagareiro.jpg`). That split is
    deliberate — see "Filenames" below.
 
-5. **Make the upload directory writable**
-
-   ```sh
-   mkdir -p Imagens/temas && chmod 755 Imagens/temas
-   ```
-
-6. **Serve it**
+4. **Serve it**
 
    ```sh
    php -S localhost:8000
@@ -87,11 +66,10 @@ PHP handlers — but the check that is supposed to catch it is skipped. Verify w
 
    Or point Apache/nginx at the project root.
 
-## Adding themes in bulk
+## Adding themes
 
-Uploading images one theme at a time through the site is fine for a personal
-theme, but the public ones are built from the command line instead. Write a
-list of names, fetch the pictures, regenerate the SQL:
+Themes are built from the command line, never through the site. Write a list
+of names, fetch the pictures, regenerate the SQL:
 
 ```sh
 PHP="C:/xampp/php/php.exe"                       # PHP is not on PATH here
@@ -120,8 +98,8 @@ and the same files can be wrapped into a Play Store `.apk` with
 second codebase and no native code: the app opens this site.
 
 What the app opens is **`app.php`**, not `index.php`. It is the same bracket
-with the accounts taken out — no login, no register, no theme creation, no
-statistics, just the public themes and the tournament. Both pages share
+without the links to Statistics and About, so the app never leaves the
+tournament. Both pages share
 `includes/torneio-view.php`; the only difference is the navbar, decided by
 `$modoApp` in `includes/header.php`.
 
@@ -193,9 +171,8 @@ php -S 127.0.0.1:8765     # in one terminal
 bash tests/todos.sh       # in another
 ```
 
-Three suites: static checks, security (SQL injection, CSRF, access control,
-output escaping), and uploads (forged images, traversal, ownership, cascade
-deletes). See `tests/README.md`.
+Two suites: static checks, and security (the API contract, CSRF, hidden themes,
+output escaping). See `tests/README.md`.
 
 ## Deploying
 
@@ -228,32 +205,16 @@ adds the `publico` flag and the foreign keys, and deletes rows orphaned by theme
 no longer exist. **Run it only once** — the encoding step reinterprets raw bytes, so
 applying it twice corrupts accented names.
 
-Passwords are left alone by the migration. They are stored in plain text in the old
-schema, and each one is converted to a bcrypt hash automatically the next time that
-user logs in successfully.
-
 > `database/dump.sql` is the original 2025 export, kept for reference only. It contains
-> the old plain-text passwords, so treat any account listed there as compromised and
-> reset it with `database/criar-admin.php`.
+> old plain-text passwords from when the site had accounts.
 
-### Shared hosting without SSH (InfinityFree and similar)
+### Shared hosting without SSH (InfinityFree, iFastNet and similar)
 
-`database/criar-admin.php` is a CLI script, and free shared hosting generally offers
-neither SSH nor remote MySQL access — so you cannot run it against the live database.
-Generate the hash on your own machine instead:
+With no SSH, load the database through phpMyAdmin: import `database/schema.sql`,
+then `database/seed-temas-publicos.sql`. Nothing else is needed — the schema
+creates the `admin` row that owns the public themes.
 
-```sh
-php -r "echo password_hash('your-real-password', PASSWORD_DEFAULT), PHP_EOL;"
-```
-
-Then in phpMyAdmin, paste the output into:
-
-```sql
-INSERT INTO utilizador (username, password) VALUES ('admin', 'PASTE_THE_HASH_HERE');
-UPDATE tema SET publico = 1 WHERE utilizadorId = (SELECT id FROM utilizador WHERE username = 'admin');
-```
-
-Two more things that bite on this kind of host:
+Two things that bite on this kind of host:
 
 - **Never put `php_flag` or `php_value` in a `.htaccess`.** They only work under
   mod_php; where PHP runs as CGI/FastCGI they return 500 for the whole directory.
@@ -265,26 +226,22 @@ Two more things that bite on this kind of host:
 
 ```
 index.php                 the tournament itself
-app.php                   the same tournament, no accounts — what the Android app opens
-Login.php Registar.php Logout.php
-CriarTema.php             create themes, upload and delete images
-AdicionarCompetidor.php   upload handler (POST only, redirects back)
-apagar.php                delete handler (POST only, redirects back)
+app.php                   the same tournament, fewer links — what the Android app opens
 Estatisticas.php          per-theme win/loss records
 sobre.php                 about page
 
 api/competidores.php      returns a theme's competitors as JSON
 api/resultado.php         records the result of one battle
 
-includes/                 config, PDO layer, auth/CSRF, uploads, shared header/footer
+includes/                 config, PDO layer, session/CSRF, shared header/footer
 includes/torneio-view.php the bracket markup, shared by index.php and app.php
 CSS/style.css             all styling
 JavaScript/bracket.js     builds and draws the bracket
 JavaScript/torneio.js     runs the tournament
 JavaScript/ui.js          navbar and competitor-count control
 JavaScript/pwa.js         registers the service worker
-Imagens/                  built-in images; user uploads land in Imagens/temas/<id>/
-database/                 schema, migration, admin helper, original dump
+Imagens/                  the theme images
+database/                 schema, theme seed, migration, original dump
 manifest.webmanifest sw.js offline.html icons/ .well-known/   the installable app
 android/                  how to build the .apk (never deployed)
 ```
@@ -296,10 +253,11 @@ in plain text, and let anyone delete competitors or inflate statistics with an
 unauthenticated request. That is all fixed:
 
 - every query is a prepared statement;
-- passwords are bcrypt hashes, upgraded transparently on first login;
-- writes require a session, ownership of the theme, and a CSRF token;
-- uploads are validated by actual file content, stored under generated names in
-  a directory derived from the theme id, and `Imagens/.htaccess` blocks execution.
+- recording a result requires a CSRF token and competitors that really exist in
+  one public theme;
+- accounts and uploads were later removed altogether, so there are no passwords
+  to store and no user files to validate. `Imagens/.htaccess` still blocks
+  execution in the image folder.
 
 The eight hand-written `Extras/*_Brackets.html` files are gone — brackets are generated
 from the competitor count instead, which is what makes odd-numbered tournaments possible.
@@ -316,8 +274,7 @@ Display names in the database keep their accents and spaces, because that
 constraint belongs to the filesystem, not to the data. `database/seed-temas-publicos.sql`
 carries the original names recovered from the 2025 export.
 
-Keep new filenames ASCII. If you add images through the web UI this is automatic
-— uploads are stored under generated hex names.
+Keep new filenames ASCII. `tools/buscar-imagens.php` does this for you.
 
 
 ## Author

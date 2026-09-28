@@ -61,10 +61,10 @@ CREATE TABLE `competidor` (
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- ---------------------------------------------------------------------------
--- Não se cria aqui nenhum utilizador: um hash de password não se escreve à
--- mão num ficheiro .sql. Depois de correr este esquema:
---
---   php database/criar-admin.php admin
---
--- e esse comando cria a conta e marca os temas públicos.
+-- O site já não tem contas. A tabela utilizador fica só porque cada tema
+-- precisa de um dono (fk_tema_utilizador), e este é o dono dos temas públicos
+-- que o seed-temas-publicos.sql cria. A password "!" não é um hash, e não há
+-- página de login onde a usar.
 -- ---------------------------------------------------------------------------
+
+INSERT INTO `utilizador` (`username`, `password`) VALUES ('admin', '!');

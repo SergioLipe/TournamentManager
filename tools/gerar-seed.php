@@ -11,10 +11,10 @@ require_once __DIR__ . '/comum.php';
  *   php tools/gerar-seed.php --dono=admin     dono dos temas (por omissão admin)
  *   php tools/gerar-seed.php --stdout         imprime em vez de gravar
  *
- * Cada subpasta de Imagens/ (excepto temas/, que é onde ficam os uploads dos
- * utilizadores) vira um tema público. Os nomes a mostrar vêm de
+ * Cada subpasta de Imagens/ (excepto temas/, onde ficavam os uploads do tempo
+ * em que o site tinha contas) vira um tema público. Os nomes a mostrar vêm de
  * tools/nomes/<Pasta>.csv; para os ficheiros que lá não estiverem, o nome é
- * deduzido do nome do ficheiro, como no upload pelo site.
+ * deduzido do nome do ficheiro.
  *
  * O SQL resultante pode correr-se as vezes que forem precisas: os temas que já
  * existam mantêm o id — e portanto os links para as estatísticas continuam a
@@ -139,8 +139,7 @@ $linhas[] = '-- GERADO por tools/gerar-seed.php a partir do conteúdo de Imagens
 $linhas[] = '-- Não editar à mão: para mudar um nome, muda-se o CSV em tools/nomes/ e';
 $linhas[] = '-- volta-se a correr o gerador.';
 $linhas[] = '--';
-$linhas[] = '-- Correr DEPOIS do schema.sql, numa base de dados que já tenha uma conta de';
-$linhas[] = '-- utilizador criada (ver database/criar-admin.php).';
+$linhas[] = '-- Correr DEPOIS do schema.sql.';
 $linhas[] = '--';
 $linhas[] = '-- Os caminhos correspondem aos ficheiros publicados em Imagens/. Os nomes a';
 $linhas[] = '-- mostrar mantêm os acentos originais, mesmo que o ficheiro em disco seja só';
@@ -154,6 +153,7 @@ $linhas[] = '-- ----------------------------------------------------------------
 $linhas[] = '';
 $linhas[] = 'SET NAMES utf8mb4;';
 $linhas[] = '';
+$linhas[] = 'INSERT IGNORE INTO utilizador (username, password) VALUES (' . sql($dono) . ", '!');";
 $linhas[] = 'SET @dono = (SELECT id FROM utilizador WHERE username = ' . sql($dono) . ');';
 
 $totalCompetidores = 0;

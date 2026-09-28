@@ -49,3 +49,8 @@ composer.lock
 /android/local.properties
 /android/*.apk
 /android/*.aab
+
+# Cópias das definições do InfinityFree, guardadas na mudança para o iFastNet.
+/.deploy.env.*
+/.env.production.*
+/.deploy-state.*

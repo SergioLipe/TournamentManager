@@ -13,7 +13,7 @@ require __DIR__ . '/includes/header.php';
     <div class="card sobre">
         <div class="card-body">
             <ul class="sobre__lista">
-                <li>Run tournaments using the built-in themes, or create your own.</li>
+                <li>Run tournaments using the built-in themes.</li>
                 <li>Handy when you cannot make up your mind, or for a friendly competition.</li>
                 <li>Pick anywhere from <?= MIN_COMPETITORS ?> to <?= MAX_COMPETITORS ?> competitors per tournament.</li>
                 <li>Odd numbers work too &mdash; the extra competitors get a bye into the next round.</li>

@@ -84,30 +84,17 @@ $modoApp          = $modoApp ?? false;
         </div>
 
         <!--
-            Na aplicação Android não há contas: nem login, nem registo, nem
-            criação de temas, nem estatísticas. Só temas públicos e a bracket.
-            Isto não é só cosmética — sem links para fora, a app nunca sai do
-            /app.php e nunca abre um separador do browser por cima de si.
+            Na aplicação Android só há a bracket, sem estatísticas nem página
+            sobre. Isto não é só cosmética — sem links para fora, a app nunca
+            sai do /app.php e nunca abre um separador do browser por cima de si.
         -->
         <div class="app-nav__group app-nav__group--end">
             <?php if (!$modoApp) { ?>
-            <a href="CriarTema.php" class="btn btn-outline-success">Create theme</a>
             <a href="Estatisticas.php" class="btn btn-outline-secondary">Statistics</a>
             <a href="sobre.php" class="btn btn-outline-secondary">About</a>
-            <?php if (autenticado()) { ?>
-                <span class="app-nav__user" title="Signed in">@<?= e(utilizadorNome() ?? '') ?></span>
-                <form method="post" action="Logout.php" class="d-inline">
-                    <?= campoCsrf() ?>
-                    <button type="submit" class="btn btn-outline-secondary">Log out</button>
-                </form>
-            <?php } else { ?>
-                <a href="Login.php" class="btn btn-outline-secondary">Log in</a>
-                <a href="Registar.php" class="btn btn-outline-secondary">Register</a>
-            <?php } ?>
             <?php } ?>
         </div>
     </div>
 </nav>
 
 <main class="app-main">
-<?php mostrarMensagens(); ?>

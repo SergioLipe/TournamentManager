@@ -104,3 +104,13 @@ Imagens/Portuguese-Desserts/Broa.jpg
 # Ficheiros que não são páginas e não pertencem a um servidor público.
 README.md
 .gitignore
+
+# O site deixou de ter contas e de aceitar imagens: os temas são só os
+# públicos, criados com as ferramentas em tools/.
+Login.php
+Registar.php
+Logout.php
+CriarTema.php
+AdicionarCompetidor.php
+apagar.php
+includes/uploads.php

@@ -170,7 +170,10 @@ if (%missing) {
 print "\n== leftover references to deleted code ==\n";
 my @dead = qw(funcoesBD navbar.php style2.css Brackets.js Carregar_Imagens
               UpdateEstatistica _Brackets.html obterDadosBaseDados
-              guardarDadosBaseDados ativarLigacaoBaseDados);
+              guardarDadosBaseDados ativarLigacaoBaseDados
+              Login.php Registar.php Logout.php CriarTema AdicionarCompetidor
+              apagar.php uploads.php exigirLogin autenticado
+              campoCsrf mostrarMensagens guardarMensagem);
 my $found = 0;
 find(sub {
     if (-d $_ and ($_ eq '.git' or $_ eq 'Imagens' or $_ eq 'vendor' or $_ eq 'database'

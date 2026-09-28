@@ -5,8 +5,7 @@
 -- Não editar à mão: para mudar um nome, muda-se o CSV em tools/nomes/ e
 -- volta-se a correr o gerador.
 --
--- Correr DEPOIS do schema.sql, numa base de dados que já tenha uma conta de
--- utilizador criada (ver database/criar-admin.php).
+-- Correr DEPOIS do schema.sql.
 --
 -- Os caminhos correspondem aos ficheiros publicados em Imagens/. Os nomes a
 -- mostrar mantêm os acentos originais, mesmo que o ficheiro em disco seja só
@@ -20,6 +19,7 @@
 
 SET NAMES utf8mb4;
 
+INSERT IGNORE INTO utilizador (username, password) VALUES ('admin', '!');
 SET @dono = (SELECT id FROM utilizador WHERE username = 'admin');
 
 -- ---------- Aircraft ----------

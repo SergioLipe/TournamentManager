@@ -22,43 +22,6 @@ function urlImagem(?string $caminho): string
     return e(implode('/', $segmentos));
 }
 
-/** Redirecciona e termina o pedido. */
-function redirecionar(string $destino): void
-{
-    header('Location: ' . $destino);
-    exit;
-}
-
-/** Guarda uma mensagem para ser mostrada no próximo pedido. */
-function guardarMensagem(string $tipo, string $texto): void
-{
-    iniciarSessao();
-    $_SESSION['mensagens'][] = ['tipo' => $tipo, 'texto' => $texto];
-}
-
-/** Devolve e limpa as mensagens pendentes. */
-function obterMensagens(): array
-{
-    iniciarSessao();
-    $mensagens = $_SESSION['mensagens'] ?? [];
-    unset($_SESSION['mensagens']);
-    return $mensagens;
-}
-
-/** Imprime as mensagens pendentes como alertas Bootstrap. */
-function mostrarMensagens(): void
-{
-    foreach (obterMensagens() as $mensagem) {
-        $classe = $mensagem['tipo'] === 'erro' ? 'danger' : $mensagem['tipo'];
-        printf(
-            '<div class="alert alert-%s alert-dismissible fade show" role="alert">%s'
-            . '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>',
-            e($classe),
-            e($mensagem['texto'])
-        );
-    }
-}
-
 /** Lê um inteiro de um array de input, dentro de limites. */
 function inteiro(array $origem, string $chave, int $omissao = 0, ?int $min = null, ?int $max = null): int
 {

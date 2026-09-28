@@ -16,14 +16,33 @@
 # partilhasse a rede. O InfinityFree está atrás de um proxy que nunca entrega
 # HTTPS directo ao Apache, por isso o %{HTTPS} do mod_rewrite não chega a ver
 # a ligação real; o cabeçalho X-Forwarded-Proto, esse, é fiável aqui.
+#
+# Num alojamento sem proxy (iFastNet pago, cPanel normal) é ao contrário: o
+# Apache recebe o HTTPS directamente e não há X-Forwarded-Proto. Só se
+# redirecciona quando nenhum dos dois diz https, e assim a regra serve nos dois.
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteCond %{HTTP:X-Forwarded-Proto} =http
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP:X-Forwarded-Proto} !=https
     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
 
 # --- Ficheiros escondidos (.env, .git, .htpasswd, ...) ---------------------
 <FilesMatch "^\.">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# --- Registo de erros do PHP ----------------------------------------------
+# O cPanel escreve o error_log na pasta do script que falhou, dentro do site,
+# e sem extensão nenhuma — a regra das extensões abaixo não o apanha. Traz
+# nomes de utilizador da base de dados e caminhos do servidor.
+<FilesMatch "^error_log$">
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>

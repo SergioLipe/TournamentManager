@@ -81,8 +81,8 @@ function nomeFicheiro(string $nome): string
 /**
  * Nome a mostrar deduzido do nome do ficheiro.
  *
- * Igual ao que o upload pelo site faz (nomeCompetidorDeFicheiro), para que
- * um tema semeado e um tema enviado pelo site se comportem da mesma maneira.
+ * "Bacalhau-a-Lagareiro" dá "Bacalhau a Lagareiro". Os CSV em tools/nomes/
+ * servem para quando isto não chega (acentos, maiúsculas).
  */
 function nomeAPartirDoFicheiro(string $ficheiro): string
 {
@@ -212,8 +212,7 @@ function imagensDaPasta(string $caminho): array
 /**
  * Confirma que os bytes descarregados são mesmo uma imagem aceite.
  *
- * As mesmas verificações que o upload pelo site faz em includes/uploads.php:
- * o tipo vem do conteúdo, nunca do URL ou do Content-Type da resposta.
+ * O tipo vem do conteúdo, nunca do URL ou do Content-Type da resposta.
  * Devolve a extensão a usar, ou null.
  */
 function extensaoDaImagem(string $bytes): ?string

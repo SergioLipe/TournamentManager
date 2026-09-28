@@ -6,23 +6,15 @@ require_once __DIR__ . '/helpers.php';
 /**
  * Acesso a temas e competidores.
  *
- * Um tema é visível se for público ou se pertencer a quem está autenticado.
- * Só o dono pode alterá-lo.
+ * Só os temas públicos são visíveis. Já não há contas nem temas pessoais: os
+ * temas vêm todos do seed (database/seed-temas-publicos.sql), gerado pelas
+ * ferramentas em tools/.
  */
 
 /** Temas marcados como públicos, disponíveis a toda a gente. */
 function temasPublicos(): array
 {
     return obterTodas('SELECT id, nome FROM tema WHERE publico = 1 ORDER BY nome');
-}
-
-/** Temas pertencentes a um utilizador. */
-function temasDoUtilizador(int $utilizadorId): array
-{
-    return obterTodas(
-        'SELECT id, nome FROM tema WHERE utilizadorId = ? ORDER BY nome',
-        [$utilizadorId]
-    );
 }
 
 /**
@@ -89,53 +81,35 @@ function agruparTemas(array $temas): array
  * O LEFT JOIN é o que faz um tema vazio — acabado de criar, ainda sem
  * imagens — aparecer na lista com "0 competitors" em vez de desaparecer.
  */
-function temasParaEscolher(?int $utilizadorId = null): array
+function temasParaEscolher(): array
 {
-    $sql = 'SELECT t.id, t.nome, COUNT(c.id) AS competidores, MIN(c.imagem) AS capa
-              FROM tema t
-              LEFT JOIN competidor c ON c.TemaId = t.id
-             WHERE ' . ($utilizadorId === null ? 't.publico = 1' : 't.utilizadorId = ?') . '
-             GROUP BY t.id, t.nome
-             ORDER BY t.nome';
-
-    return obterTodas($sql, $utilizadorId === null ? [] : [$utilizadorId]);
+    return obterTodas(
+        'SELECT t.id, t.nome, COUNT(c.id) AS competidores, MIN(c.imagem) AS capa
+           FROM tema t
+           LEFT JOIN competidor c ON c.TemaId = t.id
+          WHERE t.publico = 1
+          GROUP BY t.id, t.nome
+          ORDER BY t.nome'
+    );
 }
 
 /** Devolve um tema pelo id, ou null. */
 function obterTema(int $temaId): ?array
 {
-    return obterLinha('SELECT id, nome, utilizadorId, publico FROM tema WHERE id = ?', [$temaId]);
-}
-
-/** Devolve um tema do utilizador autenticado pelo nome, ou null. */
-function obterTemaDoUtilizadorPorNome(int $utilizadorId, string $nome): ?array
-{
-    return obterLinha(
-        'SELECT id, nome, utilizadorId, publico FROM tema WHERE utilizadorId = ? AND nome = ?',
-        [$utilizadorId, $nome]
-    );
-}
-
-/** True se o tema puder ser consultado por quem faz o pedido. */
-function podeVerTema(?array $tema): bool
-{
-    if ($tema === null) {
-        return false;
-    }
-    return (int) $tema['publico'] === 1
-        || (utilizadorId() !== null && (int) $tema['utilizadorId'] === utilizadorId());
-}
-
-/** True se o tema pertencer a quem faz o pedido. */
-function podeEditarTema(?array $tema): bool
-{
-    return $tema !== null
-        && utilizadorId() !== null
-        && (int) $tema['utilizadorId'] === utilizadorId();
+    return obterLinha('SELECT id, nome, publico FROM tema WHERE id = ?', [$temaId]);
 }
 
 /**
- * Carrega um tema garantindo que o utilizador o pode ver.
+ * True se o tema puder ser consultado. Só os públicos: os temas privados que
+ * ficaram na base de dados do tempo das contas não têm dono que os possa ver.
+ */
+function podeVerTema(?array $tema): bool
+{
+    return $tema !== null && (int) $tema['publico'] === 1;
+}
+
+/**
+ * Carrega um tema garantindo que pode ser visto.
  * Devolve null se não existir ou se o acesso for negado — do ponto de vista
  * de quem pede, os dois casos são indistinguíveis.
  */
