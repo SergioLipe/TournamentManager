@@ -265,6 +265,15 @@ hr {
     border-color: var(--acento-forte);
 }
 
+/* Sem tema escolhido o botão diz só "Pick a theme", sem o rótulo por cima. */
+.tema-botao:has(.tema-botao__capa[hidden]) .tema-botao__rotulo {
+    display: none;
+}
+
+.tema-botao:has(.tema-botao__capa[hidden]) .tema-botao__nome {
+    font-size: 1rem;
+}
+
 .tema-botao__capa {
     width: 34px;
     height: 34px;
@@ -312,14 +321,6 @@ hr {
     gap: 0.6rem;
 }
 
-.tamanho__legenda {
-    font-size: 0.6875rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--texto-suave);
-}
-
 .tamanho__opcoes {
     display: inline-flex;
     padding: 3px;
@@ -345,14 +346,20 @@ hr {
 
 .tamanho__num {
     display: block;
-    min-width: 3.25rem;
-    padding: 0.45rem 0.9rem;
-    font-weight: 800;
+    padding: 0.5rem 1.1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
     font-variant-numeric: tabular-nums;
     text-align: center;
     color: var(--texto-suave);
     border-radius: 999px;
     transition: background-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.tamanho__num strong {
+    font-size: 1.1rem;
+    font-weight: 800;
 }
 
 .tamanho__opcao:hover .tamanho__num {
@@ -1500,4 +1507,11 @@ hr {
     .tema-botao {
         max-width: 13rem;
     }
+}
+
+/* O "Next match" com o triângulo afastado do texto. Desactivado quando não
+   há nenhuma batalha pronta, por isso o Bootstrap já o esbate sozinho. */
+.btn-proximo span {
+    margin-left: 0.3rem;
+    font-size: 0.75em;
 }

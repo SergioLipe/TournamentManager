@@ -22,6 +22,21 @@ function urlImagem(?string $caminho): string
     return e(implode('/', $segmentos));
 }
 
+/**
+ * Caminho de um CSS ou JS do site com a data do ficheiro no fim (?v=...).
+ *
+ * Sem isto o browser guardava o style.css na cache e continuava a usá-lo
+ * depois de uma publicação nova: a página chegava com o HTML novo e os
+ * estilos antigos, e ficava desfeita. Com a data no URL, cada versão do
+ * ficheiro é um endereço diferente e o browser vai buscá-la.
+ */
+function urlRecurso(string $caminho): string
+{
+    $ficheiro = APP_ROOT . '/' . $caminho;
+    $versao   = is_file($ficheiro) ? (string) filemtime($ficheiro) : '0';
+    return e($caminho . '?v=' . $versao);
+}
+
 /** Lê um inteiro de um array de input, dentro de limites. */
 function inteiro(array $origem, string $chave, int $omissao = 0, ?int $min = null, ?int $max = null): int
 {

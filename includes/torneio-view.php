@@ -17,8 +17,17 @@ declare(strict_types=1);
 
 <div class="tournament">
     <div class="tournament__toolbar">
-        <button type="button" class="btn btn-primary" id="btnCarregarImagens">Load images</button>
-        <button type="button" class="btn btn-outline-primary" id="btnCarregarNomes">Use names instead</button>
+        <!--
+            Abre a próxima batalha que está pronta, e depois de cada escolha
+            abre a seguinte sozinho: dá para jogar o torneio inteiro sem ir
+            procurar a batalha certa na bracket. Fechar o duelo pára.
+        -->
+        <button type="button" class="btn btn-primary btn-proximo" id="btnProximo" disabled
+                title="Opens the next match, and keeps going after each pick until you close it">
+            Next match <span aria-hidden="true">&#9654;</span>
+        </button>
+        <button type="button" class="btn btn-outline-primary" id="btnCarregarImagens">Load images</button>
+        <button type="button" class="btn btn-outline-secondary" id="btnCarregarNomes">Use names instead</button>
         <button type="button" class="btn btn-outline-secondary" id="btnReiniciar">Reset</button>
         <span class="tournament__estado" id="estadoTorneio" role="status" aria-live="polite"></span>
     </div>

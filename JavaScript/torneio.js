@@ -133,10 +133,16 @@
 
     window.Bracket.desenhar(contentor, estrutura, {
       placeholder: placeholder,
-      aoEscolher: abrirDuelo
+      aoEscolher: function (batalha) {
+        // Escolher uma batalha à mão sai do modo seguido: quem vai à bracket
+        // buscar uma batalha em concreto não quer ser levado para outra.
+        seguido = false;
+        abrirDuelo(batalha);
+      }
     });
 
     window.Bracket.ajustarAoEcra(contentor);
+    actualizarBotaoProximo();
 
     if (pool.length > 0 && pool.length < n) {
       dizer(
@@ -270,6 +276,7 @@
         window.Bracket.actualizarBatalha(afectada, placeholder);
       });
       dizer('That result was undone. Pick again.');
+      actualizarBotaoProximo();
     }
 
     if (!window.Bracket.jogavel(batalha)) {
@@ -292,10 +299,52 @@
     lados[0].focus();
   }
 
-  function fecharDuelo() {
+  /** Esconde o duelo sem mais nada: usado depois de uma escolha. */
+  function esconderDuelo() {
     elDuelo.hidden = true;
     batalhaAberta = null;
     document.body.classList.remove('modal-aberto');
+  }
+
+  /** Fechar o duelo sem escolher (X, Esc, fora da caixa) pára o modo seguido. */
+  function fecharDuelo() {
+    seguido = false;
+    esconderDuelo();
+  }
+
+  /* --- Próxima batalha --- */
+
+  /**
+   * Com o modo seguido ligado, cada escolha abre logo a batalha seguinte.
+   * Liga-se no botão "Next match" e desliga-se ao fechar o duelo ou ao
+   * escolher uma batalha à mão na bracket.
+   */
+  var seguido = false;
+  var btnProximo = document.getElementById('btnProximo');
+
+  /**
+   * A primeira batalha por jogar, ronda a ronda: acaba-se a primeira ronda
+   * antes de passar às meias-finais, como num torneio a sério.
+   */
+  function proximaBatalha() {
+    if (!estrutura) {
+      return null;
+    }
+    for (var r = 0; r < estrutura.rondas.length; r++) {
+      var ronda = estrutura.rondas[r];
+      for (var i = 0; i < ronda.length; i++) {
+        if (ronda[i].vencedor === null && window.Bracket.jogavel(ronda[i])) {
+          return ronda[i];
+        }
+      }
+    }
+    return null;
+  }
+
+  function actualizarBotaoProximo() {
+    if (btnProximo) {
+      btnProximo.disabled = proximaBatalha() === null;
+    }
   }
 
   function escolher(posicao) {
@@ -320,11 +369,25 @@
       window.Bracket.actualizarBatalha(batalha.destino.batalha, placeholder);
     }
 
-    fecharDuelo();
+    esconderDuelo();
+    actualizarBotaoProximo();
 
     if (ehFinal) {
+      seguido = false;
       registarTorneio();
       mostrarVencedor(vencedor);
+      return;
+    }
+
+    // Uma pausa curta antes do duelo seguinte, para se ver o vencedor a
+    // avançar na bracket em vez de a caixa só trocar de imagens.
+    if (seguido) {
+      setTimeout(function () {
+        var seguinte = proximaBatalha();
+        if (seguido && seguinte && elDuelo.hidden) {
+          abrirDuelo(seguinte);
+        }
+      }, 450);
     }
   }
 
@@ -641,6 +704,17 @@
         return;
       }
       abrirSelector();
+    });
+  }
+
+  if (btnProximo) {
+    btnProximo.addEventListener('click', function () {
+      var seguinte = proximaBatalha();
+      if (!seguinte) {
+        return;
+      }
+      seguido = true;
+      abrirDuelo(seguinte);
     });
   }
 

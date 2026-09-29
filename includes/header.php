@@ -45,7 +45,7 @@ $modoApp          = $modoApp ?? false;
     <link rel="apple-touch-icon" href="icons/icon-192.png">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="CSS/style.css" rel="stylesheet">
+    <link href="<?= urlRecurso('CSS/style.css') ?>" rel="stylesheet">
 </head>
 
 <body>
@@ -70,7 +70,7 @@ $modoApp          = $modoApp ?? false;
                     <img class="tema-botao__capa" id="capaTemaEscolhido" alt="" hidden>
                     <span class="tema-botao__texto">
                         <span class="tema-botao__rotulo">Theme</span>
-                        <span class="tema-botao__nome" id="rotuloTemaEscolhido">Choose a theme</span>
+                        <span class="tema-botao__nome" id="rotuloTemaEscolhido">Pick a theme</span>
                     </span>
                     <span class="tema-botao__seta" aria-hidden="true">&#9662;</span>
                 </button>
@@ -83,12 +83,12 @@ $modoApp          = $modoApp ?? false;
                     porque são rádios.
                 -->
                 <div class="tamanho" id="tamanhoBracket" role="radiogroup" aria-labelledby="tamanhoRotulo">
-                    <span class="tamanho__legenda" id="tamanhoRotulo">Players</span>
+                    <span class="visually-hidden" id="tamanhoRotulo">Bracket size</span>
                     <div class="tamanho__opcoes">
                         <?php foreach ([8 => '3 rounds', 16 => '4 rounds'] as $tamanho => $rondas) { ?>
                             <label class="tamanho__opcao" title="<?= $tamanho ?> players · <?= $rondas ?>">
                                 <input type="radio" name="tamanho" value="<?= $tamanho ?>" <?= $tamanho === 8 ? 'checked' : '' ?>>
-                                <span class="tamanho__num"><?= $tamanho ?></span>
+                                <span class="tamanho__num"><strong><?= $tamanho ?></strong> players</span>
                             </label>
                         <?php } ?>
                     </div>
