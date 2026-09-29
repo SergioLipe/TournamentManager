@@ -38,7 +38,9 @@ $modoApp          = $modoApp ?? false;
         não serem descarregáveis) e o manifest ia no meio.
     -->
     <link rel="manifest" href="manifest.webmanifest">
-    <meta name="theme-color" content="#2f6fed">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#2f6fed" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#101318" media="(prefers-color-scheme: dark)">
     <link rel="icon" href="icons/icon-192.png" sizes="192x192">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
 
@@ -63,18 +65,33 @@ $modoApp          = $modoApp ?? false;
                     não cabia no ecrã e era só texto, sem as imagens que são
                     a única coisa que distingue um tema do outro.
                 -->
-                <button type="button" class="btn btn-primary" id="btnSelectorTemas"
+                <button type="button" class="tema-botao" id="btnSelectorTemas"
                         aria-haspopup="dialog" aria-expanded="false">
-                    <span id="rotuloTemaEscolhido">Choose theme</span>
+                    <img class="tema-botao__capa" id="capaTemaEscolhido" alt="" hidden>
+                    <span class="tema-botao__texto">
+                        <span class="tema-botao__rotulo">Theme</span>
+                        <span class="tema-botao__nome" id="rotuloTemaEscolhido">Choose a theme</span>
+                    </span>
+                    <span class="tema-botao__seta" aria-hidden="true">&#9662;</span>
                 </button>
 
-                <div class="qty" role="group" aria-label="Number of competitors">
-                    <span class="qty__label">Competitors</span>
-                    <button class="qty__btn" type="button" id="qtyMenos" aria-label="Fewer competitors">&minus;</button>
-                    <input type="number" id="numImagens" class="qty__input"
-                           value="8" min="<?= MIN_COMPETITORS ?>" max="<?= MAX_COMPETITORS ?>" step="1"
-                           aria-label="Number of competitors">
-                    <button class="qty__btn" type="button" id="qtyMais" aria-label="More competitors">+</button>
+                <!--
+                    Só há dois tamanhos: 8 e 16. Com qualquer número entre 2 e
+                    16 a maior parte das brackets saía com byes, que confundem
+                    mais do que ajudam. Dois botões lado a lado dizem logo quais
+                    são as opções, e as setas do teclado mudam entre eles
+                    porque são rádios.
+                -->
+                <div class="tamanho" id="tamanhoBracket" role="radiogroup" aria-labelledby="tamanhoRotulo">
+                    <span class="tamanho__legenda" id="tamanhoRotulo">Players</span>
+                    <div class="tamanho__opcoes">
+                        <?php foreach ([8 => '3 rounds', 16 => '4 rounds'] as $tamanho => $rondas) { ?>
+                            <label class="tamanho__opcao" title="<?= $tamanho ?> players · <?= $rondas ?>">
+                                <input type="radio" name="tamanho" value="<?= $tamanho ?>" <?= $tamanho === 8 ? 'checked' : '' ?>>
+                                <span class="tamanho__num"><?= $tamanho ?></span>
+                            </label>
+                        <?php } ?>
+                    </div>
                 </div>
             <?php } ?>
         </div>

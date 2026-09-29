@@ -23,7 +23,7 @@
  * O mesmo vale para o CSS e o JavaScript, que também são lidos da cache antes
  * da rede: publicar um style.css novo sem subir isto dá a quem já cá esteve o
  * HTML novo com a folha de estilos antiga. */
-var VERSAO = 'v4';
+var VERSAO = 'v5';
 var CACHE_ESTATICO = 'tournament-estatico-' + VERSAO;
 var CACHE_IMAGENS = 'tournament-imagens-' + VERSAO;
 

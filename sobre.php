@@ -15,9 +15,8 @@ require __DIR__ . '/includes/header.php';
             <ul class="sobre__lista">
                 <li>Run tournaments using the built-in themes.</li>
                 <li>Handy when you cannot make up your mind, or for a friendly competition.</li>
-                <li>Pick anywhere from <?= MIN_COMPETITORS ?> to <?= MAX_COMPETITORS ?> competitors per tournament.</li>
-                <li>Odd numbers work too &mdash; the extra competitors get a bye into the next round.</li>
-                <li>You can also play with plain names instead of images.</li>
+                <li>Choose an 8-player or a 16-player bracket.</li>
+                <li>You can also play with plain names instead of images &mdash; any number from <?= MIN_COMPETITORS ?> to <?= MAX_COMPETITORS ?>, with empty spots becoming byes.</li>
                 <li>Every battle is recorded, so the Statistics page shows which entries actually win.</li>
             </ul>
 

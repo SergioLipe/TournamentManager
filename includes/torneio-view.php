@@ -54,8 +54,9 @@ declare(strict_types=1);
     <div class="modal-simples__caixa" role="dialog" aria-modal="true" aria-labelledby="nomesTitulo">
         <h2 class="h5" id="nomesTitulo">Play with names</h2>
         <p class="text-muted">
-            One name per line, between <?= MIN_COMPETITORS ?> and <?= MAX_COMPETITORS ?> of them.
-            They get shuffled before the draw.
+            One name per line, from <?= MIN_COMPETITORS ?> up to <?= MAX_COMPETITORS ?>. Up to 8 names
+            play an 8-player bracket, more than that a 16-player one, and any
+            empty spots become byes. Names are shuffled before the draw.
         </p>
         <label class="visually-hidden" for="campoNomes">Competitor names</label>
         <textarea id="campoNomes" class="form-control" rows="8"

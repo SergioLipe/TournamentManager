@@ -35,8 +35,10 @@ function cartaoTema(array $tema, ?string $urlBase = null): void
            data-procura="<?= e($procura) ?>">
     <?php } ?>
         <img class="tema-cartao__img" src="<?= urlImagem($capa) ?>" alt="" loading="lazy" decoding="async">
-        <span class="tema-cartao__nome"><?= e($tema['nome']) ?></span>
-        <span class="tema-cartao__conta"><?= $quantos ?> competitor<?= $quantos === 1 ? '' : 's' ?></span>
+        <span class="tema-cartao__info">
+            <span class="tema-cartao__nome"><?= e($tema['nome']) ?></span>
+            <span class="tema-cartao__conta"><?= $quantos ?> competitor<?= $quantos === 1 ? '' : 's' ?></span>
+        </span>
     <?= $urlBase === null ? '</button>' : '</a>' ?>
     <?php
 }
@@ -48,7 +50,7 @@ function seccaoDeTemas(string $titulo, array $temas, ?string $urlBase = null): v
         return;
     }
     ?>
-    <section class="selector__grupo" data-grupo>
+    <section class="selector__grupo" data-grupo="<?= e($titulo) ?>">
         <h3 class="selector__grupo-titulo"><?= e($titulo) ?></h3>
         <div class="selector__grelha">
             <?php foreach ($temas as $tema) { cartaoTema($tema, $urlBase); } ?>

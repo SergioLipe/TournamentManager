@@ -13,7 +13,7 @@
   var placeholder = contentor.dataset.placeholder || '';
   var csrf = contentor.dataset.csrf || '';
 
-  var inputNumero = document.getElementById('numImagens');
+  var grupoTamanho = document.getElementById('tamanhoBracket');
   var estado = document.getElementById('estadoTorneio');
 
   var elDuelo = document.getElementById('duelo');
@@ -30,8 +30,44 @@
   /*  Utilitários                                                           */
   /* ---------------------------------------------------------------------- */
 
+  /* --- Tamanho da bracket: 8 ou 16 --- */
+
+  var TAMANHOS = [8, 16];
+  var CHAVE_TAMANHO = 'torneio:tamanho';
+
   function tamanhoPedido() {
-    return inputNumero ? parseInt(inputNumero.value, 10) : 8;
+    var escolhido = grupoTamanho && grupoTamanho.querySelector('input[name="tamanho"]:checked');
+    var valor = escolhido ? parseInt(escolhido.value, 10) : 8;
+    return TAMANHOS.indexOf(valor) === -1 ? 8 : valor;
+  }
+
+  /** Marca o tamanho sem disparar o change: quem chama decide se reconstrói. */
+  function marcarTamanho(valor) {
+    if (!grupoTamanho) {
+      return;
+    }
+    var opcao = grupoTamanho.querySelector('input[name="tamanho"][value="' + valor + '"]');
+    if (opcao) {
+      opcao.checked = true;
+    }
+  }
+
+  function guardarTamanho(valor) {
+    try {
+      localStorage.setItem(CHAVE_TAMANHO, String(valor));
+    } catch (erro) {
+      /* Sem localStorage a escolha só dura esta visita. */
+    }
+  }
+
+  // Quem joga sempre com 16 não tem de o escolher a cada visita.
+  try {
+    var guardado = parseInt(localStorage.getItem(CHAVE_TAMANHO), 10);
+    if (TAMANHOS.indexOf(guardado) !== -1) {
+      marcarTamanho(guardado);
+    }
+  } catch (erro) {
+    /* Fica o 8 que vem marcado no HTML. */
   }
 
   function dizer(texto, tipo) {
@@ -134,15 +170,20 @@
   /*  Carregar competidores                                                 */
   /* ---------------------------------------------------------------------- */
 
-  function carregarTema(temaId, nomeTema) {
+  function carregarTema(temaId, nomeTema, capa) {
     dizer('Loading ' + nomeTema + '…');
 
-    // O botão da barra passa a dizer o tema em vez de "Choose theme": com a
+    // O botão da barra passa a dizer o tema em vez de "Choose a theme": com a
     // barra escondida a meio de um torneio, era a única coisa que dizia qual
-    // dos dezoito estava a jogar.
+    // dos temas estava a jogar. A capa ajuda a reconhecê-lo sem ler.
     if (rotuloTema) {
       rotuloTema.textContent = nomeTema;
     }
+    if (capaTema && capa) {
+      capaTema.src = capa;
+      capaTema.hidden = false;
+    }
+    marcarCartaoEscolhido(temaId);
 
     var corpo = new URLSearchParams();
     corpo.set('temaId', String(temaId));
@@ -203,9 +244,10 @@
       return { id: null, nome: etiqueta, imagem: imagemDeNome(etiqueta), ordem: i };
     });
 
-    if (inputNumero && nomes.length < tamanhoPedido()) {
-      inputNumero.value = String(nomes.length);
-    }
+    // Os nomes escolhem o tamanho: até 8 cabem na bracket de 8 (os que
+    // faltarem dão byes), mais do que isso só na de 16. Não se guarda como
+    // preferência — é uma consequência destes nomes, não uma escolha.
+    marcarTamanho(nomes.length <= 8 ? 8 : 16);
 
     construir();
     dizer('Playing with ' + nomes.length + ' names.');
@@ -420,7 +462,25 @@
   var campoProcura = document.getElementById('selectorProcura');
   var semResultados = document.getElementById('selectorSemResultados');
   var rotuloTema = document.getElementById('rotuloTemaEscolhido');
+  var capaTema = document.getElementById('capaTemaEscolhido');
   var cartoes = document.querySelectorAll('.js-escolhe-tema');
+  var chips = elSelector ? elSelector.querySelectorAll('.selector__chip') : [];
+
+  /** A categoria escolhida nas pílulas por cima da grelha; '' é todas. */
+  var grupoActivo = '';
+
+  /** Assinala no selector o tema que está a ser jogado. */
+  function marcarCartaoEscolhido(temaId) {
+    Array.prototype.forEach.call(cartoes, function (cartao) {
+      var este = parseInt(cartao.dataset.temaId, 10) === temaId;
+      cartao.classList.toggle('tema-cartao--escolhido', este);
+      if (este) {
+        cartao.setAttribute('aria-current', 'true');
+      } else {
+        cartao.removeAttribute('aria-current');
+      }
+    });
+  }
 
   function abrirSelector() {
     if (!elSelector) {
@@ -433,18 +493,26 @@
     }
 
     // Abre sempre com a lista toda à vista. Sem isto, quem procurou "dino" na
-    // vez anterior reabria o selector com dezassete temas escondidos e sem
+    // vez anterior reabria o selector com os outros temas escondidos e sem
     // nada que explicasse porquê.
-    if (campoProcura && campoProcura.value !== '') {
+    if (campoProcura) {
       campoProcura.value = '';
-      filtrar('');
     }
+    escolherGrupo('');
+
+    // Com um tema já escolhido, a grelha abre à volta dele.
+    var escolhido = elSelector.querySelector('.tema-cartao--escolhido');
+    if (escolhido) {
+      escolhido.scrollIntoView({ block: 'center' });
+    } else {
+      elSelector.querySelector('.selector__corpo').scrollTop = 0;
+    }
+
     // Num telemóvel isto abre o teclado por cima da grelha, que é o oposto do
     // que quem vai escolher pela imagem quer; no rato e teclado é o atalho
     // óbvio. O ponteiro grosseiro é o critério que separa os dois.
     if (campoProcura && window.matchMedia('(pointer: fine)').matches) {
       campoProcura.focus();
-      campoProcura.select();
     }
   }
 
@@ -460,27 +528,49 @@
     }
   }
 
-  /** Esconde os cartões que não correspondem, e os grupos que ficam vazios. */
-  function filtrar(termo) {
-    termo = termo.trim().toLowerCase();
+  /**
+   * Mostra só os cartões que passam na procura e na categoria escolhida, e
+   * esconde os grupos que ficam vazios.
+   */
+  function filtrar() {
+    var termo = campoProcura ? campoProcura.value.trim().toLowerCase() : '';
     var visiveis = 0;
 
-    Array.prototype.forEach.call(cartoes, function (cartao) {
-      var corresponde = termo === '' || (cartao.dataset.procura || '').indexOf(termo) !== -1;
-      cartao.hidden = !corresponde;
-      if (corresponde) {
-        visiveis++;
-      }
-    });
+    Array.prototype.forEach.call(elSelector.querySelectorAll('[data-grupo]'), function (grupo) {
+      var doGrupo = grupoActivo === '' || grupo.dataset.grupo === grupoActivo;
+      var noGrupo = 0;
 
-    Array.prototype.forEach.call(document.querySelectorAll('[data-grupo]'), function (grupo) {
-      grupo.hidden = grupo.querySelectorAll('.js-escolhe-tema:not([hidden])').length === 0;
+      Array.prototype.forEach.call(grupo.querySelectorAll('.js-escolhe-tema'), function (cartao) {
+        var corresponde = doGrupo && (termo === '' || (cartao.dataset.procura || '').indexOf(termo) !== -1);
+        cartao.hidden = !corresponde;
+        if (corresponde) {
+          noGrupo++;
+        }
+      });
+
+      grupo.hidden = noGrupo === 0;
+      visiveis += noGrupo;
     });
 
     if (semResultados) {
       semResultados.hidden = visiveis > 0;
     }
   }
+
+  function escolherGrupo(grupo) {
+    grupoActivo = grupo;
+    Array.prototype.forEach.call(chips, function (chip) {
+      chip.setAttribute('aria-pressed', chip.dataset.grupoFiltro === grupo ? 'true' : 'false');
+    });
+    filtrar();
+  }
+
+  Array.prototype.forEach.call(chips, function (chip) {
+    chip.addEventListener('click', function () {
+      escolherGrupo(chip.dataset.grupoFiltro || '');
+      elSelector.querySelector('.selector__corpo').scrollTop = 0;
+    });
+  });
 
   if (btnSelector && elSelector) {
     btnSelector.addEventListener('click', abrirSelector);
@@ -491,9 +581,7 @@
   }
 
   if (campoProcura) {
-    campoProcura.addEventListener('input', function () {
-      filtrar(campoProcura.value);
-    });
+    campoProcura.addEventListener('input', filtrar);
 
     // Enter com um só tema à vista carrega-o: procurar "dino" e carregar em
     // Enter é mais rápido do que ir buscar o cartão com o rato.
@@ -525,12 +613,16 @@
   Array.prototype.forEach.call(cartoes, function (botao) {
     botao.addEventListener('click', function () {
       fecharSelector();
-      carregarTema(parseInt(botao.dataset.temaId, 10), botao.dataset.temaNome || 'theme');
+      var capa = botao.querySelector('img');
+      carregarTema(parseInt(botao.dataset.temaId, 10), botao.dataset.temaNome || 'theme', capa ? capa.src : '');
     });
   });
 
-  if (inputNumero) {
-    inputNumero.addEventListener('change', construir);
+  if (grupoTamanho) {
+    grupoTamanho.addEventListener('change', function () {
+      guardarTamanho(tamanhoPedido());
+      construir();
+    });
   }
 
   var btnImagens = document.getElementById('btnCarregarImagens');

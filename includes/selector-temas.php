@@ -20,6 +20,8 @@ require_once __DIR__ . '/temas-view.php';
  */
 
 $selTemasPublicos = temasParaEscolher();
+$selGrupos        = array_keys(agruparTemas($selTemasPublicos));
+$selTotal         = count($selTemasPublicos);
 ?>
 
 <div class="selector" id="selectorTemas" hidden>
@@ -27,24 +29,51 @@ $selTemasPublicos = temasParaEscolher();
 
     <div class="selector__caixa" role="dialog" aria-modal="true" aria-labelledby="selectorTitulo">
         <div class="selector__topo">
-            <h2 class="selector__titulo" id="selectorTitulo">Choose a theme</h2>
+            <div class="selector__cabeca">
+                <h2 class="selector__titulo" id="selectorTitulo">Choose a theme</h2>
+                <span class="selector__total"><?= $selTotal ?> theme<?= $selTotal === 1 ? '' : 's' ?></span>
+                <button type="button" class="selector__fechar" data-fechar aria-label="Close">&times;</button>
+            </div>
 
-            <label class="visually-hidden" for="selectorProcura">Search themes</label>
-            <input type="search" id="selectorProcura" class="selector__procura form-control"
-                   placeholder="Search themes" autocomplete="off">
+            <div class="selector__ferramentas">
+                <div class="selector__procura">
+                    <svg class="selector__lupa" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                        <circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M13 13l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <label class="visually-hidden" for="selectorProcura">Search themes</label>
+                    <input type="search" id="selectorProcura" class="selector__campo"
+                           placeholder="Search themes" autocomplete="off">
+                </div>
 
-            <button type="button" class="btn btn-outline-primary" id="btnTemaAleatorio">Surprise me</button>
-            <button type="button" class="selector__fechar" data-fechar aria-label="Close">&times;</button>
+                <button type="button" class="selector__surpresa" id="btnTemaAleatorio">
+                    <span aria-hidden="true">&#127922;</span> Surprise me
+                </button>
+            </div>
+
+            <!--
+                As categorias em pílulas: com duas dúzias de temas, saltar
+                directamente para "Animals" é mais rápido do que procurar ou
+                descer a grelha toda. Num telemóvel deslizam na horizontal.
+            -->
+            <?php if (count($selGrupos) > 1) { ?>
+                <div class="selector__chips" role="group" aria-label="Categories">
+                    <button type="button" class="selector__chip" data-grupo-filtro="" aria-pressed="true">All</button>
+                    <?php foreach ($selGrupos as $grupo) { ?>
+                        <button type="button" class="selector__chip" data-grupo-filtro="<?= e($grupo) ?>" aria-pressed="false"><?= e($grupo) ?></button>
+                    <?php } ?>
+                </div>
+            <?php } ?>
         </div>
 
         <div class="selector__corpo">
             <?php if ($selTemasPublicos === []) { ?>
-                <p class="selector__vazio">No public themes yet.</p>
+                <p class="selector__vazio">No themes yet.</p>
             <?php } ?>
 
             <?php seccoesDeTemasPublicos($selTemasPublicos); ?>
 
-            <p class="selector__vazio" id="selectorSemResultados" hidden>No theme with that name.</p>
+            <p class="selector__vazio" id="selectorSemResultados" hidden>No theme matches that search.</p>
         </div>
     </div>
 </div>
