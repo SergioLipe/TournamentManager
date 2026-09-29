@@ -26,9 +26,8 @@ declare(strict_types=1);
                 title="Opens the next match, and keeps going after each pick until you close it">
             Next match <span aria-hidden="true">&#9654;</span>
         </button>
-        <button type="button" class="btn btn-outline-primary" id="btnCarregarImagens">Load images</button>
-        <button type="button" class="btn btn-outline-secondary" id="btnCarregarNomes">Use names instead</button>
-        <button type="button" class="btn btn-outline-secondary" id="btnReiniciar">Reset</button>
+        <button type="button" class="btn btn-outline-secondary" id="btnReiniciar"
+                title="Start again with a new random draw">Reset</button>
         <span class="tournament__estado" id="estadoTorneio" role="status" aria-live="polite"></span>
     </div>
 
@@ -63,13 +62,15 @@ declare(strict_types=1);
     <div class="modal-simples__caixa" role="dialog" aria-modal="true" aria-labelledby="nomesTitulo">
         <h2 class="h5" id="nomesTitulo">Play with names</h2>
         <p class="text-muted">
-            One name per line, from <?= MIN_COMPETITORS ?> up to <?= MAX_COMPETITORS ?>. Up to 8 names
-            play an 8-player bracket, more than that a 16-player one, and any
-            empty spots become byes. Names are shuffled before the draw.
+            One name per line, from <?= MIN_COMPETITORS ?> up to <?= MAX_COMPETITORS ?>. The bracket is built
+            for exactly that many: with a number like 5 or 12, a few players go
+            straight to the next round (a bye). Names are shuffled before the draw.
         </p>
         <label class="visually-hidden" for="campoNomes">Competitor names</label>
         <textarea id="campoNomes" class="form-control" rows="8"
                   placeholder="Alice&#10;Bob&#10;Carol&#10;Dave"></textarea>
+        <p class="nomes__conta" id="contaNomes" aria-live="polite">0 names</p>
+        <p class="nomes__erro" id="erroNomes" role="alert" hidden></p>
         <div class="modal-simples__accoes">
             <button type="button" class="btn btn-primary" id="confirmarNomes">Build bracket</button>
             <button type="button" class="btn btn-outline-secondary" data-fechar>Cancel</button>

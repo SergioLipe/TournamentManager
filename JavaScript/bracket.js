@@ -392,11 +392,16 @@ window.Bracket = (function () {
       var competidor = batalha.competidores[i];
       var vazio = competidor === null;
 
+      // O lado vazio de um bye não está à espera de ninguém — ninguém vem.
+      // Com o ponto de interrogação parecia que faltava um adversário.
+      var semAdversario = vazio && batalha.bye;
+
       slot.img.src = vazio ? placeholder : competidor.imagem;
       slot.img.alt = vazio ? '' : competidor.nome;
-      slot.nome.textContent = vazio ? '' : competidor.nome;
+      slot.nome.textContent = semAdversario ? 'Bye' : (vazio ? '' : competidor.nome);
 
-      slot.raiz.classList.toggle('slot--vazio', vazio);
+      slot.raiz.classList.toggle('slot--vazio', vazio && !semAdversario);
+      slot.raiz.classList.toggle('slot--bye', semAdversario);
       slot.raiz.classList.toggle('slot--venceu', batalha.vencedor !== null && competidor === batalha.vencedor);
       slot.raiz.classList.toggle(
         'slot--perdeu',

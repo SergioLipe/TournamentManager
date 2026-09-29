@@ -1400,10 +1400,23 @@ hr {
    9. Ecrãs pequenos
    -------------------------------------------------------------------------- */
 
+/* Entre o portátil pequeno e o ecrã largo o grupo da esquerda é o mais
+   apertado: sem a palavra "players" os três controlos cabem numa linha. */
+@media (min-width: 1101px) and (max-width: 1365px) {
+    .tamanho__palavra {
+        display: none;
+    }
+
+    .tamanho__num {
+        min-width: 3.25rem;
+        text-align: center;
+    }
+}
+
 /* Abaixo disto os três grupos da barra já não cabem numa linha. O título
    passa para a sua própria linha, ao centro e à altura do botão redondo, e
    os controlos e as ligações descem para as linhas de baixo. */
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
     .app-nav__inner {
         grid-template-columns: minmax(0, 1fr);
         grid-template-areas:
@@ -1514,4 +1527,91 @@ hr {
 .btn-proximo span {
     margin-left: 0.3rem;
     font-size: 0.75em;
+}
+
+/* --- "Use names" na barra --- */
+
+.nav-nomes {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 44px;
+    padding: 0 1rem;
+    font: inherit;
+    font-weight: 600;
+    color: var(--texto);
+    background-color: var(--fundo-elevado);
+    border: 1px solid var(--borda-forte);
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nav-nomes:hover,
+.nav-nomes:focus-visible {
+    border-color: var(--acento);
+    box-shadow: 0 0 0 3px var(--acento-suave);
+    outline: none;
+}
+
+/* Com nomes o 8/16 não se aplica: fica esbatido e sem nada marcado. */
+.tamanho--desligado {
+    opacity: 0.45;
+}
+
+.tamanho--desligado .tamanho__opcao input {
+    cursor: not-allowed;
+}
+
+/* --- Diálogo dos nomes --- */
+
+.nomes__conta {
+    margin: 0.5rem 0 0;
+    font-size: 0.8125rem;
+    color: var(--texto-suave);
+}
+
+.nomes__conta--demais {
+    color: var(--derrota);
+    font-weight: 600;
+}
+
+.nomes__erro {
+    margin: 0.5rem 0 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--derrota);
+}
+
+/* --- Bye: o lado vazio mostra "BYE" num quadrado tracejado --- */
+
+.slot--bye {
+    position: relative;
+}
+
+.slot--bye .slot__img {
+    visibility: hidden;
+}
+
+.slot--bye::before {
+    content: 'BYE';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--slot);
+    height: var(--slot);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--texto-suave);
+    border: 2px dashed var(--borda-forte);
+    border-radius: var(--raio-pequeno);
+}
+
+.slot--bye .slot__nome {
+    visibility: hidden;
 }

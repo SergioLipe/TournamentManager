@@ -60,14 +60,45 @@
     }
   }
 
-  // Quem joga sempre com 16 não tem de o escolher a cada visita.
-  try {
-    var guardado = parseInt(localStorage.getItem(CHAVE_TAMANHO), 10);
-    if (TAMANHOS.indexOf(guardado) !== -1) {
-      marcarTamanho(guardado);
+  /** O tamanho escolhido da última vez, ou 8. */
+  function tamanhoGuardado() {
+    try {
+      var guardado = parseInt(localStorage.getItem(CHAVE_TAMANHO), 10);
+      if (TAMANHOS.indexOf(guardado) !== -1) {
+        return guardado;
+      }
+    } catch (erro) {
+      /* Sem localStorage fica o 8. */
     }
-  } catch (erro) {
-    /* Fica o 8 que vem marcado no HTML. */
+    return 8;
+  }
+
+  // Quem joga sempre com 16 não tem de o escolher a cada visita.
+  marcarTamanho(tamanhoGuardado());
+
+  /*
+   * Com nomes, a bracket é do tamanho exacto da lista — 5 nomes, 5 jogadores
+   * — e o 8/16 não se aplica. Fica desligado e sem nenhum marcado, para não
+   * dizer "8 players" por cima de uma bracket de 5; volta ao escolher um tema.
+   */
+  var modoNomes = false;
+
+  function definirModoNomes(ligado) {
+    modoNomes = ligado;
+    if (!grupoTamanho) {
+      return;
+    }
+    grupoTamanho.classList.toggle('tamanho--desligado', ligado);
+    grupoTamanho.title = ligado ? 'With names, the bracket has one spot per name' : '';
+    Array.prototype.forEach.call(grupoTamanho.querySelectorAll('input[name="tamanho"]'), function (opcao) {
+      opcao.disabled = ligado;
+      if (ligado) {
+        opcao.checked = false;
+      }
+    });
+    if (!ligado) {
+      marcarTamanho(tamanhoGuardado());
+    }
   }
 
   function dizer(texto, tipo) {
@@ -119,7 +150,8 @@
   /* ---------------------------------------------------------------------- */
 
   function construir() {
-    var n = tamanhoPedido();
+    // Com nomes, um lugar por nome; com um tema, o 8 ou 16 escolhido.
+    var n = modoNomes ? pool.length : tamanhoPedido();
 
     // Com menos competidores carregados do que lugares pedidos, joga-se com
     // os que existem em vez de deixar slots por preencher para sempre.
@@ -153,13 +185,25 @@
     }
   }
 
+  /**
+   * Recomeça com um sorteio novo. Com um tema vai buscar outra vez à base de
+   * dados, que devolve competidores à sorte de entre todos os do tema — com
+   * 55 animais, um torneio de 8 traz caras novas em vez dos mesmos baralhados.
+   * Com nomes baralha os mesmos nomes. Sem nada carregado abre o selector.
+   */
   function reiniciar() {
-    // Volta a baralhar o que já está carregado, sem ir outra vez à base de dados.
-    pool = baralhar(pool.slice());
-    construir();
-    if (pool.length > 0) {
-      dizer('Bracket reshuffled.');
+    seguido = false;
+    if (temaAtual) {
+      carregarTema(temaAtual.id, temaAtual.nome);
+      return;
     }
+    if (pool.length > 0) {
+      pool = baralhar(pool.slice());
+      construir();
+      dizer('Names reshuffled.');
+      return;
+    }
+    abrirSelector();
   }
 
   function baralhar(array) {
@@ -216,6 +260,7 @@
 
         temaAtual = dados.tema;
         pool = dados.competidores;
+        definirModoNomes(false);
         construir();
 
         if (pool.length >= tamanhoPedido()) {
@@ -235,26 +280,37 @@
       })
       .filter(function (linha) {
         return linha !== '';
-      })
-      .slice(0, window.Bracket.MAX);
+      });
 
     if (nomes.length < window.Bracket.MIN) {
       dizer('Enter at least ' + window.Bracket.MIN + ' names, one per line.', 'erro');
       return false;
     }
 
+    // Cortar à socapa os que passam de 16 deixava alguém fora do torneio sem
+    // aviso. O diálogo fica aberto para se tirar os que sobram.
+    if (nomes.length > window.Bracket.MAX) {
+      dizer('That is ' + nomes.length + ' names — the most is ' + window.Bracket.MAX + '.', 'erro');
+      return false;
+    }
+
     temaAtual = null;
+
+    // O botão do tema deixa de mostrar o último tema: agora joga-se com nomes.
+    if (rotuloTema) {
+      rotuloTema.textContent = 'Pick a theme';
+    }
+    if (capaTema) {
+      capaTema.hidden = true;
+    }
+    marcarCartaoEscolhido(null);
     // Sem id: um torneio de nomes não escreve estatísticas.
     pool = baralhar(nomes).map(function (nome, i) {
       var etiqueta = primeiraMaiuscula(nome);
       return { id: null, nome: etiqueta, imagem: imagemDeNome(etiqueta), ordem: i };
     });
 
-    // Os nomes escolhem o tamanho: até 8 cabem na bracket de 8 (os que
-    // faltarem dão byes), mais do que isso só na de 16. Não se guarda como
-    // preferência — é uma consequência destes nomes, não uma escolha.
-    marcarTamanho(nomes.length <= 8 ? 8 : 16);
-
+    definirModoNomes(true);
     construir();
     dizer('Playing with ' + nomes.length + ' names.');
     return true;
@@ -379,15 +435,15 @@
       return;
     }
 
-    // Uma pausa curta antes do duelo seguinte, para se ver o vencedor a
-    // avançar na bracket em vez de a caixa só trocar de imagens.
+    // Pouco mais de um segundo antes do duelo seguinte: dá para ver o
+    // vencedor avançar na bracket, em vez de a caixa só trocar de imagens.
     if (seguido) {
       setTimeout(function () {
         var seguinte = proximaBatalha();
         if (seguido && seguinte && elDuelo.hidden) {
           abrirDuelo(seguinte);
         }
-      }, 450);
+      }, 1200);
     }
   }
 
@@ -688,25 +744,6 @@
     });
   }
 
-  var btnImagens = document.getElementById('btnCarregarImagens');
-  if (btnImagens) {
-    btnImagens.addEventListener('click', function () {
-      if (temaAtual) {
-        carregarTema(temaAtual.id, temaAtual.nome);
-        return;
-      }
-
-      // Sem tema escolhido não se adivinha: abre-se o selector. Antes disto
-      // carregava um tema à sorte, o que agora é o "Surprise me" que está lá
-      // dentro — e escolhido de propósito, não por engano.
-      if (cartoes.length === 0) {
-        dizer('There are no themes to load yet.', 'aviso');
-        return;
-      }
-      abrirSelector();
-    });
-  }
-
   if (btnProximo) {
     btnProximo.addEventListener('click', function () {
       var seguinte = proximaBatalha();
@@ -728,18 +765,38 @@
   var btnNomes = document.getElementById('btnCarregarNomes');
   if (btnNomes && elNomes) {
     var campoNomes = elNomes.querySelector('#campoNomes');
+    var contaNomes = elNomes.querySelector('#contaNomes');
+    var erroNomes = elNomes.querySelector('#erroNomes');
+
+    /** Conta à medida que se escreve, para se saber quantos faltam ou sobram. */
+    function actualizarConta() {
+      var quantos = campoNomes.value.split('\n').filter(function (linha) {
+        return linha.trim() !== '';
+      }).length;
+      var max = window.Bracket.MAX;
+      contaNomes.textContent = quantos + ' name' + (quantos === 1 ? '' : 's') + ' · up to ' + max;
+      contaNomes.classList.toggle('nomes__conta--demais', quantos > max);
+      erroNomes.hidden = true;
+    }
 
     btnNomes.addEventListener('click', function () {
       elNomes.hidden = false;
       document.body.classList.add('modal-aberto');
+      actualizarConta();
       campoNomes.focus();
     });
+
+    campoNomes.addEventListener('input', actualizarConta);
 
     elNomes.querySelector('#confirmarNomes').addEventListener('click', function () {
       if (usarNomes(campoNomes.value)) {
         elNomes.hidden = true;
         document.body.classList.remove('modal-aberto');
+        return;
       }
+      // O estado da página fica por trás do diálogo; o erro repete-se aqui.
+      erroNomes.textContent = estado ? estado.textContent : '';
+      erroNomes.hidden = false;
     });
 
     Array.prototype.forEach.call(elNomes.querySelectorAll('[data-fechar]'), function (el) {

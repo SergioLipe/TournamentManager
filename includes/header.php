@@ -88,11 +88,15 @@ $modoApp          = $modoApp ?? false;
                         <?php foreach ([8 => '3 rounds', 16 => '4 rounds'] as $tamanho => $rondas) { ?>
                             <label class="tamanho__opcao" title="<?= $tamanho ?> players · <?= $rondas ?>">
                                 <input type="radio" name="tamanho" value="<?= $tamanho ?>" <?= $tamanho === 8 ? 'checked' : '' ?>>
-                                <span class="tamanho__num"><strong><?= $tamanho ?></strong> players</span>
+                                <span class="tamanho__num"><strong><?= $tamanho ?></strong><span class="tamanho__palavra"> players</span></span>
                             </label>
                         <?php } ?>
                     </div>
                 </div>
+
+                <button type="button" class="nav-nomes" id="btnCarregarNomes" aria-haspopup="dialog">
+                    <span aria-hidden="true">&#9998;</span> Use names
+                </button>
             <?php } ?>
         </div>
 
