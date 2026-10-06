@@ -9,9 +9,9 @@
   "scope": "/",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui"],
-  "orientation": "any",
+  "orientation": "landscape",
   "theme_color": "#2f6fed",
-  "background_color": "#14181d",
+  "background_color": "#0e1116",
   "categories": ["games", "entertainment"],
   "icons": [
     {

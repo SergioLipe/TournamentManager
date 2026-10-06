@@ -34,6 +34,16 @@
     }
     aplicarEstadoNav(guardada === '1');
 
+    // Para o torneio esconder a barra ao carregar um tema: a partir daí o que
+    // interessa é a bracket, e num telemóvel deitado a barra comia um terço
+    // da altura. Não se guarda — é o torneio a pedir, não uma escolha de quem
+    // joga — e o botão redondo continua lá para a trazer de volta.
+    window.TorneioNav = {
+      esconder: function () {
+        aplicarEstadoNav(true);
+      }
+    };
+
     botaoNav.addEventListener('click', function () {
       var escondida = !nav.classList.contains('app-nav--hidden');
       aplicarEstadoNav(escondida);

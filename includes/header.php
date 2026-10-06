@@ -48,7 +48,19 @@ $modoApp          = $modoApp ?? false;
     <link href="<?= urlRecurso('CSS/style.css') ?>" rel="stylesheet">
 </head>
 
-<body>
+<body class="<?= $modoApp ? 'modo-app' : '' ?>">
+
+<?php if ($modoApp) { ?>
+<!--
+    A app instalada abre sempre deitada (orientation no manifest). Isto é para
+    quem abre o app.php no browser de um telemóvel ao alto, onde não há como
+    forçar a rotação: em vez de uma bracket minúscula, pede-se para rodar.
+-->
+<div class="rodar" aria-hidden="true">
+    <span class="rodar__icone">&#10227;</span>
+    <p>Turn your phone sideways</p>
+</div>
+<?php } ?>
 
 <button id="toggleNavBtn" type="button" title="Show/hide menu" aria-label="Show/hide menu" aria-expanded="true">
     <span aria-hidden="true">&#9650;</span>
@@ -95,8 +107,14 @@ $modoApp          = $modoApp ?? false;
                 </div>
 
                 <button type="button" class="nav-nomes" id="btnCarregarNomes" aria-haspopup="dialog">
-                    <span aria-hidden="true">&#9998;</span> Use names
+                    <span aria-hidden="true">&#9998;</span> <span class="nav-nomes__texto">Use names</span>
                 </button>
+            <?php } else { ?>
+                <!-- Fora do torneio, o caminho de volta. Num ecrã baixo o título
+                     do meio esconde-se, e sem isto não havia como regressar. -->
+                <a href="<?= $modoApp ? 'app.php' : 'index.php' ?>" class="nav-nomes">
+                    <span aria-hidden="true">&larr;</span> Tournament
+                </a>
             <?php } ?>
         </div>
 
@@ -105,13 +123,13 @@ $modoApp          = $modoApp ?? false;
         </div>
 
         <!--
-            Na aplicação Android só há a bracket, sem estatísticas nem página
-            sobre. Isto não é só cosmética — sem links para fora, a app nunca
-            sai do /app.php e nunca abre um separador do browser por cima de si.
+            Na aplicação Android há estatísticas mas não a página sobre. As
+            estatísticas abrem com ?app=1, que as mantém em modo app: a ligação
+            de volta vai para o app.php e a app nunca sai do site.
         -->
         <div class="app-nav__group app-nav__group--end">
+            <a href="Estatisticas.php<?= $modoApp ? '?app=1' : '' ?>" class="btn btn-outline-secondary">Statistics</a>
             <?php if (!$modoApp) { ?>
-            <a href="Estatisticas.php" class="btn btn-outline-secondary">Statistics</a>
             <a href="sobre.php" class="btn btn-outline-secondary">About</a>
             <?php } ?>
         </div>

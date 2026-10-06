@@ -13,11 +13,17 @@ $competidores = $tema !== null ? competidoresDoTema((int) $tema['id']) : [];
 $listaPublicos = temasParaEscolher();
 
 $tituloPagina = 'Statistics';
+
+// Aberta a partir da app (?app=1): a barra continua em modo app e as
+// ligações daqui mantêm o parâmetro, para nunca se cair no index.php.
+$modoApp  = isset($_GET['app']);
+$urlTema  = 'Estatisticas.php?' . ($modoApp ? 'app=1&' : '') . 'temaId=';
 require __DIR__ . '/includes/header.php';
 ?>
 
 <div class="container form-largo">
-    <h1 class="h2 mb-4">Statistics</h1>
+    <h1 class="h2 mb-1">Statistics</h1>
+    <p class="text-muted mb-4">Every finished tournament, from everyone who plays, adds to these numbers.</p>
 
     <!--
         A escolha do tema é a mesma grelha de cartões do torneio, mas de
@@ -38,7 +44,7 @@ require __DIR__ . '/includes/header.php';
                 <p class="selector__vazio">No public themes yet.</p>
             <?php } ?>
 
-            <?php seccoesDeTemasPublicos($listaPublicos, 'Estatisticas.php?temaId='); ?>
+            <?php seccoesDeTemasPublicos($listaPublicos, $urlTema); ?>
         </div>
     </details>
 

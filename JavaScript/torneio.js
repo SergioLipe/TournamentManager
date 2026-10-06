@@ -261,6 +261,7 @@
         temaAtual = dados.tema;
         pool = dados.competidores;
         definirModoNomes(false);
+        esconderBarra();
         construir();
 
         if (pool.length >= tamanhoPedido()) {
@@ -311,6 +312,7 @@
     });
 
     definirModoNomes(true);
+    esconderBarra();
     construir();
     dizer('Playing with ' + nomes.length + ' names.');
     return true;
@@ -852,9 +854,21 @@
   window.addEventListener('resize', reajustar);
   window.addEventListener('orientationchange', reajustar);
 
-  var botaoNav = document.getElementById('toggleNavBtn');
-  if (botaoNav) {
-    botaoNav.addEventListener('click', reajustar);
+  // A barra abre e fecha com uma transição de altura; medir a meio dava a
+  // bracket com o tamanho errado, por isso reajusta-se quando ela acaba.
+  var barra = document.getElementById('mainNav');
+  if (barra) {
+    barra.addEventListener('transitionend', function (evento) {
+      if (evento.target === barra) {
+        reajustar();
+      }
+    });
+  }
+
+  function esconderBarra() {
+    if (window.TorneioNav) {
+      window.TorneioNav.esconder();
+    }
   }
 
   // Bracket vazia à espera de um tema.

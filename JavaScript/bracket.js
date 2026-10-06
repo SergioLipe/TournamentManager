@@ -214,30 +214,61 @@ window.Bracket = (function () {
   function larguraSlot(coluna, tamanho) {
     var base;
 
+    // A progressão é suave de propósito: a final um pouco maior, para se
+    // destacar, mas sem roubar espaço à primeira ronda, que é onde estão
+    // quase todas as imagens. Com a final ao dobro da primeira ronda, a
+    // bracket de 16 num telemóvel ficava com as imagens de fora a 34px.
     if (coluna.lado === 'final') {
-      base = 170;
-    } else if (coluna.batalhas.length >= 4) {
-      base = 92;
-    } else if (coluna.batalhas.length >= 2) {
-      base = 118;
-    } else {
       base = 140;
+    } else if (coluna.batalhas.length >= 4) {
+      base = 100;
+    } else if (coluna.batalhas.length >= 2) {
+      base = 110;
+    } else {
+      base = 122;
     }
 
     return Math.round(base * factorCompacto(tamanho));
   }
 
   /**
-   * Encolhe a bracket até caber na largura disponível, para não haver
-   * scroll horizontal.
+   * Põe a bracket do maior tamanho que cabe no ecrã — em largura e em altura.
+   *
+   * Cada batalha pode ser desenhada com os dois competidores lado a lado
+   * (larga e baixa) ou um por cima do outro (estreita e alta), e isso decide-
+   * -se por ronda. A primeira ronda tem muitas batalhas numa coluna e pede
+   * lado a lado; as últimas têm uma ou duas e cabem empilhadas numa coluna
+   * estreita. Num telemóvel deitado, tudo lado a lado dava 1558px de largura
+   * para 844 de ecrã, e tudo empilhado 652px de altura para 320 — e as
+   * imagens ficavam com 34px. A mistura cabe com o dobro do tamanho.
+   *
+   * Em vez de adivinhar pelo tamanho do ecrã, experimentam-se todas as
+   * misturas — as k primeiras rondas lado a lado, o resto empilhado, para k
+   * de 0 a todas — e fica a que deixa as imagens maiores.
+   *
+   * A escala também pode passar de 1: num ecrã grande com espaço a sobrar a
+   * bracket cresce, em vez de ficar pequena ao canto de uma página vazia.
    *
    * O transform não ocupa espaço no layout: a altura do contentor tem de ser
    * acertada à mão, senão fica um vazio por baixo do tamanho por escalar.
    */
-  // Baixo de propósito: o pedido foi que a bracket coubesse sempre, e a
-  // alternativa a encolher é voltar ao scroll lateral. Só serve de travão
-  // contra um contentor medido a zero.
   var ESCALA_MINIMA = 0.12;
+  var ESCALA_MAXIMA = 1.8;
+
+  /** Espaço deixado por baixo da bracket, para não encostar ao fundo. */
+  var MARGEM_FUNDO = 16;
+
+  /**
+   * Desenha as rondas a partir de `lado` empilhadas e as anteriores lado a
+   * lado, e devolve o tamanho da grelha assim, sem transform.
+   */
+  function dispor(grelha, colunasEl, lado) {
+    for (var i = 0; i < colunasEl.length; i++) {
+      var ronda = parseInt(colunasEl[i].getAttribute('data-ronda'), 10);
+      colunasEl[i].classList.toggle('coluna--empilhada', ronda >= lado);
+    }
+    return { largura: grelha.offsetWidth, altura: grelha.offsetHeight };
+  }
 
   function ajustarAoEcra(contentor) {
     var grelha = contentor.querySelector('.bracket__grelha');
@@ -249,38 +280,58 @@ window.Bracket = (function () {
     // anterior em vez do tamanho real.
     grelha.style.transform = 'none';
     contentor.style.height = '';
-    contentor.style.overflowX = 'auto';
-
-    var disponivel = contentor.clientWidth;
-    var necessario = grelha.offsetWidth;
-
-    if (!disponivel || !necessario) {
-      return;
-    }
-
-    var escala = disponivel / necessario;
-
-    if (escala >= 1) {
-      contentor.style.overflowX = 'auto';
-      return; // já cabe: não vale a pena encolher
-    }
-
-    // Abaixo de certo ponto as imagens ficam ilegíveis; aí é preferível
-    // deixar rolar do que mostrar uma bracket que ninguém consegue ver.
-    var coube = escala >= ESCALA_MINIMA;
-    escala = Math.max(escala, ESCALA_MINIMA);
-
-    grelha.style.transform = 'scale(' + escala + ')';
-
-    // O transform é só visual: em termos de layout a grelha continua com a
-    // largura por escalar, e o contentor mostraria barra de scroll por causa
-    // de conteúdo que, no ecrã, já cabe. Só se deixa rolar quando a escala
-    // mínima não chegou.
-    contentor.style.overflowX = coube ? 'hidden' : 'auto';
+    contentor.style.overflowX = 'hidden';
 
     var estilo = window.getComputedStyle(contentor);
     var extra = parseFloat(estilo.paddingTop) + parseFloat(estilo.paddingBottom);
-    contentor.style.height = Math.ceil(grelha.offsetHeight * escala + extra) + 'px';
+
+    var largura = contentor.clientWidth;
+    // A altura que sobra do topo da bracket até ao fundo da janela. Nunca
+    // menos do que um mínimo: com a janela muito baixa (teclado aberto, por
+    // exemplo) a bracket ficava microscópica.
+    var topo = contentor.getBoundingClientRect().top + window.pageYOffset;
+    var altura = Math.max(220, window.innerHeight - topo - extra - MARGEM_FUNDO);
+
+    if (!largura) {
+      return;
+    }
+
+    var colunasEl = grelha.querySelectorAll('.coluna');
+    var rondas = 0;
+    for (var i = 0; i < colunasEl.length; i++) {
+      rondas = Math.max(rondas, parseInt(colunasEl[i].getAttribute('data-ronda'), 10) + 1);
+    }
+
+    // Do tudo lado a lado (k = rondas, o desenho de sempre) até tudo
+    // empilhado (k = 0). Em caso de empate fica o primeiro, o mais clássico.
+    var melhor = null;
+    for (var k = rondas; k >= 0; k--) {
+      var medida = dispor(grelha, colunasEl, k);
+      if (!medida.largura || !medida.altura) {
+        continue;
+      }
+      var escalaK = Math.min(largura / medida.largura, altura / medida.altura, ESCALA_MAXIMA);
+      if (melhor === null || escalaK > melhor.escala + 0.001) {
+        melhor = { k: k, escala: escalaK, medida: medida };
+      }
+    }
+
+    if (melhor === null) {
+      return;
+    }
+
+    var medidaFinal = dispor(grelha, colunasEl, melhor.k);
+    var escala = Math.max(ESCALA_MINIMA, melhor.escala);
+    var medida = medidaFinal;
+
+    grelha.style.transform = 'scale(' + escala + ')';
+
+    // A origem do transform é o canto de cima à esquerda, por isso a grelha
+    // centra-se à mão: o que sobra da largura, a dividir pelos dois lados.
+    var sobra = Math.max(0, largura - medida.largura * escala);
+    grelha.style.marginLeft = Math.floor(sobra / 2) + 'px';
+
+    contentor.style.height = Math.ceil(medida.altura * escala + extra) + 'px';
   }
 
   function criarElemento(tag, classe) {
@@ -325,6 +376,7 @@ window.Bracket = (function () {
 
     colunas(estrutura).forEach(function (coluna) {
       var elColuna = criarElemento('div', 'coluna coluna--' + coluna.lado);
+      elColuna.setAttribute('data-ronda', String(coluna.ronda));
       elColuna.style.setProperty("--slot", larguraSlot(coluna, estrutura.tamanho) + "px");
 
       var titulo = criarElemento('div', 'coluna__titulo');
