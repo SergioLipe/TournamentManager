@@ -54,3 +54,17 @@ composer.lock
 /.deploy.env.*
 /.env.production.*
 /.deploy-state.*
+
+# O projecto Android gerado pelo Bubblewrap (npx @bubblewrap/cli init/update).
+# Volta a gerar-se a partir do twa-manifest.json, por isso não se guarda.
+/android/app/
+/android/gradle/
+/android/build.gradle
+/android/settings.gradle
+/android/gradle.properties
+/android/gradlew
+/android/gradlew.bat
+/android/manifest-checksum.txt
+/android/store_icon.png
+/android/*.idsig
+/android/hs_err_pid*.log
