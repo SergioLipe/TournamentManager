@@ -718,16 +718,22 @@
     });
   }
 
-  var btnAleatorio = document.getElementById('btnTemaAleatorio');
-  if (btnAleatorio) {
-    btnAleatorio.addEventListener('click', function () {
-      // À sorte entre os que estão à vista: com uma procura activa, o dado
-      // rola só sobre o que ela deixou passar.
-      var visiveis = elSelector.querySelectorAll('.js-escolhe-tema:not([hidden])');
-      if (visiveis.length === 0) {
+  // "Surprise me" na barra: carrega logo um tema à sorte, sem abrir o
+  // selector. Nunca o que já está a ser jogado — carregar outra vez o mesmo
+  // parecia que o botão não tinha feito nada.
+  var btnSurpresa = document.getElementById('btnSurpresa');
+  if (btnSurpresa) {
+    btnSurpresa.addEventListener('click', function () {
+      var opcoes = Array.prototype.filter.call(cartoes, function (cartao) {
+        return !temaAtual || parseInt(cartao.dataset.temaId, 10) !== temaAtual.id;
+      });
+      if (opcoes.length === 0) {
+        dizer('There are no themes to pick from yet.', 'aviso');
         return;
       }
-      visiveis[Math.floor(Math.random() * visiveis.length)].click();
+      var cartao = opcoes[Math.floor(Math.random() * opcoes.length)];
+      var capa = cartao.querySelector('img');
+      carregarTema(parseInt(cartao.dataset.temaId, 10), cartao.dataset.temaNome || 'theme', capa ? capa.src : '');
     });
   }
 

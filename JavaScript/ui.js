@@ -114,3 +114,19 @@
       .catch(semForcar);
   });
 })();
+
+/**
+ * Estatísticas: a faixa de temas abre com o tema escolhido à vista. Com duas
+ * dúzias de temas, os do fim da lista ficavam fora do ecrã e parecia que a
+ * página não sabia qual estava aberto.
+ */
+(function () {
+  'use strict';
+
+  var activo = document.querySelector('.faixa-temas__item--activo');
+  if (!activo) {
+    return;
+  }
+  var faixa = activo.parentNode;
+  faixa.scrollLeft = activo.offsetLeft - (faixa.clientWidth - activo.offsetWidth) / 2;
+})();

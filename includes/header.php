@@ -92,6 +92,12 @@ $modoApp          = $modoApp ?? false;
                     <span class="tema-botao__seta" aria-hidden="true">&#9662;</span>
                 </button>
 
+                <!-- Um tema à sorte, sem abrir o selector. -->
+                <button type="button" class="nav-surpresa" id="btnSurpresa" title="Surprise me: play a random theme"
+                        aria-label="Surprise me">
+                    <span aria-hidden="true">&#127922;</span> <span class="nav-surpresa__texto">Surprise me</span>
+                </button>
+
                 <!--
                     Só há dois tamanhos: 8 e 16. Com qualquer número entre 2 e
                     16 a maior parte das brackets saía com byes, que confundem
@@ -111,7 +117,8 @@ $modoApp          = $modoApp ?? false;
                     </div>
                 </div>
 
-                <button type="button" class="nav-nomes" id="btnCarregarNomes" aria-haspopup="dialog">
+                <button type="button" class="nav-nomes" id="btnCarregarNomes" aria-haspopup="dialog"
+                        title="Play with your own list of names" aria-label="Use names">
                     <span aria-hidden="true">&#9998;</span> <span class="nav-nomes__texto">Use names</span>
                 </button>
             <?php } else { ?>

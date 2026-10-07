@@ -45,10 +45,6 @@ $selTotal         = count($selTemasPublicos);
                     <input type="search" id="selectorProcura" class="selector__campo"
                            placeholder="Search themes" autocomplete="off">
                 </div>
-
-                <button type="button" class="selector__surpresa" id="btnTemaAleatorio">
-                    <span aria-hidden="true">&#127922;</span> Surprise me
-                </button>
             </div>
 
             <!--

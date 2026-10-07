@@ -816,27 +816,6 @@ hr {
     box-shadow: 0 0 0 3px var(--acento-suave);
 }
 
-.selector__surpresa {
-    height: 2.75rem;
-    padding: 0 1.15rem;
-    font: inherit;
-    font-weight: 600;
-    color: var(--texto);
-    background-color: var(--fundo-elevado);
-    border: 1px solid var(--borda-forte);
-    border-radius: 999px;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: border-color 0.15s ease, color 0.15s ease;
-}
-
-.selector__surpresa:hover,
-.selector__surpresa:focus-visible {
-    color: var(--acento);
-    border-color: var(--acento);
-    outline: none;
-}
-
 /* Deslizam na horizontal em vez de partirem em várias linhas: num telemóvel
    seis categorias em três linhas empurravam a grelha para metade do ecrã. */
 .selector__chips {
@@ -916,8 +895,8 @@ hr {
 
 .selector__grelha {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
-    gap: 0.85rem;
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+    gap: 0.7rem;
 }
 
 .selector__vazio {
@@ -984,18 +963,19 @@ hr {
     display: flex;
     flex-direction: column;
     gap: 0.1rem;
-    padding: 2.5rem 0.75rem 0.65rem;
+    padding: 2rem 0.6rem 0.5rem;
     background: linear-gradient(to top, rgba(6, 8, 12, 0.9) 0%, rgba(6, 8, 12, 0.55) 55%, rgba(6, 8, 12, 0) 100%);
 }
 
 .tema-cartao__nome {
+    font-size: 0.9rem;
     font-weight: 700;
     line-height: 1.2;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .tema-cartao__conta {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: rgba(255, 255, 255, 0.78);
 }
 
@@ -1169,118 +1149,184 @@ hr {
 }
 
 /* --------------------------------------------------------------------------
-   7. Cartões das estatísticas e página sobre
+   7. Estatísticas e página sobre
    -------------------------------------------------------------------------- */
 
-/* A escolha do tema nas estatísticas: a mesma grelha do selector do torneio,
-   dentro de um <details> que se fecha quando já há um tema aberto. */
-.escolher-tema {
-    border: 1px solid var(--borda);
-    border-radius: var(--raio);
-    background-color: var(--fundo-elevado);
+/* Sem tema escolhido, os cartões rolam com a página. Os títulos dos grupos
+   deixam de ser fixos: aqui ficariam escondidos por baixo da barra do topo. */
+.estatisticas .selector__grupo-titulo {
+    position: static;
+    background: none;
 }
 
-.escolher-tema__resumo {
-    padding: 0.65rem 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    list-style: none;
-}
+/* --- Faixa de temas (com um tema aberto) --- */
 
-.escolher-tema__resumo::-webkit-details-marker {
-    display: none;
-}
-
-.escolher-tema__resumo::before {
-    content: '▸';
-    display: inline-block;
-    margin-right: 0.5rem;
-    color: var(--texto-suave);
-    transition: transform 0.15s ease;
-}
-
-.escolher-tema[open] .escolher-tema__resumo::before {
-    transform: rotate(90deg);
-}
-
-.escolher-tema__corpo {
-    padding: 0 1rem 1rem;
-    /* A grelha inteira são dezoito cartões; num ecrã de telemóvel isso é uma
-       página e meia de deslocamento antes de se chegar às estatísticas. */
-    max-height: 60vh;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-}
-
-.grelha-cartoes {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.cartao {
+/* Desliza de lado em vez de ocupar a altura da página. O scroll-snap faz
+   cada deslize parar com um tema inteiro na borda, sem meios cortados. */
+.faixa-temas {
     display: flex;
-    flex-direction: column;
-    background-color: var(--fundo-elevado);
-    border: 1px solid var(--borda);
-    border-radius: var(--raio);
-    overflow: hidden;
-    box-shadow: var(--sombra);
+    gap: 0.5rem;
+    margin: 0 -0.75rem 1.25rem;
+    padding: 0.25rem 0.75rem 0.6rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
 }
 
-.cartao__img {
-    width: 100%;
-    height: 150px;
+.faixa-temas__item {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.85rem 0.3rem 0.3rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--texto);
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: var(--fundo-elevado);
+    border: 1px solid var(--borda);
+    border-radius: 999px;
+    scroll-snap-align: start;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.faixa-temas__item:hover {
+    color: var(--texto);
+    border-color: var(--acento);
+}
+
+.faixa-temas__item--activo {
+    color: var(--sobre-acento);
+    background-color: var(--acento);
+    border-color: var(--acento);
+}
+
+.faixa-temas__item--activo:hover {
+    color: var(--sobre-acento);
+}
+
+.faixa-temas__img {
+    width: 30px;
+    height: 30px;
     object-fit: cover;
+    border-radius: 50%;
     background-color: var(--fundo-subtil);
 }
 
-.cartao__corpo {
+.estatisticas__cabeca {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 0.75rem;
-    flex: 1;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.75rem;
+    margin-bottom: 0.75rem;
 }
 
-.cartao__titulo {
+/* --- Classificação --- */
+
+/* Uma linha por competidor. Em ecrãs largos, duas colunas lado a lado. */
+.ranking {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 26rem), 1fr));
+    gap: 0.5rem 1rem;
     margin: 0;
-    font-size: 0.9375rem;
-    font-weight: 600;
-    line-height: 1.3;
+    padding: 0;
+    list-style: none;
 }
 
-.cartao__stats {
+.ranking__linha {
     display: flex;
-    gap: 0.875rem;
-    margin: 0;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.45rem 0.75rem 0.45rem 0.5rem;
+    background-color: var(--fundo-elevado);
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
 }
 
-.cartao__stats > div {
-    display: flex;
-    flex-direction: column;
-}
-
-.cartao__stats dt {
-    font-size: 0.6875rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+.ranking__pos {
+    flex: none;
+    width: 1.75rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
     color: var(--texto-suave);
 }
 
-.cartao__stats dd {
-    margin: 0;
-    font-size: 1.125rem;
+/* Os três primeiros em dourado, os únicos que ganharam o direito. */
+.ranking__linha:nth-child(-n + 3) .ranking__pos {
+    color: var(--ouro);
+}
+
+.ranking__img {
+    flex: none;
+    width: 52px;
+    height: 52px;
+    object-fit: cover;
+    border-radius: var(--raio-pequeno);
+    background-color: var(--fundo-subtil);
+}
+
+.ranking__info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.ranking__nome {
     font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ranking__taxa {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--texto-suave);
+}
+
+.ranking__taxa .barra {
+    flex: 1;
+    max-width: 9rem;
+}
+
+.ranking__sem {
+    font-size: 0.75rem;
+    color: var(--texto-suave);
+}
+
+.ranking__numeros {
+    flex: none;
+    display: flex;
+    gap: 0.85rem;
+    margin: 0;
+    text-align: center;
+}
+
+.ranking__numeros dt {
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+}
+
+.ranking__numeros dd {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 800;
     font-variant-numeric: tabular-nums;
 }
 
-.cartao__taxa {
-    margin: 0;
-    font-size: 0.75rem;
-    color: var(--texto-suave);
+.ranking__titulos dd {
+    color: var(--ouro);
 }
 
 .barra {
@@ -1416,7 +1462,7 @@ hr {
 
 /* Entre o portátil pequeno e o ecrã largo o grupo da esquerda é o mais
    apertado: sem a palavra "players" os três controlos cabem numa linha. */
-@media (min-width: 1101px) and (max-width: 1365px) {
+@media (min-width: 1101px) and (max-width: 1599px) {
     .tamanho__palavra {
         display: none;
     }
@@ -1519,8 +1565,8 @@ hr {
     }
 
     .selector__grelha {
-        grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
-        gap: 0.6rem;
+        grid-template-columns: repeat(auto-fill, minmax(6.75rem, 1fr));
+        gap: 0..5rem;
     }
 
     .tema-cartao__info {
@@ -1751,8 +1797,7 @@ hr {
         gap: 0.5rem;
     }
 
-    .selector__campo,
-    .selector__surpresa {
+    .selector__campo {
         height: 2.35rem;
     }
 
@@ -1783,7 +1828,7 @@ hr {
     }
 
     .selector__grelha {
-        grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
         gap: 0.5rem;
     }
 
@@ -1884,4 +1929,138 @@ hr {
 @keyframes rodar {
     0%, 20%   { transform: rotate(0deg); }
     60%, 100% { transform: rotate(90deg); }
+}
+
+/* --- "Surprise me" na barra --- */
+
+.nav-surpresa {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 0.9rem;
+    font: inherit;
+    font-weight: 600;
+    color: var(--texto);
+    background-color: var(--fundo-elevado);
+    border: 1px solid var(--borda-forte);
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nav-surpresa:hover,
+.nav-surpresa:focus-visible {
+    border-color: var(--acento);
+    box-shadow: 0 0 0 3px var(--acento-suave);
+    outline: none;
+}
+
+/* Onde a barra é uma só linha e o espaço aperta, fica só o dado. */
+@media (min-width: 1101px) and (max-width: 1599px), (max-height: 520px) {
+    .nav-surpresa {
+        padding: 0;
+    }
+
+    .nav-surpresa__texto {
+        display: none;
+    }
+}
+
+@media (max-height: 520px) {
+    .nav-surpresa {
+        min-width: 38px;
+        min-height: 38px;
+    }
+}
+
+/* Estatísticas num telemóvel: linhas mais baixas. */
+@media (max-width: 575.98px), (max-height: 520px) {
+    .ranking__img {
+        width: 44px;
+        height: 44px;
+    }
+
+    .ranking__numeros {
+        gap: 0.6rem;
+    }
+}
+
+/* Entre 1101 e 1365px, com o "Surprise me" na barra, o "Use names" também
+   fica só com o ícone: com as palavras o grupo da esquerda partia em duas
+   linhas e a barra duplicava de altura. */
+@media (min-width: 1101px) and (max-width: 1365px) {
+    .nav-nomes {
+        justify-content: center;
+        min-width: 44px;
+        padding: 0;
+    }
+
+    .nav-nomes__texto {
+        display: none;
+    }
+}
+
+/* "← Tournament" é uma ligação com aspecto de botão: sem sublinhado. */
+a.nav-nomes,
+a.nav-nomes:hover {
+    color: var(--texto);
+    text-decoration: none;
+}
+
+/* Estatísticas num telemóvel deitado: o título grande, a frase e as margens
+   comiam metade dos 390px antes da primeira linha da classificação. */
+@media (max-height: 520px) {
+    .form-largo {
+        margin-top: 0.75rem;
+    }
+
+    .estatisticas h1 {
+        font-size: 1.25rem;
+    }
+
+    .estatisticas > p.text-muted {
+        margin-bottom: 0.6rem !important;
+        font-size: 0.8125rem;
+    }
+
+    .faixa-temas {
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.4rem;
+    }
+
+    .faixa-temas__item {
+        padding: 0.2rem 0.75rem 0.2rem 0.2rem;
+        font-size: 0.8125rem;
+    }
+
+    .faixa-temas__img {
+        width: 26px;
+        height: 26px;
+    }
+
+    .estatisticas__cabeca {
+        margin-bottom: 0.5rem;
+    }
+
+    .estatisticas__cabeca .h4 {
+        font-size: 1.1rem;
+    }
+
+    .ranking {
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+        gap: 0.4rem 0.75rem;
+    }
+
+    .ranking__linha {
+        padding: 0.3rem 0.6rem 0.3rem 0.35rem;
+    }
+
+    .ranking__img {
+        width: 40px;
+        height: 40px;
+    }
 }
