@@ -2064,3 +2064,19 @@ a.nav-nomes:hover {
         height: 40px;
     }
 }
+
+/* --- Política de privacidade --- */
+
+.privacidade h2 {
+    margin-top: 1.5rem;
+    font-weight: 700;
+}
+
+.privacidade h2:first-child {
+    margin-top: 0;
+}
+
+.privacidade p,
+.privacidade li {
+    line-height: 1.65;
+}

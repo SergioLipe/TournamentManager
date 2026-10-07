@@ -32,6 +32,10 @@ require __DIR__ . '/includes/header.php';
                    rel="noopener">CC BY 4.0</a>.
             </p>
 
+            <p class="sobre__creditos">
+                <a href="privacidade.php">Privacy policy</a>
+            </p>
+
             <p class="sobre__autor">
                 <strong>Sérgio Filipe Azevedo Gonçalves</strong><br>
                 <a href="mailto:lipewtf@hotmail.com">lipewtf@hotmail.com</a>
