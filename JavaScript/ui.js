@@ -55,3 +55,62 @@
     });
   }
 })();
+
+/**
+ * Travar a app na horizontal (só no app.php).
+ *
+ * Na app da Play Store isto já está resolvido pelo Android, a partir do
+ * "orientation" do manifest — e funciona mesmo com a rotação automática
+ * bloqueada, sem pedir a ninguém que a desbloqueie.
+ *
+ * No Chrome, uma página só pode travar a orientação em ecrã inteiro, e só
+ * pode pôr-se em ecrã inteiro depois de um toque. Daí o botão "Tap to play":
+ * ecrã inteiro, depois screen.orientation.lock. Instalada a partir do Chrome
+ * (display-mode standalone) já não precisa do toque e trava logo.
+ *
+ * Onde não há screen.orientation.lock — o Safari do iPhone — não há maneira
+ * de forçar, e fica o pedido para rodar.
+ */
+(function () {
+  'use strict';
+
+  var rodar = document.getElementById('rodar');
+  if (!rodar) {
+    return;
+  }
+
+  var botao = document.getElementById('rodarBotao');
+  var alternativa = document.getElementById('rodarAlternativa');
+  var raiz = document.documentElement;
+
+  var podeTravar = !!(window.screen && screen.orientation && typeof screen.orientation.lock === 'function');
+  var podeEcraInteiro = typeof raiz.requestFullscreen === 'function';
+
+  function travar() {
+    return podeTravar ? screen.orientation.lock('landscape') : Promise.reject(new Error('sem lock'));
+  }
+
+  function semForcar() {
+    botao.hidden = true;
+    alternativa.hidden = false;
+  }
+
+  if (!podeTravar || !podeEcraInteiro) {
+    semForcar();
+  }
+
+  var instalada = window.matchMedia('(display-mode: standalone)').matches
+    || window.matchMedia('(display-mode: fullscreen)').matches;
+
+  if (instalada) {
+    travar().catch(function () {
+      /* Fica o botão, que tenta outra vez com ecrã inteiro. */
+    });
+  }
+
+  botao.addEventListener('click', function () {
+    raiz.requestFullscreen({ navigationUI: 'hide' })
+      .then(travar)
+      .catch(semForcar);
+  });
+})();

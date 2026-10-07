@@ -52,13 +52,18 @@ $modoApp          = $modoApp ?? false;
 
 <?php if ($modoApp) { ?>
 <!--
-    A app instalada abre sempre deitada (orientation no manifest). Isto é para
-    quem abre o app.php no browser de um telemóvel ao alto, onde não há como
-    forçar a rotação: em vez de uma bracket minúscula, pede-se para rodar.
+    A app da Play Store abre sempre deitada: o Android lê o "orientation" do
+    manifest e trava o ecrã, mesmo com a rotação automática bloqueada. Isto é
+    para o app.php aberto no Chrome de um telemóvel ao alto, onde uma página
+    só pode rodar o ecrã depois de um toque: o botão põe em ecrã inteiro e
+    trava na horizontal (ver ui.js). Onde nem isso dá — o iPhone — fica o
+    pedido para rodar.
 -->
-<div class="rodar" aria-hidden="true">
-    <span class="rodar__icone">&#10227;</span>
-    <p>Turn your phone sideways</p>
+<div class="rodar" id="rodar">
+    <span class="rodar__icone" aria-hidden="true">&#10227;</span>
+    <p class="rodar__texto">Tournament plays sideways</p>
+    <button type="button" class="btn btn-primary rodar__botao" id="rodarBotao">Tap to play</button>
+    <p class="rodar__alternativa" id="rodarAlternativa" hidden>Turn your phone sideways to play.</p>
 </div>
 <?php } ?>
 

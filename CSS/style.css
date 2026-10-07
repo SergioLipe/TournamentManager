@@ -1870,6 +1870,15 @@ hr {
         font-size: 1.125rem;
         font-weight: 700;
     }
+
+    .rodar__botao {
+        padding: 0.8rem 2.25rem;
+        font-size: 1.125rem;
+    }
+
+    .rodar__alternativa {
+        color: var(--texto-suave);
+    }
 }
 
 @keyframes rodar {
